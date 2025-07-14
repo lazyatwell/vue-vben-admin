@@ -1,3 +1,5 @@
+import { encrypt } from '@vben/utils';
+
 import { baseRequestClient, requestClient } from '#/api/request';
 
 export namespace AuthApi {
@@ -9,7 +11,8 @@ export namespace AuthApi {
 
   /** 登录接口返回值 */
   export interface LoginResult {
-    accessToken: string;
+    access_token: string;
+    expires_in: number;
   }
 
   export interface RefreshTokenResult {
@@ -22,6 +25,7 @@ export namespace AuthApi {
  * 登录
  */
 export async function loginApi(data: AuthApi.LoginParams) {
+  data.password = encrypt(data.password ?? '');
   return requestClient.post<AuthApi.LoginResult>('/auth/login', data);
 }
 

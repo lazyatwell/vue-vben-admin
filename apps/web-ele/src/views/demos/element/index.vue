@@ -6,6 +6,9 @@ import { Page } from '@vben/common-ui';
 import {
   ElButton,
   ElCard,
+  ElForm,
+  ElFormItem,
+  ElInput,
   ElMessage,
   ElNotification,
   ElSegmented,
@@ -54,6 +57,11 @@ const tableData = [
 const segmentedValue = ref('Mon');
 
 const segmentedOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+const form = ref({
+  username: '',
+  password: '',
+});
 </script>
 
 <template>
@@ -111,6 +119,19 @@ const segmentedOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
           <ElTable.TableColumn label="测试列1" prop="prop1" />
           <ElTable.TableColumn label="测试列2" prop="prop2" />
         </ElTable>
+      </ElCard>
+      <ElCard class="mb-5 w-80">
+        <ElForm :model="form" label-width="80px">
+          <ElFormItem label="用户名">
+            <ElInput v-model="form.username" />
+          </ElFormItem>
+          <ElFormItem label="密码">
+            <ElInput v-model="form.password" />
+          </ElFormItem>
+          <ElFormItem label-width="0">
+            <ElButton type="primary">登录</ElButton>
+          </ElFormItem>
+        </ElForm>
       </ElCard>
     </div>
   </Page>

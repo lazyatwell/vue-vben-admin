@@ -31,6 +31,6 @@ export default defineEventHandler(async (event) => {
 
   return useResponseSuccess({
     ...findUser,
-    accessToken,
+    access_token: accessToken,
   });
 });

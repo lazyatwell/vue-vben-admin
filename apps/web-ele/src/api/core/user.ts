@@ -1,10 +1,19 @@
 import type { UserInfo } from '@vben/types';
 
-import { requestClient } from '#/api/request';
+import { customRequestClient } from '#/api/request';
 
 /**
  * 获取用户信息
  */
 export async function getUserInfoApi() {
-  return requestClient.get<UserInfo>('/user/info');
+  // @ts-expect-error 忽略类型错误
+  const { code, msg, ...rest } = await customRequestClient.get<UserInfo>(
+    '/system/user/getInfo',
+  );
+
+  if (code !== 200) {
+    throw new Error(msg);
+  }
+
+  return rest;
 }

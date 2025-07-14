@@ -22,13 +22,13 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   appName: '',
-  copyright: true,
+  copyright: false,
   logo: '',
   pageDescription: '',
   pageTitle: '',
   sloganImage: '',
-  toolbar: true,
-  toolbarList: () => ['color', 'language', 'layout', 'theme'],
+  toolbar: import.meta.env.MODE === 'development',
+  toolbarList: () => ['color', 'layout', 'theme'],
   clickLogo: () => {},
 });
 

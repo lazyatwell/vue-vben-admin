@@ -3,7 +3,7 @@ import type { Preferences } from './types';
 const defaultPreferences: Preferences = {
   app: {
     accessMode: 'frontend',
-    authPageLayout: 'panel-right',
+    authPageLayout: 'panel-center',
     checkUpdatesInterval: 1,
     colorGrayMode: false,
     colorWeakMode: false,
@@ -15,8 +15,7 @@ const defaultPreferences: Preferences = {
     contentPaddingLeft: 0,
     contentPaddingRight: 0,
     contentPaddingTop: 0,
-    defaultAvatar:
-      'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
+    defaultAvatar: '/static/avatar.jpg',
     defaultHomePath: '/analytics',
     dynamicTitle: true,
     enableCheckUpdates: true,
@@ -26,7 +25,7 @@ const defaultPreferences: Preferences = {
     layout: 'sidebar-nav',
     locale: 'zh-CN',
     loginExpiredMode: 'page',
-    name: 'Vben Admin',
+    name: 'Ocean Admin',
     preferencesButtonPosition: 'auto',
     watermark: false,
     zIndex: 200,
@@ -39,10 +38,10 @@ const defaultPreferences: Preferences = {
     styleType: 'normal',
   },
   copyright: {
-    companyName: 'Vben',
-    companySiteLink: 'https://www.vben.pro',
-    date: '2024',
-    enable: true,
+    companyName: 'Ocean',
+    companySiteLink: 'http://www.china-ocean.com.cn/',
+    date: '2025',
+    enable: false,
     icp: '',
     icpLink: '',
     settingShow: true,
@@ -63,7 +62,7 @@ const defaultPreferences: Preferences = {
   logo: {
     enable: true,
     fit: 'contain',
-    source: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp',
+    source: '/static/logo.svg',
   },
   navigation: {
     accordion: true,
@@ -112,7 +111,7 @@ const defaultPreferences: Preferences = {
     colorPrimary: 'hsl(212 100% 45%)',
     colorSuccess: 'hsl(144 57% 58%)',
     colorWarning: 'hsl(42 84% 61%)',
-    mode: 'dark',
+    mode: 'light',
     radius: '0.5',
     semiDarkHeader: false,
     semiDarkSidebar: false,
@@ -126,7 +125,7 @@ const defaultPreferences: Preferences = {
   widget: {
     fullscreen: true,
     globalSearch: true,
-    languageToggle: true,
+    languageToggle: false,
     lockScreen: true,
     notification: true,
     refresh: true,
