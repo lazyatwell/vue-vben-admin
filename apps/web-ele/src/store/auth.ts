@@ -1,4 +1,4 @@
-import type { Recordable, UserInfo } from '@vben/types';
+import type { Recordable, UserInfoType } from '@vben/types';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
     onSuccess?: () => Promise<void> | void,
   ) {
     // 异步处理用户登录操作并获取 accessToken
-    let userInfo: null | UserInfo = null;
+    let userInfo: null | UserInfoType = null;
     try {
       loginLoading.value = true;
 
@@ -58,9 +58,9 @@ export const useAuthStore = defineStore('auth', () => {
               );
         }
 
-        if (userInfo?.realName) {
+        if (userInfo?.user?.remark) {
           ElNotification({
-            message: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
+            message: `${$t('authentication.loginSuccessDesc')}:${userInfo?.user?.remark}`,
             title: $t('authentication.loginSuccess'),
             type: 'success',
           });
@@ -96,9 +96,10 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    let userInfo: null | UserInfo = null;
+    let userInfo: null | UserInfoType = null;
     userInfo = await getUserInfoApi();
     userStore.setUserInfo(userInfo);
+    accessStore.setAccessCodes(userInfo?.permissions ?? []);
     return userInfo;
   }
 

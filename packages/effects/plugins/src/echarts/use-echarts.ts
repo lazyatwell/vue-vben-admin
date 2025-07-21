@@ -47,6 +47,7 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
     if (!el) {
       return;
     }
+    // known issue: https://github.com/apache/echarts/issues/18255
     chartInstance = echarts.init(el, t || isDark.value ? 'dark' : null);
 
     return chartInstance;

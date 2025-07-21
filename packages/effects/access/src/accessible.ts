@@ -54,7 +54,14 @@ async function generateAccessible(
         root.children?.push(route);
       }
     } else {
-      router.addRoute(route);
+      try {
+        router.addRoute(route);
+      } catch (error: any) {
+        console.error(
+          `Failed to add route: ${String(route.name)}:`,
+          error?.message,
+        );
+      }
     }
   });
 
@@ -62,7 +69,14 @@ async function generateAccessible(
     if (root.name) {
       router.removeRoute(root.name);
     }
-    router.addRoute(root);
+    try {
+      router.addRoute(root);
+    } catch (error: any) {
+      console.error(
+        `Failed to add route: ${String(root.name)}:`,
+        error?.message,
+      );
+    }
   }
 
   // 生成菜单

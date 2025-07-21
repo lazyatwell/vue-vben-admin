@@ -106,12 +106,15 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   return client;
 }
 
+/** 请求客户端,返回数据格式为data */
 export const requestClient = createRequestClient(apiURL, {
   responseReturn: 'data',
 });
 
+/** 请求客户端,返回数据格式为body */
 export const customRequestClient = createRequestClient(apiURL, {
   responseReturn: 'body',
 });
 
+/** 请求客户端, 不携带token，返回数据格式不进行处理 */
 export const baseRequestClient = new RequestClient({ baseURL: apiURL });
