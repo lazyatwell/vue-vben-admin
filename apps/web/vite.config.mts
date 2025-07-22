@@ -1,8 +1,12 @@
+import type { EnvType } from '@ocean/vite-config';
+
 import { defineConfig } from '@ocean/vite-config';
 
 import ElementPlus from 'unplugin-element-plus/vite';
 
-export default defineConfig(async () => {
+const viteUserConfig = defineConfig(async (config) => {
+  const env = (config || {}) as EnvType;
+  console.warn(env);
   return {
     application: {},
     vite: {
@@ -13,15 +17,17 @@ export default defineConfig(async () => {
       ],
       server: {
         proxy: {
-          '/dev-api': {
+          [env.apiUrl]: {
             changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/dev-api/, ''),
+            rewrite: (path: string) => path.replace(env.apiUrl, ''),
             // mock代理目标地址
-            target: 'http://10.3.0.52/prod-api',
+            target: env.devProxy,
             ws: false,
           },
         },
       },
     },
   };
-});
+}, 'application');
+
+export default viteUserConfig;

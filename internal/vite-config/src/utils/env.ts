@@ -58,16 +58,15 @@ async function loadEnv<T = Record<string, string>>(match = 'VITE_GLOB_', confFil
   return envConfig as T;
 }
 
-async function loadAndConvertEnv(
-  match = 'VITE_',
-  confFiles = getConfFiles(),
-): Promise<
-  Partial<ApplicationPluginOptions> & {
-    appTitle: string;
-    base: string;
-    port: number;
-  }
-> {
+export type EnvType = Partial<ApplicationPluginOptions> & {
+  apiUrl: string;
+  appTitle: string;
+  base: string;
+  devProxy: string;
+  port: number;
+};
+
+async function loadAndConvertEnv(match = 'VITE_', confFiles = getConfFiles()): Promise<EnvType> {
   const envConfig = await loadEnv(match, confFiles);
 
   const {
@@ -81,6 +80,8 @@ async function loadAndConvertEnv(
     VITE_PORT,
     VITE_PWA,
     VITE_VISUALIZER,
+    VITE_GLOB_DEV_PROXY,
+    VITE_GLOB_API_URL,
   } = envConfig;
 
   const compressTypes = (VITE_COMPRESS ?? '').split(',').filter((item) => item === 'brotli' || item === 'gzip');
@@ -94,9 +95,11 @@ async function loadAndConvertEnv(
     devtools: getBoolean(VITE_DEVTOOLS),
     injectAppLoading: getBoolean(VITE_INJECT_APP_LOADING),
     nitroMock: getBoolean(VITE_NITRO_MOCK),
-    port: getNumber(VITE_PORT, 5173),
+    port: getNumber(VITE_PORT, 8093),
     pwa: getBoolean(VITE_PWA),
     visualizer: getBoolean(VITE_VISUALIZER),
+    devProxy: getString(VITE_GLOB_DEV_PROXY, 'http://localhost:8093/dev-api'),
+    apiUrl: getString(VITE_GLOB_API_URL, '/dev-api'),
   };
 }
 
