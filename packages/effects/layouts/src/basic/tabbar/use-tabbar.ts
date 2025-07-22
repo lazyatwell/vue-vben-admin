@@ -1,13 +1,13 @@
 import type { RouteLocationNormalizedGeneric } from 'vue-router';
 
-import type { TabDefinition } from '@vben/types';
+import type { TabDefinition } from '@ocean/types';
 
-import type { IContextMenuItem } from '@vben-core/tabs-ui';
+import type { IContextMenuItem } from '@ocean-core/tabs-ui';
 
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useContentMaximize, useTabs } from '@vben/hooks';
+import { useContentMaximize, useTabs } from '@ocean/hooks';
 import {
   ArrowLeftToLine,
   ArrowRightLeft,
@@ -20,10 +20,10 @@ import {
   PinOff,
   RotateCw,
   X,
-} from '@vben/icons';
-import { $t, useI18n } from '@vben/locales';
-import { getTabKey, useAccessStore, useTabbarStore } from '@vben/stores';
-import { filterTree } from '@vben/utils';
+} from '@ocean/icons';
+import { $t, useI18n } from '@ocean/locales';
+import { getTabKey, useAccessStore, useTabbarStore } from '@ocean/stores';
+import { filterTree } from '@ocean/utils';
 
 export function useTabbar() {
   const router = useRouter();
@@ -53,16 +53,9 @@ export function useTabbar() {
 
   const { locale } = useI18n();
   const currentTabs = ref<RouteLocationNormalizedGeneric[]>();
-  watch(
-    [
-      () => tabbarStore.getTabs,
-      () => tabbarStore.updateTime,
-      () => locale.value,
-    ],
-    ([tabs]) => {
-      currentTabs.value = tabs.map((item) => wrapperTabLocale(item));
-    },
-  );
+  watch([() => tabbarStore.getTabs, () => tabbarStore.updateTime, () => locale.value], ([tabs]) => {
+    currentTabs.value = tabs.map((item) => wrapperTabLocale(item));
+  });
 
   /**
    * 初始化固定标签页
@@ -143,9 +136,7 @@ export function useTabbar() {
         },
         icon: affixTab ? PinOff : Pin,
         key: 'affix',
-        text: affixTab
-          ? $t('preferences.tabbar.contextMenu.unpin')
-          : $t('preferences.tabbar.contextMenu.pin'),
+        text: affixTab ? $t('preferences.tabbar.contextMenu.unpin') : $t('preferences.tabbar.contextMenu.pin'),
       },
       {
         handler: async () => {

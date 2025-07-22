@@ -24,13 +24,13 @@ export async function perfectionist(): Promise<Linter.Config[]> {
           {
             customGroups: {
               type: {
-                'vben-core-type': ['^@vben-core/.+'],
-                'vben-type': ['^@vben/.+'],
+                'ocean-core-type': ['^@ocean-core/.+'],
+                'ocean-type': ['^@ocean/.+'],
                 'vue-type': ['^vue$', '^vue-.+', '^@vue/.+'],
               },
               value: {
-                vben: ['^@vben/.+'],
-                'vben-core': ['^@vben-core/.+'],
+                ocean: ['^@ocean/.+'],
+                'ocean-core': ['^@ocean-core/.+'],
                 vue: ['^vue$', '^vue-.+', '^@vue/.+'],
               },
             },
@@ -38,14 +38,14 @@ export async function perfectionist(): Promise<Linter.Config[]> {
             groups: [
               ['external-type', 'builtin-type', 'type'],
               'vue-type',
-              'vben-type',
-              'vben-core-type',
+              'ocean-type',
+              'ocean-core-type',
               ['parent-type', 'sibling-type', 'index-type'],
               ['internal-type'],
               'builtin',
               'vue',
-              'vben',
-              'vben-core',
+              'ocean',
+              'ocean-core',
               'external',
               'internal',
               ['parent', 'sibling', 'index'],

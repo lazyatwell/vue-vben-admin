@@ -64,23 +64,15 @@ describe('fileDownloader', () => {
 
   it('should handle empty URL gracefully', async () => {
     const url = '';
-    mockAxiosInstance.get.mockRejectedValueOnce(
-      new Error('Request failed with status code 404'),
-    );
+    mockAxiosInstance.get.mockRejectedValueOnce(new Error('Request failed with status code 404'));
 
-    await expect(fileDownloader.download(url)).rejects.toThrow(
-      'Request failed with status code 404',
-    );
+    await expect(fileDownloader.download(url)).rejects.toThrow('Request failed with status code 404');
   });
 
   it('should handle null URL gracefully', async () => {
     const url = null as unknown as string;
-    mockAxiosInstance.get.mockRejectedValueOnce(
-      new Error('Request failed with status code 404'),
-    );
+    mockAxiosInstance.get.mockRejectedValueOnce(new Error('Request failed with status code 404'));
 
-    await expect(fileDownloader.download(url)).rejects.toThrow(
-      'Request failed with status code 404',
-    );
+    await expect(fileDownloader.download(url)).rejects.toThrow('Request failed with status code 404');
   });
 });

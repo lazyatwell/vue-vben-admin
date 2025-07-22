@@ -1,13 +1,6 @@
 {
-  "name": "@vben/locales",
-  "version": "5.5.7",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "packages/locales"
-  },
+  "name": "@ocean/locales",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -21,7 +14,7 @@
   },
   "dependencies": {
     "@intlify/core-base": "catalog:",
-    "@vben-core/composables": "workspace:*",
+    "@ocean-core/composables": "workspace:*",
     "vue": "catalog:",
     "vue-i18n": "catalog:"
   }

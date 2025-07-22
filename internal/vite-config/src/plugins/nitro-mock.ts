@@ -2,7 +2,7 @@ import type { PluginOption } from 'vite';
 
 import type { NitroMockPluginOptions } from '../typing';
 
-import { colors, consola, getPackage } from '@vben/node-utils';
+import { colors, consola, getPackage } from '@ocean/node-utils';
 
 import getPort from 'get-port';
 import { build, createDevServer, createNitro, prepare } from 'nitropack';
@@ -10,7 +10,7 @@ import { build, createDevServer, createNitro, prepare } from 'nitropack';
 const hmrKeyRe = /^runtimeConfig\.|routeRules\./;
 
 export const viteNitroMockPlugin = ({
-  mockServerPackage = '@vben/backend-mock',
+  mockServerPackage = '@ocean/backend-mock',
   port = 5320,
   verbose = true,
 }: NitroMockPluginOptions = {}): PluginOption => {
@@ -23,9 +23,7 @@ export const viteNitroMockPlugin = ({
 
       const pkg = await getPackage(mockServerPackage);
       if (!pkg) {
-        consola.log(
-          `Package ${mockServerPackage} not found. Skip mock server.`,
-        );
+        consola.log(`Package ${mockServerPackage} not found. Skip mock server.`);
         return;
       }
 
@@ -69,14 +67,8 @@ async function runNitroServer(rootDir: string, port: number, verbose: boolean) {
               return;
             }
             verbose &&
-              consola.info(
-                `Nitro config updated:\n${diff
-                  .map((entry) => `  ${entry.toString()}`)
-                  .join('\n')}`,
-              );
-            await (diff.every((e) => hmrKeyRe.test(e.key))
-              ? nitro.updateConfig(newConfig.config)
-              : reload());
+              consola.info(`Nitro config updated:\n${diff.map((entry) => `  ${entry.toString()}`).join('\n')}`);
+            await (diff.every((e) => hmrKeyRe.test(e.key)) ? nitro.updateConfig(newConfig.config) : reload());
           },
         },
         watch: true,

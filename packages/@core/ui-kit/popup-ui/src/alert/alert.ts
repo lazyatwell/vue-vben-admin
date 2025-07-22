@@ -1,8 +1,8 @@
 import type { Component, VNode, VNodeArrayChildren } from 'vue';
 
-import type { Recordable } from '@vben-core/typings';
+import type { Recordable } from '@ocean-core/typings';
 
-import { createContext } from '@vben-core/shadcn-ui';
+import { createContext } from '@ocean-core/shadcn-ui';
 
 export type IconType = 'error' | 'info' | 'question' | 'success' | 'warning';
 
@@ -12,9 +12,7 @@ export type BeforeCloseScope = {
 
 export type AlertProps = {
   /** 关闭前的回调，如果返回false，则终止关闭 */
-  beforeClose?: (
-    scope: BeforeCloseScope,
-  ) => boolean | Promise<boolean | undefined> | undefined;
+  beforeClose?: (scope: BeforeCloseScope) => boolean | Promise<boolean | undefined> | undefined;
   /** 边框 */
   bordered?: boolean;
   /**
@@ -62,11 +60,7 @@ export type PromptProps<T = any> = {
   /** 输入组件的属性 */
   componentProps?: Recordable<any>;
   /** 输入组件的插槽 */
-  componentSlots?:
-    | (() => any)
-    | Recordable<unknown>
-    | VNode
-    | VNodeArrayChildren;
+  componentSlots?: (() => any) | Recordable<unknown> | VNode | VNodeArrayChildren;
   /** 默认值 */
   defaultValue?: T;
   /** 输入组件的值属性名 */
@@ -83,8 +77,7 @@ export type AlertContext = {
   doConfirm: () => void;
 };
 
-export const [injectAlertContext, provideAlertContext] =
-  createContext<AlertContext>('VbenAlertContext');
+export const [injectAlertContext, provideAlertContext] = createContext<AlertContext>('OceanAlertContext');
 
 /**
  * 获取Alert上下文

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
-defineOptions({ name: 'VbenButtonGroup' });
+defineOptions({ name: 'OceanButtonGroup' });
 
 withDefaults(
   defineProps<{
@@ -14,14 +14,7 @@ withDefaults(
 </script>
 <template>
   <div
-    :class="
-      cn(
-        'vben-button-group rounded-md',
-        `size-${size}`,
-        gap ? 'with-gap' : 'no-gap',
-        $attrs.class as string,
-      )
-    "
+    :class="cn('ocean-button-group rounded-md', `size-${size}`, gap ? 'with-gap' : 'no-gap', $attrs.class as string)"
     :style="{ gap: gap ? `${gap}px` : '0px' }"
   >
     <slot></slot>
@@ -29,7 +22,7 @@ withDefaults(
 </template>
 
 <style lang="scss" scoped>
-.vben-button-group {
+.ocean-button-group {
   display: inline-flex;
 
   &.size-large :deep(button) {

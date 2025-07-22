@@ -3,8 +3,8 @@ import type { MenuItemProps, MenuItemRegistered } from '../types';
 
 import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
 
-import { useNamespace } from '@vben-core/composables';
-import { VbenIcon, VbenTooltip } from '@vben-core/shadcn-ui';
+import { useNamespace } from '@ocean-core/composables';
+import { OceanIcon, OceanTooltip } from '@ocean-core/shadcn-ui';
 
 import { MenuBadge } from '../components';
 import { useMenu, useMenuContext, useSubMenuContext } from '../hooks';
@@ -27,27 +27,16 @@ const subMenu = useSubMenuContext();
 const { parentMenu, parentPaths } = useMenu();
 
 const active = computed(() => props.path === rootMenu?.activePath);
-const menuIcon = computed(() =>
-  active.value ? props.activeIcon || props.icon : props.icon,
-);
+const menuIcon = computed(() => (active.value ? props.activeIcon || props.icon : props.icon));
 
-const isTopLevelMenuItem = computed(
-  () => parentMenu.value?.type.name === 'Menu',
-);
+const isTopLevelMenuItem = computed(() => parentMenu.value?.type.name === 'Menu');
 
 const collapseShowTitle = computed(
-  () =>
-    rootMenu.props?.collapseShowTitle &&
-    isTopLevelMenuItem.value &&
-    rootMenu.props.collapse,
+  () => rootMenu.props?.collapseShowTitle && isTopLevelMenuItem.value && rootMenu.props.collapse,
 );
 
 const showTooltip = computed(
-  () =>
-    rootMenu.props.mode === 'vertical' &&
-    isTopLevelMenuItem.value &&
-    rootMenu.props?.collapse &&
-    slots.title,
+  () => rootMenu.props.mode === 'vertical' && isTopLevelMenuItem.value && rootMenu.props?.collapse && slots.title,
 );
 
 const item: MenuItemRegistered = reactive({
@@ -92,14 +81,10 @@ onBeforeUnmount(() => {
     role="menuitem"
     @click.stop="handleClick"
   >
-    <VbenTooltip
-      v-if="showTooltip"
-      :content-class="[rootMenu.theme]"
-      side="right"
-    >
+    <OceanTooltip v-if="showTooltip" :content-class="[rootMenu.theme]" side="right">
       <template #trigger>
         <div :class="[nsMenu.be('tooltip', 'trigger')]">
-          <VbenIcon :class="nsMenu.e('icon')" :icon="menuIcon" fallback />
+          <OceanIcon :class="nsMenu.e('icon')" :icon="menuIcon" fallback />
           <slot></slot>
           <span v-if="collapseShowTitle" :class="nsMenu.e('name')">
             <slot name="title"></slot>
@@ -107,14 +92,10 @@ onBeforeUnmount(() => {
         </div>
       </template>
       <slot name="title"></slot>
-    </VbenTooltip>
+    </OceanTooltip>
     <div v-show="!showTooltip" :class="[e('content')]">
-      <MenuBadge
-        v-if="rootMenu.props.mode !== 'horizontal'"
-        class="right-2"
-        v-bind="props"
-      />
-      <VbenIcon :class="nsMenu.e('icon')" :icon="menuIcon" />
+      <MenuBadge v-if="rootMenu.props.mode !== 'horizontal'" class="right-2" v-bind="props" />
+      <OceanIcon :class="nsMenu.e('icon')" :icon="menuIcon" />
       <slot></slot>
       <slot name="title"></slot>
     </div>

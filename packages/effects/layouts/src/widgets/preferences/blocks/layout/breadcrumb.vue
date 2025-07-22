@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SelectOption } from '@vben/types';
+import type { SelectOption } from '@ocean/types';
 
 import { computed } from 'vue';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
 import SwitchItem from '../switch-item.vue';
 import ToggleItem from '../toggle-item.vue';
@@ -40,17 +40,10 @@ const disableItem = computed(() => {
   <SwitchItem v-model="breadcrumbShowIcon" :disabled="disableItem">
     {{ $t('preferences.breadcrumb.icon') }}
   </SwitchItem>
-  <SwitchItem
-    v-model="breadcrumbShowHome"
-    :disabled="disableItem || !breadcrumbShowIcon"
-  >
+  <SwitchItem v-model="breadcrumbShowHome" :disabled="disableItem || !breadcrumbShowIcon">
     {{ $t('preferences.breadcrumb.home') }}
   </SwitchItem>
-  <ToggleItem
-    v-model="breadcrumbStyleType"
-    :disabled="disableItem"
-    :items="typeItems"
-  >
+  <ToggleItem v-model="breadcrumbStyleType" :disabled="disableItem" :items="typeItems">
     {{ $t('preferences.breadcrumb.style') }}
   </ToggleItem>
 </template>

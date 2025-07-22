@@ -1,15 +1,8 @@
 {
-  "name": "@vben-core/shadcn-ui",
-  "version": "5.5.7",
+  "name": "@ocean-core/shadcn-ui",
+  "version": "1.0.0",
   "#main": "./dist/index.mjs",
   "#module": "./dist/index.mjs",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "packages/@vben-core/uikit/shadcn-ui"
-  },
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -40,10 +33,10 @@
     }
   },
   "dependencies": {
-    "@vben-core/composables": "workspace:*",
-    "@vben-core/icons": "workspace:*",
-    "@vben-core/shared": "workspace:*",
-    "@vben-core/typings": "workspace:*",
+    "@ocean-core/composables": "workspace:*",
+    "@ocean-core/icons": "workspace:*",
+    "@ocean-core/shared": "workspace:*",
+    "@ocean-core/typings": "workspace:*",
     "@vueuse/core": "catalog:",
     "class-variance-authority": "catalog:",
     "lucide-vue-next": "catalog:",

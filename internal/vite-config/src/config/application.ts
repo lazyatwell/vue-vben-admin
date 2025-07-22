@@ -4,7 +4,7 @@ import type { DefineApplicationOptions } from '../typing';
 
 import path, { relative } from 'node:path';
 
-import { findMonorepoRoot } from '@vben/node-utils';
+import { findMonorepoRoot } from '@ocean/node-utils';
 
 import { NodePackageImporter } from 'sass';
 import { defineConfig, loadEnv, mergeConfig } from 'vite';
@@ -83,19 +83,12 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
         port,
         warmup: {
           // 预热文件
-          clientFiles: [
-            './index.html',
-            './src/bootstrap.ts',
-            './src/{views,layouts,router,store,api,adapter}/*',
-          ],
+          clientFiles: ['./index.html', './src/bootstrap.ts', './src/{views,layouts,router,store,api,adapter}/*'],
         },
       },
     };
 
-    const mergedCommonConfig = mergeConfig(
-      await getCommonConfig(),
-      applicationConfig,
-    );
+    const mergedCommonConfig = mergeConfig(await getCommonConfig(), applicationConfig);
     return mergeConfig(mergedCommonConfig, vite);
   });
 }
@@ -110,7 +103,7 @@ function createCssOptions(injectGlobalScss = true): CSSOptions {
               const relativePath = relative(root, filepath);
               // apps下的包注入全局样式
               if (relativePath.startsWith(`apps${path.sep}`)) {
-                return `@use "@vben/styles/global" as *;\n${content}`;
+                return `@use "@ocean/styles/global" as *;\n${content}`;
               }
               return content;
             },

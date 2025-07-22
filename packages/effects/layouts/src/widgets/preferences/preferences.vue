@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { Settings } from '@vben/icons';
-import { $t, loadLocaleMessages } from '@vben/locales';
-import { preferences, updatePreferences } from '@vben/preferences';
-import { capitalizeFirstLetter } from '@vben/utils';
+import { Settings } from '@ocean/icons';
+import { $t, loadLocaleMessages } from '@ocean/locales';
+import { preferences, updatePreferences } from '@ocean/preferences';
+import { capitalizeFirstLetter } from '@ocean/utils';
 
-import { useVbenDrawer } from '@vben-core/popup-ui';
-import { VbenButton } from '@vben-core/shadcn-ui';
+import { useOceanDrawer } from '@ocean-core/popup-ui';
+import { OceanButton } from '@ocean-core/shadcn-ui';
 
 import PreferencesDrawer from './preferences-drawer.vue';
 
-const [Drawer, drawerApi] = useVbenDrawer({
+const [Drawer, drawerApi] = useOceanDrawer({
   connectedComponent: PreferencesDrawer,
 });
 
@@ -38,9 +38,7 @@ const listen = computed(() => {
   for (const [key, value] of Object.entries(preferences)) {
     if (typeof value === 'object') {
       for (const subKey of Object.keys(value)) {
-        result[`update:${key}${capitalizeFirstLetter(subKey)}`] = (
-          val: any,
-        ) => {
+        result[`update:${key}${capitalizeFirstLetter(subKey)}`] = (val: any) => {
           updatePreferences({ [key]: { [subKey]: val } });
           if (key === 'app' && subKey === 'locale') {
             loadLocaleMessages(val);
@@ -60,12 +58,12 @@ const listen = computed(() => {
 
     <div @click="() => drawerApi.open()">
       <slot>
-        <VbenButton
+        <OceanButton
           :title="$t('preferences.title')"
           class="bg-primary flex-col-center size-10 cursor-pointer rounded-l-lg rounded-r-none border-none"
         >
           <Settings class="size-5" />
-        </VbenButton>
+        </OceanButton>
       </slot>
     </div>
   </div>

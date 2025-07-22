@@ -1,17 +1,14 @@
-import type {
-  VbenFormSchema as FormSchema,
-  VbenFormProps,
-} from '@vben/common-ui';
+import type { OceanFormSchema as FormSchema, OceanFormProps } from '@ocean/common-ui';
 
 import type { ComponentType } from './component';
 
-import { setupVbenForm, useVbenForm as useForm, z } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { setupOceanForm, useOceanForm as useForm, z } from '@ocean/common-ui';
+import { $t } from '@ocean/locales';
 
 import { initComponentAdapter } from './component';
 
 initComponentAdapter();
-setupVbenForm<ComponentType>({
+setupOceanForm<ComponentType>({
   config: {
     baseModelPropName: 'value',
     // naive-ui组件的空值为null,不能是undefined，否则重置表单时不生效
@@ -39,9 +36,9 @@ setupVbenForm<ComponentType>({
   },
 });
 
-const useVbenForm = useForm<ComponentType>;
+const useOceanForm = useForm<ComponentType>;
 
-export { useVbenForm, z };
+export { useOceanForm, z };
 
-export type VbenFormSchema = FormSchema<ComponentType>;
-export type { VbenFormProps };
+export type OceanFormSchema = FormSchema<ComponentType>;
+export type { OceanFormProps };

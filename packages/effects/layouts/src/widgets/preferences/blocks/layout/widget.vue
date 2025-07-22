@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SelectOption } from '@vben/types';
+import type { SelectOption } from '@ocean/types';
 
 import { computed } from 'vue';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
 import SelectItem from '../select-item.vue';
 import SwitchItem from '../switch-item.vue';
@@ -19,9 +19,7 @@ const widgetNotification = defineModel<boolean>('widgetNotification');
 const widgetThemeToggle = defineModel<boolean>('widgetThemeToggle');
 const widgetSidebarToggle = defineModel<boolean>('widgetSidebarToggle');
 const widgetLockScreen = defineModel<boolean>('widgetLockScreen');
-const appPreferencesButtonPosition = defineModel<string>(
-  'appPreferencesButtonPosition',
-);
+const appPreferencesButtonPosition = defineModel<string>('appPreferencesButtonPosition');
 const widgetRefresh = defineModel<boolean>('widgetRefresh');
 
 const positionItems = computed((): SelectOption[] => [

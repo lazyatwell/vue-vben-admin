@@ -3,14 +3,9 @@ import type { TooltipContentProps } from 'radix-vue';
 
 import type { StyleValue } from 'vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '@ocean-core/typings';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../../ui';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui';
 
 interface Props {
   contentClass?: ClassType;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SupportedLanguagesType } from '@vben/locales';
+import type { SupportedLanguagesType } from '@ocean/locales';
 import type {
   BreadcrumbStyleType,
   BuiltinThemeType,
@@ -10,28 +10,19 @@ import type {
   NavigationStyleType,
   PreferencesButtonPositionType,
   ThemeModeType,
-} from '@vben/types';
+} from '@ocean/types';
 
-import type { SegmentedItem } from '@vben-core/shadcn-ui';
+import type { SegmentedItem } from '@ocean-core/shadcn-ui';
 
 import { computed, ref } from 'vue';
 
-import { Copy, RotateCw } from '@vben/icons';
-import { $t, loadLocaleMessages } from '@vben/locales';
-import {
-  clearPreferencesCache,
-  preferences,
-  resetPreferences,
-  usePreferences,
-} from '@vben/preferences';
+import { Copy, RotateCw } from '@ocean/icons';
+import { $t, loadLocaleMessages } from '@ocean/locales';
+import { clearPreferencesCache, preferences, resetPreferences, usePreferences } from '@ocean/preferences';
 
-import { useVbenDrawer } from '@vben-core/popup-ui';
-import {
-  VbenButton,
-  VbenIconButton,
-  VbenSegmented,
-} from '@vben-core/shadcn-ui';
-import { globalShareState } from '@vben-core/shared/global-state';
+import { useOceanDrawer } from '@ocean-core/popup-ui';
+import { OceanButton, OceanIconButton, OceanSegmented } from '@ocean-core/shadcn-ui';
+import { globalShareState } from '@ocean-core/shared/global-state';
 
 import { useClipboard } from '@vueuse/core';
 
@@ -68,9 +59,7 @@ const appColorWeakMode = defineModel<boolean>('appColorWeakMode');
 const appContentCompact = defineModel<ContentCompactType>('appContentCompact');
 const appWatermark = defineModel<boolean>('appWatermark');
 const appEnableCheckUpdates = defineModel<boolean>('appEnableCheckUpdates');
-const appPreferencesButtonPosition = defineModel<PreferencesButtonPositionType>(
-  'appPreferencesButtonPosition',
-);
+const appPreferencesButtonPosition = defineModel<PreferencesButtonPositionType>('appPreferencesButtonPosition');
 
 const transitionProgress = defineModel<boolean>('transitionProgress');
 const transitionName = defineModel<string>('transitionName');
@@ -87,26 +76,19 @@ const themeSemiDarkHeader = defineModel<boolean>('themeSemiDarkHeader');
 const sidebarEnable = defineModel<boolean>('sidebarEnable');
 const sidebarWidth = defineModel<number>('sidebarWidth');
 const sidebarCollapsed = defineModel<boolean>('sidebarCollapsed');
-const sidebarCollapsedShowTitle = defineModel<boolean>(
-  'sidebarCollapsedShowTitle',
-);
-const sidebarAutoActivateChild = defineModel<boolean>(
-  'sidebarAutoActivateChild',
-);
+const sidebarCollapsedShowTitle = defineModel<boolean>('sidebarCollapsedShowTitle');
+const sidebarAutoActivateChild = defineModel<boolean>('sidebarAutoActivateChild');
 const sidebarExpandOnHover = defineModel<boolean>('sidebarExpandOnHover');
 const sidebarCollapsedButton = defineModel<boolean>('sidebarCollapsedButton');
 const sidebarFixedButton = defineModel<boolean>('sidebarFixedButton');
 const headerEnable = defineModel<boolean>('headerEnable');
 const headerMode = defineModel<LayoutHeaderModeType>('headerMode');
-const headerMenuAlign =
-  defineModel<LayoutHeaderMenuAlignType>('headerMenuAlign');
+const headerMenuAlign = defineModel<LayoutHeaderMenuAlignType>('headerMenuAlign');
 
 const breadcrumbEnable = defineModel<boolean>('breadcrumbEnable');
 const breadcrumbShowIcon = defineModel<boolean>('breadcrumbShowIcon');
 const breadcrumbShowHome = defineModel<boolean>('breadcrumbShowHome');
-const breadcrumbStyleType = defineModel<BreadcrumbStyleType>(
-  'breadcrumbStyleType',
-);
+const breadcrumbStyleType = defineModel<BreadcrumbStyleType>('breadcrumbStyleType');
 const breadcrumbHideOnlyOne = defineModel<boolean>('breadcrumbHideOnlyOne');
 
 const tabbarEnable = defineModel<boolean>('tabbarEnable');
@@ -118,13 +100,9 @@ const tabbarDraggable = defineModel<boolean>('tabbarDraggable');
 const tabbarWheelable = defineModel<boolean>('tabbarWheelable');
 const tabbarStyleType = defineModel<string>('tabbarStyleType');
 const tabbarMaxCount = defineModel<number>('tabbarMaxCount');
-const tabbarMiddleClickToClose = defineModel<boolean>(
-  'tabbarMiddleClickToClose',
-);
+const tabbarMiddleClickToClose = defineModel<boolean>('tabbarMiddleClickToClose');
 
-const navigationStyleType = defineModel<NavigationStyleType>(
-  'navigationStyleType',
-);
+const navigationStyleType = defineModel<NavigationStyleType>('navigationStyleType');
 const navigationSplit = defineModel<boolean>('navigationSplit');
 const navigationAccordion = defineModel<boolean>('navigationAccordion');
 
@@ -136,24 +114,16 @@ const footerFixed = defineModel<boolean>('footerFixed');
 const copyrightSettingShow = defineModel<boolean>('copyrightSettingShow');
 const copyrightEnable = defineModel<boolean>('copyrightEnable');
 const copyrightCompanyName = defineModel<string>('copyrightCompanyName');
-const copyrightCompanySiteLink = defineModel<string>(
-  'copyrightCompanySiteLink',
-);
+const copyrightCompanySiteLink = defineModel<string>('copyrightCompanySiteLink');
 const copyrightDate = defineModel<string>('copyrightDate');
 const copyrightIcp = defineModel<string>('copyrightIcp');
 const copyrightIcpLink = defineModel<string>('copyrightIcpLink');
 
 const shortcutKeysEnable = defineModel<boolean>('shortcutKeysEnable');
-const shortcutKeysGlobalSearch = defineModel<boolean>(
-  'shortcutKeysGlobalSearch',
-);
-const shortcutKeysGlobalLogout = defineModel<boolean>(
-  'shortcutKeysGlobalLogout',
-);
+const shortcutKeysGlobalSearch = defineModel<boolean>('shortcutKeysGlobalSearch');
+const shortcutKeysGlobalLogout = defineModel<boolean>('shortcutKeysGlobalLogout');
 
-const shortcutKeysGlobalLockScreen = defineModel<boolean>(
-  'shortcutKeysGlobalLockScreen',
-);
+const shortcutKeysGlobalLockScreen = defineModel<boolean>('shortcutKeysGlobalLockScreen');
 
 const widgetGlobalSearch = defineModel<boolean>('widgetGlobalSearch');
 const widgetFullscreen = defineModel<boolean>('widgetFullscreen');
@@ -177,7 +147,7 @@ const {
 } = usePreferences();
 const { copy } = useClipboard({ legacy: true });
 
-const [Drawer] = useVbenDrawer();
+const [Drawer] = useOceanDrawer();
 
 const activeTab = ref('appearance');
 
@@ -203,12 +173,7 @@ const tabs = computed((): SegmentedItem[] => {
 });
 
 const showBreadcrumbConfig = computed(() => {
-  return (
-    !isFullContent.value &&
-    !isMixedNav.value &&
-    !isHeaderNav.value &&
-    preferences.header.enable
-  );
+  return !isFullContent.value && !isMixedNav.value && !isHeaderNav.value && preferences.header.enable;
 });
 
 async function handleCopy() {
@@ -237,29 +202,18 @@ async function handleReset() {
 
 <template>
   <div>
-    <Drawer
-      :description="$t('preferences.subtitle')"
-      :title="$t('preferences.title')"
-      class="sm:max-w-sm"
-    >
+    <Drawer :description="$t('preferences.subtitle')" :title="$t('preferences.title')" class="sm:max-w-sm">
       <template #extra>
         <div class="flex items-center">
-          <VbenIconButton
-            :disabled="!diffPreference"
-            :tooltip="$t('preferences.resetTip')"
-            class="relative"
-          >
-            <span
-              v-if="diffPreference"
-              class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"
-            ></span>
+          <OceanIconButton :disabled="!diffPreference" :tooltip="$t('preferences.resetTip')" class="relative">
+            <span v-if="diffPreference" class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"></span>
             <RotateCw class="size-4" @click="handleReset" />
-          </VbenIconButton>
+          </OceanIconButton>
         </div>
       </template>
 
       <div class="p-1">
-        <VbenSegmented v-model="activeTab" :tabs="tabs">
+        <OceanSegmented v-model="activeTab" :tabs="tabs">
           <template #general>
             <Block :title="$t('preferences.general')">
               <General
@@ -353,10 +307,7 @@ async function handleReset() {
                 v-model:breadcrumb-show-home="breadcrumbShowHome"
                 v-model:breadcrumb-show-icon="breadcrumbShowIcon"
                 v-model:breadcrumb-style-type="breadcrumbStyleType"
-                :disabled="
-                  !showBreadcrumbConfig ||
-                  !(isSideNav || isSideMixedNav || isHeaderSidebarNav)
-                "
+                :disabled="!showBreadcrumbConfig || !(isSideNav || isSideMixedNav || isHeaderSidebarNav)"
               />
             </Block>
             <Block :title="$t('preferences.tabbar.title')">
@@ -375,9 +326,7 @@ async function handleReset() {
             </Block>
             <Block :title="$t('preferences.widget.title')">
               <Widget
-                v-model:app-preferences-button-position="
-                  appPreferencesButtonPosition
-                "
+                v-model:app-preferences-button-position="appPreferencesButtonPosition"
                 v-model:widget-fullscreen="widgetFullscreen"
                 v-model:widget-global-search="widgetGlobalSearch"
                 v-model:widget-language-toggle="widgetLanguageToggle"
@@ -389,15 +338,9 @@ async function handleReset() {
               />
             </Block>
             <Block :title="$t('preferences.footer.title')">
-              <Footer
-                v-model:footer-enable="footerEnable"
-                v-model:footer-fixed="footerFixed"
-              />
+              <Footer v-model:footer-enable="footerEnable" v-model:footer-fixed="footerFixed" />
             </Block>
-            <Block
-              v-if="copyrightSettingShow"
-              :title="$t('preferences.copyright.title')"
-            >
+            <Block v-if="copyrightSettingShow" :title="$t('preferences.copyright.title')">
               <Copyright
                 v-model:copyright-company-name="copyrightCompanyName"
                 v-model:copyright-company-site-link="copyrightCompanySiteLink"
@@ -420,21 +363,15 @@ async function handleReset() {
               />
             </Block>
           </template>
-        </VbenSegmented>
+        </OceanSegmented>
       </div>
 
       <template #footer>
-        <VbenButton
-          :disabled="!diffPreference"
-          class="mx-4 w-full"
-          size="sm"
-          variant="default"
-          @click="handleCopy"
-        >
+        <OceanButton :disabled="!diffPreference" class="mx-4 w-full" size="sm" variant="default" @click="handleCopy">
           <Copy class="mr-2 size-3" />
           {{ $t('preferences.copyPreferences') }}
-        </VbenButton>
-        <VbenButton
+        </OceanButton>
+        <OceanButton
           :disabled="!diffPreference"
           class="mr-4 w-full"
           size="sm"
@@ -442,7 +379,7 @@ async function handleReset() {
           @click="handleClearCache"
         >
           {{ $t('preferences.clearAndLogout') }}
-        </VbenButton>
+        </OceanButton>
       </template>
     </Drawer>
   </div>

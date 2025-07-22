@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import type { MenuRecordRaw } from '@vben/types';
+import type { MenuRecordRaw } from '@ocean/types';
 
 import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 
-import {
-  ArrowDown,
-  ArrowUp,
-  CornerDownLeft,
-  MdiKeyboardEsc,
-  Search,
-} from '@vben/icons';
-import { $t } from '@vben/locales';
-import { isWindowsOs } from '@vben/utils';
+import { ArrowDown, ArrowUp, CornerDownLeft, MdiKeyboardEsc, Search } from '@ocean/icons';
+import { $t } from '@ocean/locales';
+import { isWindowsOs } from '@ocean/utils';
 
-import { useVbenModal } from '@vben-core/popup-ui';
+import { useOceanModal } from '@ocean-core/popup-ui';
 
 import { useMagicKeys, whenever } from '@vueuse/core';
 
@@ -23,18 +17,15 @@ defineOptions({
   name: 'GlobalSearch',
 });
 
-const props = withDefaults(
-  defineProps<{ enableShortcutKey?: boolean; menus?: MenuRecordRaw[] }>(),
-  {
-    enableShortcutKey: true,
-    menus: () => [],
-  },
-);
+const props = withDefaults(defineProps<{ enableShortcutKey?: boolean; menus?: MenuRecordRaw[] }>(), {
+  enableShortcutKey: true,
+  menus: () => [],
+});
 
 const keyword = ref('');
 const searchInputRef = ref<HTMLInputElement>();
 
-const [Modal, modalApi] = useVbenModal({
+const [Modal, modalApi] = useOceanModal({
   onCancel() {
     modalApi.close();
   },
@@ -96,11 +87,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <Modal
-      :fullscreen-button="false"
-      class="w-[600px]"
-      header-class="py-2 border-b"
-    >
+    <Modal :fullscreen-button="false" class="w-[600px]" header-class="py-2 border-b">
       <template #title>
         <div class="flex items-center">
           <Search class="text-muted-foreground mr-2 size-4" />
@@ -136,12 +123,8 @@ onMounted(() => {
       class="md:bg-accent group flex h-8 cursor-pointer items-center gap-3 rounded-2xl border-none bg-none px-2 py-0.5 outline-none"
       @click="toggleOpen()"
     >
-      <Search
-        class="text-muted-foreground group-hover:text-foreground size-4 group-hover:opacity-100"
-      />
-      <span
-        class="text-muted-foreground group-hover:text-foreground hidden text-xs duration-300 md:block"
-      >
+      <Search class="text-muted-foreground group-hover:text-foreground size-4 group-hover:opacity-100" />
+      <span class="text-muted-foreground group-hover:text-foreground hidden text-xs duration-300 md:block">
         {{ $t('ui.widgets.search.title') }}
       </span>
       <span

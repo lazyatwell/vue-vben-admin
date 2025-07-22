@@ -4,7 +4,7 @@ import type { PinInputProps } from './types';
 import { computed, onBeforeUnmount, ref, useId, watch } from 'vue';
 
 import { PinInput, PinInputGroup, PinInputInput } from '../../ui';
-import { VbenButton } from '../button';
+import { OceanButton } from '../button';
 
 defineOptions({
   inheritAttrs: false,
@@ -99,13 +99,9 @@ const id = useId();
   >
     <div class="relative flex w-full">
       <PinInputGroup class="mr-2">
-        <PinInputInput
-          v-for="(item, index) in codeLength"
-          :key="item"
-          :index="index"
-        />
+        <PinInputInput v-for="(item, index) in codeLength" :key="item" :index="index" />
       </PinInputGroup>
-      <VbenButton
+      <OceanButton
         :disabled="disabled"
         :loading="btnLoading"
         class="flex-grow"
@@ -114,7 +110,7 @@ const id = useId();
         @click="handleSend"
       >
         {{ btnText }}
-      </VbenButton>
+      </OceanButton>
     </div>
   </PinInput>
 </template>

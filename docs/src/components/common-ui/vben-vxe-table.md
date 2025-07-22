@@ -2,11 +2,11 @@
 outline: deep
 ---
 
-# Vben Vxe Table 表格
+# Ocean Vxe Table 表格
 
-框架提供的Table 列表组件基于 [vxe-table](https://vxetable.cn/v4/#/grid/api?apiKey=grid)，结合`Vben Form 表单`进行了二次封装。
+框架提供的Table 列表组件基于 [vxe-table](https://vxetable.cn/v4/#/grid/api?apiKey=grid)，结合`Ocean Form 表单`进行了二次封装。
 
-其中，表头的 **表单搜索** 部分采用了`Vben Form表单`，表格主体部分使用了`vxe-grid`组件，支持表格的分页、排序、筛选等功能。
+其中，表头的 **表单搜索** 部分采用了`Ocean Form表单`，表格主体部分使用了`vxe-grid`组件，支持表格的分页、排序、筛选等功能。
 
 > 如果文档内没有参数说明，可以尝试在在线示例或者在 [vxe-grid 官方API 文档](https://vxetable.cn/v4/#/grid/api?apiKey=grid) 内寻找
 
@@ -29,13 +29,13 @@ outline: deep
 ```ts
 import { h } from 'vue';
 
-import { setupVbenVxeTable, useVbenVxeGrid } from '@vben/plugins/vxe-table';
+import { setupOceanVxeTable, useOceanVxeGrid } from '@ocean/plugins/vxe-table';
 
 import { Button, Image } from 'ant-design-vue';
 
-import { useVbenForm } from './form';
+import { useOceanForm } from './form';
 
-setupVbenVxeTable({
+setupOceanVxeTable({
   configVxeTable: (vxeUI) => {
     vxeUI.setConfig({
       grid: {
@@ -77,38 +77,34 @@ setupVbenVxeTable({
     vxeUI.renderer.add('CellLink', {
       renderTableDefault(renderOpts) {
         const { props } = renderOpts;
-        return h(
-          Button,
-          { size: 'small', type: 'link' },
-          { default: () => props?.text },
-        );
+        return h(Button, { size: 'small', type: 'link' }, { default: () => props?.text });
       },
     });
 
     // 这里可以自行扩展 vxe-table 的全局配置，比如自定义格式化
     // vxeUI.formats.add
   },
-  useVbenForm,
+  useOceanForm,
 });
 
-export { useVbenVxeGrid };
+export { useOceanVxeGrid };
 
-export type * from '@vben/plugins/vxe-table';
+export type * from '@ocean/plugins/vxe-table';
 ```
 
 :::
 
 ## 基础表格
 
-使用 `useVbenVxeGrid` 创建最基础的表格。
+使用 `useOceanVxeGrid` 创建最基础的表格。
 
-<DemoPreview dir="demos/vben-vxe-table/basic" />
+<DemoPreview dir="demos/ocean-vxe-table/basic" />
 
 ## 远程加载
 
 通过指定 `proxyConfig.ajax` 的 `query` 方法，可以实现远程加载数据。
 
-<DemoPreview dir="demos/vben-vxe-table/remote" />
+<DemoPreview dir="demos/ocean-vxe-table/remote" />
 
 ## 树形表格
 
@@ -122,13 +118,13 @@ treeConfig: {
 },
 ```
 
-<DemoPreview dir="demos/vben-vxe-table/tree" />
+<DemoPreview dir="demos/ocean-vxe-table/tree" />
 
 ## 固定表头/列
 
 列固定可选参数： `'left' | 'right' | '' | null`
 
-<DemoPreview dir="demos/vben-vxe-table/fixed" />
+<DemoPreview dir="demos/ocean-vxe-table/fixed" />
 
 ## 自定义单元格
 
@@ -150,29 +146,25 @@ vxeUI.renderer.add('CellImage', {
 vxeUI.renderer.add('CellLink', {
   renderDefault(renderOpts) {
     const { props } = renderOpts;
-    return h(
-      Button,
-      { size: 'small', type: 'link' },
-      { default: () => props?.text },
-    );
+    return h(Button, { size: 'small', type: 'link' }, { default: () => props?.text });
   },
 });
 ```
 
-<DemoPreview dir="demos/vben-vxe-table/custom-cell" />
+<DemoPreview dir="demos/ocean-vxe-table/custom-cell" />
 
 ## 搜索表单
 
-**表单搜索** 部分采用了`Vben Form 表单`，参考 [Vben Form 表单文档](/components/common-ui/vben-form)。
+**表单搜索** 部分采用了`Ocean Form 表单`，参考 [Ocean Form 表单文档](/components/common-ui/ocean-form)。
 
 当启用了表单搜索时，可以在toolbarConfig中配置`search`为`true`来让表格在工具栏区域显示一个搜索表单控制按钮。表格的所有以`form-`开头的命名插槽都会被传递给搜索表单。
 
 ### 定制分隔条
 
-当你启用表单搜索时，在表单和表格之间会显示一个分隔条。这个分隔条使用了默认的组件背景色，并且横向贯穿整个Vben Vxe Table在视觉上融入了页面的默认背景中。如果你在Vben Vxe Table的外层包裹了一个不同背景色的容器（如将其放在一个Card内），默认的表单和表格之间的分隔条可能就显得格格不入了，下面的代码演示了如何定制这个分隔条。
+当你启用表单搜索时，在表单和表格之间会显示一个分隔条。这个分隔条使用了默认的组件背景色，并且横向贯穿整个Ocean Vxe Table在视觉上融入了页面的默认背景中。如果你在Ocean Vxe Table的外层包裹了一个不同背景色的容器（如将其放在一个Card内），默认的表单和表格之间的分隔条可能就显得格格不入了，下面的代码演示了如何定制这个分隔条。
 
 ```ts
-const [Grid] = useVbenVxeGrid({
+const [Grid] = useOceanVxeGrid({
   formOptions: {},
   gridOptions: {},
   // 完全移除分隔条
@@ -184,19 +176,19 @@ const [Grid] = useVbenVxeGrid({
 });
 ```
 
-<DemoPreview dir="demos/vben-vxe-table/form" />
+<DemoPreview dir="demos/ocean-vxe-table/form" />
 
 ## 单元格编辑
 
 通过指定`editConfig.mode`为`cell`，可以实现单元格编辑。
 
-<DemoPreview dir="demos/vben-vxe-table/edit-cell" />
+<DemoPreview dir="demos/ocean-vxe-table/edit-cell" />
 
 ## 行编辑
 
 通过指定`editConfig.mode`为`row`，可以实现行编辑。
 
-<DemoPreview dir="demos/vben-vxe-table/edit-row" />
+<DemoPreview dir="demos/ocean-vxe-table/edit-row" />
 
 ## 虚拟滚动
 
@@ -204,19 +196,19 @@ const [Grid] = useVbenVxeGrid({
 
 > 参考 [vxe-table 官方文档 - 虚拟滚动](https://vxetable.cn/v4/#/component/grid/scroll/vertical)。
 
-<DemoPreview dir="demos/vben-vxe-table/virtual" />
+<DemoPreview dir="demos/ocean-vxe-table/virtual" />
 
 ## API
 
-`useVbenVxeGrid` 返回一个数组，第一个元素是表格组件，第二个元素是表格的方法。
+`useOceanVxeGrid` 返回一个数组，第一个元素是表格组件，第二个元素是表格的方法。
 
 ```vue
 <script setup lang="ts">
-import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import { useOceanVxeGrid } from '#/adapter/vxe-table';
 
 // Grid 为表格组件
 // gridApi 为表格的方法
-const [Grid, gridApi] = useVbenVxeGrid({
+const [Grid, gridApi] = useOceanVxeGrid({
   gridOptions: {},
   formOptions: {},
   gridEvents: {},
@@ -232,32 +224,32 @@ const [Grid, gridApi] = useVbenVxeGrid({
 
 ### GridApi
 
-useVbenVxeGrid 返回的第二个参数，是一个对象，包含了一些表单的方法。
+useOceanVxeGrid 返回的第二个参数，是一个对象，包含了一些表单的方法。
 
-| 方法名 | 描述 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| setLoading | 设置loading状态 | `(loading)=>void` | - |
-| setGridOptions | 设置vxe-table grid组件参数 | `(options: Partial<VxeGridProps['gridOptions'])=>void` | - |
-| reload | 重载表格，会进行初始化 | `(params:any)=>void` | - |
-| query | 重载表格，会保留当前分页 | `(params:any)=>void` | - |
-| grid | vxe-table grid实例 | `VxeGridInstance` | - |
-| formApi | vbenForm api实例 | `FormApi` | - |
-| toggleSearchForm | 设置搜索表单显示状态 | `(show?: boolean)=>boolean` | 当省略参数时，则将表单在显示和隐藏两种状态之间切换 |
+| 方法名           | 描述                       | 类型                                                   | 说明                                               |
+| ---------------- | -------------------------- | ------------------------------------------------------ | -------------------------------------------------- |
+| setLoading       | 设置loading状态            | `(loading)=>void`                                      | -                                                  |
+| setGridOptions   | 设置vxe-table grid组件参数 | `(options: Partial<VxeGridProps['gridOptions'])=>void` | -                                                  |
+| reload           | 重载表格，会进行初始化     | `(params:any)=>void`                                   | -                                                  |
+| query            | 重载表格，会保留当前分页   | `(params:any)=>void`                                   | -                                                  |
+| grid             | vxe-table grid实例         | `VxeGridInstance`                                      | -                                                  |
+| formApi          | oceanForm api实例          | `FormApi`                                              | -                                                  |
+| toggleSearchForm | 设置搜索表单显示状态       | `(show?: boolean)=>boolean`                            | 当省略参数时，则将表单在显示和隐藏两种状态之间切换 |
 
 ## Props
 
-所有属性都可以传入 `useVbenVxeGrid` 的第一个参数中。
+所有属性都可以传入 `useOceanVxeGrid` 的第一个参数中。
 
-| 属性名 | 描述 | 类型 | 版本要求 |
-| --- | --- | --- | --- |
-| tableTitle | 表格标题 | `string` | - |
-| tableTitleHelp | 表格标题帮助信息 | `string` | - |
-| gridClass | grid组件的class | `string` | - |
-| gridOptions | grid组件的参数 | `VxeTableGridProps` | - |
-| gridEvents | grid组件的触发的事件 | `VxeGridListeners` | - |
-| formOptions | 表单参数 | `VbenFormProps` | - |
-| showSearchForm | 是否显示搜索表单 | `boolean` | - |
-| separator | 搜索表单与表格主体之间的分隔条 | `boolean\|SeparatorOptions` | >5.5.4 |
+| 属性名         | 描述                           | 类型                        | 版本要求 |
+| -------------- | ------------------------------ | --------------------------- | -------- |
+| tableTitle     | 表格标题                       | `string`                    | -        |
+| tableTitleHelp | 表格标题帮助信息               | `string`                    | -        |
+| gridClass      | grid组件的class                | `string`                    | -        |
+| gridOptions    | grid组件的参数                 | `VxeTableGridProps`         | -        |
+| gridEvents     | grid组件的触发的事件           | `VxeGridListeners`          | -        |
+| formOptions    | 表单参数                       | `OceanFormProps`            | -        |
+| showSearchForm | 是否显示搜索表单               | `boolean`                   | -        |
+| separator      | 搜索表单与表格主体之间的分隔条 | `boolean\|SeparatorOptions` | >5.5.4   |
 
 ## Slots
 

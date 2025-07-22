@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import type {
-  AlertDialogContentEmits,
-  AlertDialogContentProps,
-} from 'radix-vue';
+import type { AlertDialogContentEmits, AlertDialogContentProps } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '@ocean-core/typings';
 
 import { computed, ref } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
-import {
-  AlertDialogContent,
-  AlertDialogPortal,
-  useForwardPropsEmits,
-} from 'radix-vue';
+import { AlertDialogContent, AlertDialogPortal, useForwardPropsEmits } from 'radix-vue';
 
 import AlertDialogOverlay from './AlertDialogOverlay.vue';
 
@@ -31,9 +24,7 @@ const props = withDefaults(
   >(),
   { modal: true },
 );
-const emits = defineEmits<
-  AlertDialogContentEmits & { close: []; closed: []; opened: [] }
->();
+const emits = defineEmits<AlertDialogContentEmits & { close: []; closed: []; opened: [] }>();
 
 const delegatedProps = computed(() => {
   const { class: _, modal: _modal, open: _open, ...delegated } = props;
@@ -67,8 +58,7 @@ defineExpose({
         :style="{
           ...(zIndex ? { zIndex } : {}),
           position: 'fixed',
-          backdropFilter:
-            overlayBlur && overlayBlur > 0 ? `blur(${overlayBlur}px)` : 'none',
+          backdropFilter: overlayBlur && overlayBlur > 0 ? `blur(${overlayBlur}px)` : 'none',
         }"
         @click="() => emits('close')"
       />
@@ -84,10 +74,8 @@ defineExpose({
           'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
           'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
           {
-            'data-[state=open]:slide-in-from-top-[48%] data-[state=closed]:slide-out-to-top-[48%]':
-              !centered,
-            'data-[state=open]:slide-in-from-top-[98%] data-[state=closed]:slide-out-to-top-[148%]':
-              centered,
+            'data-[state=open]:slide-in-from-top-[48%] data-[state=closed]:slide-out-to-top-[48%]': !centered,
+            'data-[state=open]:slide-in-from-top-[98%] data-[state=closed]:slide-out-to-top-[148%]': centered,
             'top-[10vh]': !centered,
             'top-1/2 -translate-y-1/2': centered,
           },

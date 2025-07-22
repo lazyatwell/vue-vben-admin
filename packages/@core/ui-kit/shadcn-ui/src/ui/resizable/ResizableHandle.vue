@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import type {
-  SplitterResizeHandleEmits,
-  SplitterResizeHandleProps,
-} from 'radix-vue';
+import type { SplitterResizeHandleEmits, SplitterResizeHandleProps } from 'radix-vue';
 
 import type { HTMLAttributes } from 'vue';
 
 import { computed } from 'vue';
 
-import { GripVertical } from '@vben-core/icons';
-import { cn } from '@vben-core/shared/utils';
+import { GripVertical } from '@ocean-core/icons';
+import { cn } from '@ocean-core/shared/utils';
 
 import { SplitterResizeHandle, useForwardPropsEmits } from 'radix-vue';
 
@@ -40,9 +37,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     "
   >
     <template v-if="props.withHandle">
-      <div
-        class="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-sm border"
-      >
+      <div class="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-sm border">
         <GripVertical class="h-2.5 w-2.5" />
       </div>
     </template>

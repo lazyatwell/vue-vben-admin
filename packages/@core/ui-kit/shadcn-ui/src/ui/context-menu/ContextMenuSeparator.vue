@@ -3,7 +3,7 @@ import type { ContextMenuSeparatorProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { ContextMenuSeparator } from 'radix-vue';
 
@@ -17,8 +17,5 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <ContextMenuSeparator
-    v-bind="delegatedProps"
-    :class="cn('bg-border -mx-1 my-1 h-px', props.class)"
-  />
+  <ContextMenuSeparator v-bind="delegatedProps" :class="cn('bg-border -mx-1 my-1 h-px', props.class)" />
 </template>

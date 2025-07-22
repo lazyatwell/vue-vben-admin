@@ -1,4 +1,4 @@
-import type { Recordable } from '@vben/types';
+import type { Recordable } from '@ocean/types';
 
 /**
  * 一个缓存对象，在不刷新页面时，无需重复请求远程接口
@@ -34,10 +34,9 @@ export async function fetchIconsData(prefix: string): Promise<string[]> {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 1000 * 10);
-      const response: IconifyResponse = await fetch(
-        `https://api.iconify.design/collection?prefix=${prefix}`,
-        { signal: controller.signal },
-      ).then((res) => res.json());
+      const response: IconifyResponse = await fetch(`https://api.iconify.design/collection?prefix=${prefix}`, {
+        signal: controller.signal,
+      }).then((res) => res.json());
       clearTimeout(timeoutId);
       const list = response.uncategorized || [];
       if (response.categories) {

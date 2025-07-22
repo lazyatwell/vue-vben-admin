@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { BuiltinThemePreset } from '@vben/preferences';
-import type { BuiltinThemeType } from '@vben/types';
+import type { BuiltinThemePreset } from '@ocean/preferences';
+import type { BuiltinThemeType } from '@ocean/types';
 
 import { computed, ref, watch } from 'vue';
 
-import { UserRoundPen } from '@vben/icons';
-import { $t } from '@vben/locales';
-import { BUILT_IN_THEME_PRESETS } from '@vben/preferences';
-import { convertToHsl, TinyColor } from '@vben/utils';
+import { UserRoundPen } from '@ocean/icons';
+import { $t } from '@ocean/locales';
+import { BUILT_IN_THEME_PRESETS } from '@ocean/preferences';
+import { convertToHsl, TinyColor } from '@ocean/utils';
 
 import { useThrottleFn } from '@vueuse/core';
 
@@ -105,13 +105,9 @@ function selectColor() {
 watch(
   () => [modelValue.value, props.isDark] as [BuiltinThemeType, boolean],
   ([themeType, isDark]) => {
-    const theme = builtinThemePresets.value.find(
-      (item) => item.type === themeType,
-    );
+    const theme = builtinThemePresets.value.find((item) => item.type === themeType);
     if (theme) {
-      const primaryColor = isDark
-        ? theme.darkPrimaryColor || theme.primaryColor
-        : theme.primaryColor;
+      const primaryColor = isDark ? theme.darkPrimaryColor || theme.primaryColor : theme.primaryColor;
 
       themeColorPrimary.value = primaryColor || theme.color;
     }
@@ -130,17 +126,12 @@ watch(
           class="outline-box flex-center group cursor-pointer"
         >
           <template v-if="theme.type !== 'custom'">
-            <div
-              :style="{ backgroundColor: theme.color }"
-              class="mx-10 my-2 size-5 rounded-md"
-            ></div>
+            <div :style="{ backgroundColor: theme.color }" class="mx-10 my-2 size-5 rounded-md"></div>
           </template>
           <template v-else>
             <div class="size-full px-10 py-2" @click.stop="selectColor">
               <div class="flex-center relative size-5 rounded-sm">
-                <UserRoundPen
-                  class="absolute z-10 size-5 opacity-60 group-hover:opacity-100"
-                />
+                <UserRoundPen class="absolute z-10 size-5 opacity-60 group-hover:opacity-100" />
                 <input
                   ref="colorInput"
                   :value="inputValue"

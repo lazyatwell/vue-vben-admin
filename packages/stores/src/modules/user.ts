@@ -1,4 +1,4 @@
-import type { UserInfoType } from '@vben-core/typings';
+import type { UserInfoType } from '@ocean-core/typings';
 
 import { acceptHMRUpdate, defineStore } from 'pinia';
 

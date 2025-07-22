@@ -1,19 +1,13 @@
 import type { VxeGridInstance } from 'vxe-table';
 
-import type { ExtendedFormApi } from '@vben-core/form-ui';
+import type { ExtendedFormApi } from '@ocean-core/form-ui';
 
 import type { VxeGridProps } from './types';
 
 import { toRaw } from 'vue';
 
-import { Store } from '@vben-core/shared/store';
-import {
-  bindMethods,
-  isBoolean,
-  isFunction,
-  mergeWithArrayOverride,
-  StateHandler,
-} from '@vben-core/shared/utils';
+import { Store } from '@ocean-core/shared/store';
+import { bindMethods, isBoolean, isFunction, mergeWithArrayOverride, StateHandler } from '@ocean-core/shared/utils';
 
 function getDefaultState(): VxeGridProps {
   return {
@@ -43,15 +37,12 @@ export class VxeGridApi<T extends Record<string, any> = any> {
     const storeState = { ...options };
 
     const defaultState = getDefaultState();
-    this.store = new Store<VxeGridProps>(
-      mergeWithArrayOverride(storeState, defaultState),
-      {
-        onUpdate: () => {
-          // this.prevState = this.state;
-          this.state = this.store.state;
-        },
+    this.store = new Store<VxeGridProps>(mergeWithArrayOverride(storeState, defaultState), {
+      onUpdate: () => {
+        // this.prevState = this.state;
+        this.state = this.store.state;
       },
-    );
+    });
 
     this.state = this.store.state;
     this.stateHandler = new StateHandler();
@@ -97,11 +88,7 @@ export class VxeGridApi<T extends Record<string, any> = any> {
     });
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: VxeGridProps<T>) => Partial<VxeGridProps<T>>)
-      | Partial<VxeGridProps<T>>,
-  ) {
+  setState(stateOrFn: ((prev: VxeGridProps<T>) => Partial<VxeGridProps<T>>) | Partial<VxeGridProps<T>>) {
     if (isFunction(stateOrFn)) {
       this.store.setState((prev) => {
         return mergeWithArrayOverride(stateOrFn(prev), prev);

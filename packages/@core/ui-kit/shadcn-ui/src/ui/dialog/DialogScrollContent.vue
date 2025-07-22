@@ -3,21 +3,12 @@ import type { DialogContentEmits, DialogContentProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { X } from 'lucide-vue-next';
-import {
-  DialogClose,
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-  useForwardPropsEmits,
-} from 'radix-vue';
+import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'radix-vue';
 
-const props = withDefaults(
-  defineProps<DialogContentProps & { class?: any; zIndex?: number }>(),
-  { zIndex: 1000 },
-);
+const props = withDefaults(defineProps<DialogContentProps & { class?: any; zIndex?: number }>(), { zIndex: 1000 });
 const emits = defineEmits<DialogContentEmits>();
 
 const delegatedProps = computed(() => {
@@ -48,10 +39,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
           (event) => {
             const originalEvent = event.detail.originalEvent;
             const target = originalEvent.target as HTMLElement;
-            if (
-              originalEvent.offsetX > target.clientWidth ||
-              originalEvent.offsetY > target.clientHeight
-            ) {
+            if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
               event.preventDefault();
             }
           }
@@ -59,9 +47,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       >
         <slot></slot>
 
-        <DialogClose
-          class="hover:bg-secondary absolute right-4 top-4 rounded-md p-0.5 transition-colors"
-        >
+        <DialogClose class="hover:bg-secondary absolute right-4 top-4 rounded-md p-0.5 transition-colors">
           <X class="h-4 w-4" />
           <span class="sr-only">Close</span>
         </DialogClose>

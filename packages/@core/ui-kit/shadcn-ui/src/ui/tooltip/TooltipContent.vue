@@ -3,7 +3,7 @@ import type { TooltipContentEmits, TooltipContentProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { TooltipContent, TooltipPortal, useForwardPropsEmits } from 'radix-vue';
 
@@ -11,14 +11,11 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(
-  defineProps<TooltipContentProps & { class?: any }>(),
-  {
-    class: '',
-    side: 'right',
-    sideOffset: 5,
-  },
-);
+const props = withDefaults(defineProps<TooltipContentProps & { class?: any }>(), {
+  class: '',
+  side: 'right',
+  sideOffset: 5,
+});
 
 const emits = defineEmits<TooltipContentEmits>();
 

@@ -5,17 +5,17 @@ import type { FormSchema, MaybeComponentProps } from '../types';
 
 import { computed, nextTick, onUnmounted, useTemplateRef, watch } from 'vue';
 
-import { CircleAlert } from '@vben-core/icons';
+import { CircleAlert } from '@ocean-core/icons';
 import {
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormMessage,
-  VbenRenderContent,
-  VbenTooltip,
-} from '@vben-core/shadcn-ui';
-import { cn, isFunction, isObject, isString } from '@vben-core/shared/utils';
+  OceanRenderContent,
+  OceanTooltip,
+} from '@ocean-core/shadcn-ui';
+import { cn, isFunction, isObject, isString } from '@ocean-core/shared/utils';
 
 import { toTypedSchema } from '@vee-validate/zod';
 import { useFieldError, useFormValues } from 'vee-validate';
@@ -63,9 +63,7 @@ const compact = formRenderProps.compact;
 const isInValid = computed(() => errors.value?.length > 0);
 
 const FieldComponent = computed(() => {
-  const finalComponent = isString(component)
-    ? componentMap.value[component]
-    : component;
+  const finalComponent = isString(component) ? componentMap.value[component] : component;
   if (!finalComponent) {
     // 组件未注册
     console.warn(`Component ${component} is not registered`);
@@ -73,14 +71,9 @@ const FieldComponent = computed(() => {
   return finalComponent;
 });
 
-const {
-  dynamicComponentProps,
-  dynamicRules,
-  isDisabled,
-  isIf,
-  isRequired,
-  isShow,
-} = useDependencies(() => dependencies);
+const { dynamicComponentProps, dynamicRules, isDisabled, isIf, isRequired, isShow } = useDependencies(
+  () => dependencies,
+);
 
 const labelStyle = computed(() => {
   return labelClass?.includes('w-') || isVertical.value
@@ -154,9 +147,7 @@ const fieldRules = computed(() => {
 });
 
 const computedProps = computed(() => {
-  const finalComponentProps = isFunction(componentProps)
-    ? componentProps(values.value, formApi!)
-    : componentProps;
+  const finalComponentProps = isFunction(componentProps) ? componentProps(values.value, formApi!) : componentProps;
 
   return {
     ...commonComponentProps,
@@ -206,9 +197,7 @@ function fieldBindEvent(slotProps: Record<string, any>) {
   const modelValue = slotProps.componentField.modelValue;
   const handler = slotProps.componentField['onUpdate:modelValue'];
 
-  const bindEventField =
-    modelPropName ||
-    (isString(component) ? componentBindEventMap.value?.[component] : null);
+  const bindEventField = modelPropName || (isString(component) ? componentBindEventMap.value?.[component] : null);
 
   let value = modelValue;
   // antd design 的一些组件会传递一个 event 对象
@@ -249,12 +238,8 @@ function createComponentProps(slotProps: Record<string, any>) {
     ...slotProps.componentField,
     ...computedProps.value,
     ...bindEvents,
-    ...(Reflect.has(computedProps.value, 'onChange')
-      ? { onChange: computedProps.value.onChange }
-      : {}),
-    ...(Reflect.has(computedProps.value, 'onInput')
-      ? { onInput: computedProps.value.onInput }
-      : {}),
+    ...(Reflect.has(computedProps.value, 'onChange') ? { onChange: computedProps.value.onChange } : {}),
+    ...(Reflect.has(computedProps.value, 'onInput') ? { onInput: computedProps.value.onInput } : {}),
   };
 
   return binds;
@@ -282,12 +267,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <FormField
-    v-if="isIf"
-    v-bind="fieldProps"
-    v-slot="slotProps"
-    :name="fieldName"
-  >
+  <FormField v-if="isIf" v-bind="fieldProps" v-slot="slotProps" :name="fieldName">
     <FormItem
       v-show="isShow"
       :class="{
@@ -320,7 +300,7 @@ onUnmounted(() => {
         :style="labelStyle"
       >
         <template v-if="label">
-          <VbenRenderContent :content="label" />
+          <OceanRenderContent :content="label" />
         </template>
       </FormLabel>
       <div class="flex-auto overflow-hidden p-[1px]">
@@ -344,44 +324,32 @@ onUnmounted(() => {
                 v-bind="createComponentProps(slotProps)"
                 :disabled="shouldDisabled"
               >
-                <template
-                  v-for="name in renderContentKey"
-                  :key="name"
-                  #[name]="renderSlotProps"
-                >
-                  <VbenRenderContent
+                <template v-for="name in renderContentKey" :key="name" #[name]="renderSlotProps">
+                  <OceanRenderContent
                     :content="customContentRender[name]"
                     v-bind="{ ...renderSlotProps, formContext: slotProps }"
                   />
                 </template>
                 <!-- <slot></slot> -->
               </component>
-              <VbenTooltip
-                v-if="compact && isInValid"
-                :delay-duration="300"
-                side="left"
-              >
+              <OceanTooltip v-if="compact && isInValid" :delay-duration="300" side="left">
                 <template #trigger>
                   <slot name="trigger">
                     <CircleAlert
-                      :class="
-                        cn(
-                          'text-foreground/80 hover:text-foreground inline-flex size-5 cursor-pointer',
-                        )
-                      "
+                      :class="cn('text-foreground/80 hover:text-foreground inline-flex size-5 cursor-pointer')"
                     />
                   </slot>
                 </template>
                 <FormMessage />
-              </VbenTooltip>
+              </OceanTooltip>
             </slot>
           </FormControl>
           <!-- 自定义后缀 -->
           <div v-if="suffix" class="ml-1">
-            <VbenRenderContent :content="suffix" />
+            <OceanRenderContent :content="suffix" />
           </div>
           <FormDescription v-if="description" class="ml-1">
-            <VbenRenderContent :content="description" />
+            <OceanRenderContent :content="description" />
           </FormDescription>
         </div>
 

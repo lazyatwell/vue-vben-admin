@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { useVbenModal, VbenButton } from '@vben/common-ui';
+import { OceanButton, useOceanModal } from '@ocean/common-ui';
 
-const [Modal, modalApi] = useVbenModal();
+const [Modal, modalApi] = useOceanModal();
 </script>
 <template>
   <div>
-    <VbenButton @click="() => modalApi.open()">Open</VbenButton>
+    <OceanButton @click="() => modalApi.open()">Open</OceanButton>
     <Modal class="w-[600px]" title="基础示例"> modal content </Modal>
   </div>
 </template>

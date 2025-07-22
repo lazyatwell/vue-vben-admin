@@ -3,7 +3,7 @@ import type { DialogTitleProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { DialogTitle } from 'radix-vue';
 
@@ -17,10 +17,7 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <DialogTitle
-    :class="cn('text-foreground font-medium', props.class)"
-    v-bind="delegatedProps"
-  >
+  <DialogTitle :class="cn('text-foreground font-medium', props.class)" v-bind="delegatedProps">
     <slot></slot>
   </DialogTitle>
 </template>

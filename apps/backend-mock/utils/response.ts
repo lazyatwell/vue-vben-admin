@@ -15,11 +15,7 @@ export function usePageResponseSuccess<T = any>(
   list: T[],
   { message = 'ok' } = {},
 ) {
-  const pageData = pagination(
-    Number.parseInt(`${page}`),
-    Number.parseInt(`${pageSize}`),
-    list,
-  );
+  const pageData = pagination(Number.parseInt(`${page}`), Number.parseInt(`${pageSize}`), list);
 
   return {
     ...useResponseSuccess({
@@ -39,10 +35,7 @@ export function useResponseError(message: string, error: any = null) {
   };
 }
 
-export function forbiddenResponse(
-  event: H3Event<EventHandlerRequest>,
-  message = 'Forbidden Exception',
-) {
+export function forbiddenResponse(event: H3Event<EventHandlerRequest>, message = 'Forbidden Exception') {
   setResponseStatus(event, 403);
   return useResponseError(message, message);
 }
@@ -56,11 +49,7 @@ export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function pagination<T = any>(
-  pageNo: number,
-  pageSize: number,
-  array: T[],
-): T[] {
+export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]): T[] {
   const offset = (pageNo - 1) * Number(pageSize);
   return offset + Number(pageSize) >= array.length
     ? array.slice(offset)

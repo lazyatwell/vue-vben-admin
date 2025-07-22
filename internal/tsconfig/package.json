@@ -1,14 +1,7 @@
 {
-  "name": "@vben/tsconfig",
-  "version": "5.5.7",
+  "name": "@ocean/tsconfig",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "internal/tsconfig"
-  },
   "license": "MIT",
   "type": "module",
   "files": [
@@ -19,7 +12,7 @@
     "web.json"
   ],
   "dependencies": {
-    "@vben/types": "workspace:*",
+    "@ocean/types": "workspace:*",
     "vite": "catalog:"
   }
 }

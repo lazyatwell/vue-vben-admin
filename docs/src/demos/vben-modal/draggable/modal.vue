@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useVbenModal } from '@vben/common-ui';
+import { useOceanModal } from '@ocean/common-ui';
 
-const [Modal] = useVbenModal({
+const [Modal] = useOceanModal({
   draggable: true,
 });
 </script>

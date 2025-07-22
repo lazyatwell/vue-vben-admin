@@ -3,8 +3,8 @@ import type { ZodTypeAny } from 'zod';
 
 import type { Component, HtmlHTMLAttributes, Ref } from 'vue';
 
-import type { VbenButtonProps } from '@vben-core/shadcn-ui';
-import type { ClassType, MaybeComputedRef } from '@vben-core/typings';
+import type { OceanButtonProps } from '@ocean-core/shadcn-ui';
+import type { ClassType, MaybeComputedRef } from '@ocean-core/typings';
 
 import type { FormApi } from './form-api';
 
@@ -12,21 +12,19 @@ export type FormLayout = 'horizontal' | 'vertical';
 
 export type BaseFormComponentType =
   | 'DefaultButton'
+  | 'OceanCheckbox'
+  | 'OceanInput'
+  | 'OceanInputPassword'
+  | 'OceanPinInput'
+  | 'OceanSelect'
   | 'PrimaryButton'
-  | 'VbenCheckbox'
-  | 'VbenInput'
-  | 'VbenInputPassword'
-  | 'VbenPinInput'
-  | 'VbenSelect'
   | (Record<never, never> & string);
 
 type Breakpoints = '2xl:' | '3xl:' | '' | 'lg:' | 'md:' | 'sm:' | 'xl:';
 
 type GridCols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
 
-export type WrapperClassType =
-  | `${Breakpoints}grid-cols-${GridCols}`
-  | (Record<never, never> & string);
+export type WrapperClassType = `${Breakpoints}grid-cols-${GridCols}` | (Record<never, never> & string);
 
 export type FormItemClassType =
   | `${Breakpoints}cols-end-${'auto' | GridCols}`
@@ -67,12 +65,7 @@ export type FormActions = FormContext<GenericObject>;
 
 export type CustomRenderType = (() => Component | string) | string;
 
-export type FormSchemaRuleType =
-  | 'required'
-  | 'selectRequired'
-  | null
-  | (Record<never, never> & string)
-  | ZodTypeAny;
+export type FormSchemaRuleType = 'required' | 'selectRequired' | null | (Record<never, never> & string) | ZodTypeAny;
 
 type FormItemDependenciesCondition<T = boolean | PromiseLike<boolean>> = (
   value: Partial<Record<string, any>>,
@@ -130,10 +123,7 @@ export interface FormItemDependencies {
 }
 
 type ComponentProps =
-  | ((
-      value: Partial<Record<string, any>>,
-      actions: FormActions,
-    ) => MaybeComponentProps)
+  | ((value: Partial<Record<string, any>>, actions: FormActions) => MaybeComponentProps)
   | MaybeComponentProps;
 
 export interface FormCommonConfig {
@@ -208,28 +198,16 @@ export interface FormCommonConfig {
   wrapperClass?: string;
 }
 
-type RenderComponentContentType = (
-  value: Partial<Record<string, any>>,
-  api: FormActions,
-) => Record<string, any>;
+type RenderComponentContentType = (value: Partial<Record<string, any>>, api: FormActions) => Record<string, any>;
 
-export type HandleSubmitFn = (
-  values: Record<string, any>,
-) => Promise<void> | void;
+export type HandleSubmitFn = (values: Record<string, any>) => Promise<void> | void;
 
-export type HandleResetFn = (
-  values: Record<string, any>,
-) => Promise<void> | void;
+export type HandleResetFn = (values: Record<string, any>) => Promise<void> | void;
 
 export type FieldMappingTime = [
   string,
   [string, string],
-  (
-    | ((value: any, fieldName: string) => any)
-    | [string, string]
-    | null
-    | string
-  )?,
+  (((value: any, fieldName: string) => any) | [string, string] | null | string)?,
 ][];
 
 export type ArrayToStringFields = Array<
@@ -238,9 +216,7 @@ export type ArrayToStringFields = Array<
   | string[] // 简单数组格式，最后一个元素可以是分隔符
 >;
 
-export interface FormSchema<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> extends FormCommonConfig {
+export interface FormSchema<T extends BaseFormComponentType = BaseFormComponentType> extends FormCommonConfig {
   /** 组件 */
   component: Component | T;
   /** 组件参数 */
@@ -269,9 +245,7 @@ export interface FormFieldProps extends FormSchema {
   required?: boolean;
 }
 
-export interface FormRenderProps<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> {
+export interface FormRenderProps<T extends BaseFormComponentType = BaseFormComponentType> {
   /**
    * 表单字段数组映射字符串配置 默认使用","
    */
@@ -338,18 +312,14 @@ export interface FormRenderProps<
   wrapperClass?: WrapperClassType;
 }
 
-export interface ActionButtonOptions extends VbenButtonProps {
+export interface ActionButtonOptions extends OceanButtonProps {
   [key: string]: any;
   content?: MaybeComputedRef<string>;
   show?: boolean;
 }
 
-export interface VbenFormProps<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> extends Omit<
-    FormRenderProps<T>,
-    'componentBindEventMap' | 'componentMap' | 'form'
-  > {
+export interface OceanFormProps<T extends BaseFormComponentType = BaseFormComponentType>
+  extends Omit<FormRenderProps<T>, 'componentBindEventMap' | 'componentMap' | 'form'> {
   /**
    * 操作按钮是否反转（提交按钮前置）
    */
@@ -378,10 +348,7 @@ export interface VbenFormProps<
   /**
    * 表单值变化回调
    */
-  handleValuesChange?: (
-    values: Record<string, any>,
-    fieldsChanged: string[],
-  ) => void;
+  handleValuesChange?: (values: Record<string, any>, fieldsChanged: string[]) => void;
   /**
    * 重置按钮参数
    */
@@ -418,14 +385,10 @@ export interface VbenFormProps<
 }
 
 export type ExtendedFormApi = FormApi & {
-  useStore: <T = NoInfer<VbenFormProps>>(
-    selector?: (state: NoInfer<VbenFormProps>) => T,
-  ) => Readonly<Ref<T>>;
+  useStore: <T = NoInfer<OceanFormProps>>(selector?: (state: NoInfer<OceanFormProps>) => T) => Readonly<Ref<T>>;
 };
 
-export interface VbenFormAdapterOptions<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> {
+export interface OceanFormAdapterOptions<T extends BaseFormComponentType = BaseFormComponentType> {
   config?: {
     baseModelPropName?: string;
     disabledOnChangeListener?: boolean;
@@ -434,15 +397,7 @@ export interface VbenFormAdapterOptions<
     modelPropNameMap?: Partial<Record<T, string>>;
   };
   defineRules?: {
-    required?: (
-      value: any,
-      params: any,
-      ctx: Record<string, any>,
-    ) => boolean | string;
-    selectRequired?: (
-      value: any,
-      params: any,
-      ctx: Record<string, any>,
-    ) => boolean | string;
+    required?: (value: any, params: any, ctx: Record<string, any>) => boolean | string;
+    selectRequired?: (value: any, params: any, ctx: Record<string, any>) => boolean | string;
   };
 }

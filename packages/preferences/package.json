@@ -1,13 +1,6 @@
 {
-  "name": "@vben/preferences",
-  "version": "5.5.7",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "packages/preferences"
-  },
+  "name": "@ocean/preferences",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -20,7 +13,7 @@
     }
   },
   "dependencies": {
-    "@vben-core/preferences": "workspace:*",
-    "@vben-core/typings": "workspace:*"
+    "@ocean-core/preferences": "workspace:*",
+    "@ocean-core/typings": "workspace:*"
   }
 }

@@ -5,7 +5,7 @@ import type { ToggleVariants } from './toggle';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Toggle, useForwardPropsEmits } from 'radix-vue';
 
@@ -38,10 +38,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-  <Toggle
-    v-bind="forwarded"
-    :class="cn(toggleVariants({ variant, size }), props.class)"
-  >
+  <Toggle v-bind="forwarded" :class="cn(toggleVariants({ variant, size }), props.class)">
     <slot></slot>
   </Toggle>
 </template>

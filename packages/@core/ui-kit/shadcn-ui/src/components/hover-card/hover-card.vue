@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import type {
-  HoverCardContentProps,
-  HoverCardRootEmits,
-  HoverCardRootProps,
-} from 'radix-vue';
+import type { HoverCardContentProps, HoverCardRootEmits, HoverCardRootProps } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '@ocean-core/typings';
 
 import { computed } from 'vue';
 
@@ -24,12 +20,7 @@ const props = defineProps<Props>();
 const emits = defineEmits<HoverCardRootEmits>();
 
 const delegatedProps = computed(() => {
-  const {
-    class: _cls,
-    contentClass: _,
-    contentProps: _cProps,
-    ...delegated
-  } = props;
+  const { class: _cls, contentClass: _, contentProps: _cProps, ...delegated } = props;
 
   return delegated;
 });
@@ -44,11 +35,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         <slot name="trigger"></slot>
       </div>
     </HoverCardTrigger>
-    <HoverCardContent
-      :class="contentClass"
-      v-bind="contentProps"
-      class="side-content z-popup"
-    >
+    <HoverCardContent :class="contentClass" v-bind="contentProps" class="side-content z-popup">
       <slot></slot>
     </HoverCardContent>
   </HoverCard>

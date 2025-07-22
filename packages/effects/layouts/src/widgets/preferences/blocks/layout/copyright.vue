@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
 import InputItem from '../input-item.vue';
 import SwitchItem from '../switch-item.vue';
@@ -13,9 +13,7 @@ const copyrightDate = defineModel<string>('copyrightDate');
 const copyrightIcp = defineModel<string>('copyrightIcp');
 const copyrightIcpLink = defineModel<string>('copyrightIcpLink');
 const copyrightCompanyName = defineModel<string>('copyrightCompanyName');
-const copyrightCompanySiteLink = defineModel<string>(
-  'copyrightCompanySiteLink',
-);
+const copyrightCompanySiteLink = defineModel<string>('copyrightCompanySiteLink');
 
 const itemDisabled = computed(() => props.disabled || !copyrightEnable.value);
 </script>

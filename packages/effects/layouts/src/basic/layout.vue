@@ -1,35 +1,25 @@
 <script lang="ts" setup>
 import type { SetupContext } from 'vue';
 
-import type { MenuRecordRaw } from '@vben/types';
+import type { MenuRecordRaw } from '@ocean/types';
 
 import { computed, useSlots, watch } from 'vue';
 
-import { useRefresh } from '@vben/hooks';
-import { $t, i18n } from '@vben/locales';
-import {
-  preferences,
-  updatePreferences,
-  usePreferences,
-} from '@vben/preferences';
-import { useAccessStore } from '@vben/stores';
-import { cloneDeep, mapTree } from '@vben/utils';
+import { useRefresh } from '@ocean/hooks';
+import { $t, i18n } from '@ocean/locales';
+import { preferences, updatePreferences, usePreferences } from '@ocean/preferences';
+import { useAccessStore } from '@ocean/stores';
+import { cloneDeep, mapTree } from '@ocean/utils';
 
-import { VbenAdminLayout } from '@vben-core/layout-ui';
-import { VbenBackTop, VbenLogo } from '@vben-core/shadcn-ui';
+import { OceanAdminLayout } from '@ocean-core/layout-ui';
+import { OceanBackTop, OceanLogo } from '@ocean-core/shadcn-ui';
 
 import { Breadcrumb, CheckUpdates, Preferences } from '../widgets';
 import { LayoutContent, LayoutContentSpinner } from './content';
 import { Copyright } from './copyright';
 import { LayoutFooter } from './footer';
 import { LayoutHeader } from './header';
-import {
-  LayoutExtraMenu,
-  LayoutMenu,
-  LayoutMixedMenu,
-  useExtraMenu,
-  useMixedMenu,
-} from './menu';
+import { LayoutExtraMenu, LayoutMenu, LayoutMixedMenu, useExtraMenu, useMixedMenu } from './menu';
 import { LayoutTabbar } from './tabbar';
 
 defineOptions({ name: 'BasicLayout' });
@@ -88,16 +78,11 @@ const logoCollapsed = computed(() => {
   if (isHeaderNav.value || isMixedNav.value || isHeaderSidebarNav.value) {
     return false;
   }
-  return (
-    sidebarCollapsed.value || isSideMixedNav.value || isHeaderMixedNav.value
-  );
+  return sidebarCollapsed.value || isSideMixedNav.value || isHeaderMixedNav.value;
 });
 
 const showHeaderNav = computed(() => {
-  return (
-    !isMobile.value &&
-    (isHeaderNav.value || isMixedNav.value || isHeaderMixedNav.value)
-  );
+  return !isMobile.value && (isHeaderNav.value || isMixedNav.value || isHeaderMixedNav.value);
 });
 
 const {
@@ -177,7 +162,7 @@ const headerSlots = computed(() => {
 </script>
 
 <template>
-  <VbenAdminLayout
+  <OceanAdminLayout
     v-model:sidebar-extra-visible="sidebarExtraVisible"
     :content-compact="preferences.app.contentCompact"
     :content-compact-width="preferences.app.contentCompactWidth"
@@ -215,24 +200,14 @@ const headerSlots = computed(() => {
     :z-index="preferences.app.zIndex"
     @side-mouse-leave="handleSideMouseLeave"
     @toggle-sidebar="toggleSidebar"
-    @update:sidebar-collapse="
-      (value: boolean) => updatePreferences({ sidebar: { collapsed: value } })
-    "
-    @update:sidebar-enable="
-      (value: boolean) => updatePreferences({ sidebar: { enable: value } })
-    "
-    @update:sidebar-expand-on-hover="
-      (value: boolean) =>
-        updatePreferences({ sidebar: { expandOnHover: value } })
-    "
-    @update:sidebar-extra-collapse="
-      (value: boolean) =>
-        updatePreferences({ sidebar: { extraCollapse: value } })
-    "
+    @update:sidebar-collapse="(value: boolean) => updatePreferences({ sidebar: { collapsed: value } })"
+    @update:sidebar-enable="(value: boolean) => updatePreferences({ sidebar: { enable: value } })"
+    @update:sidebar-expand-on-hover="(value: boolean) => updatePreferences({ sidebar: { expandOnHover: value } })"
+    @update:sidebar-extra-collapse="(value: boolean) => updatePreferences({ sidebar: { extraCollapse: value } })"
   >
     <!-- logo -->
     <template #logo>
-      <VbenLogo
+      <OceanLogo
         v-if="preferences.logo.enable"
         :fit="preferences.logo.fit"
         :class="logoClass"
@@ -245,18 +220,12 @@ const headerSlots = computed(() => {
         <template v-if="$slots['logo-text']" #text>
           <slot name="logo-text"></slot>
         </template>
-      </VbenLogo>
+      </OceanLogo>
     </template>
     <!-- 头部区域 -->
     <template #header>
-      <LayoutHeader
-        :theme="theme"
-        @clear-preferences-and-logout="clearPreferencesAndLogout"
-      >
-        <template
-          v-if="!showHeaderNav && preferences.breadcrumb.enable"
-          #breadcrumb
-        >
+      <LayoutHeader :theme="theme" @clear-preferences-and-logout="clearPreferencesAndLogout">
+        <template v-if="!showHeaderNav && preferences.breadcrumb.enable" #breadcrumb>
           <Breadcrumb
             :hide-when-only-one="preferences.breadcrumb.hideOnlyOne"
             :show-home="preferences.breadcrumb.showHome"
@@ -323,24 +292,15 @@ const headerSlots = computed(() => {
       />
     </template>
     <template #side-extra-title>
-      <VbenLogo
-        v-if="preferences.logo.enable"
-        :fit="preferences.logo.fit"
-        :text="preferences.app.name"
-        :theme="theme"
-      >
+      <OceanLogo v-if="preferences.logo.enable" :fit="preferences.logo.fit" :text="preferences.app.name" :theme="theme">
         <template v-if="$slots['logo-text']" #text>
           <slot name="logo-text"></slot>
         </template>
-      </VbenLogo>
+      </OceanLogo>
     </template>
 
     <template #tabbar>
-      <LayoutTabbar
-        v-if="preferences.tabbar.enable"
-        :show-icon="preferences.tabbar.showIcon"
-        :theme="theme"
-      />
+      <LayoutTabbar v-if="preferences.tabbar.enable" :show-icon="preferences.tabbar.showIcon" :theme="theme" />
     </template>
 
     <!-- 主体内容 -->
@@ -355,10 +315,7 @@ const headerSlots = computed(() => {
     <!-- 页脚 -->
     <template v-if="preferences.footer.enable" #footer>
       <LayoutFooter>
-        <Copyright
-          v-if="preferences.copyright.enable"
-          v-bind="preferences.copyright"
-        />
+        <Copyright v-if="preferences.copyright.enable" v-bind="preferences.copyright" />
       </LayoutFooter>
     </template>
 
@@ -374,12 +331,9 @@ const headerSlots = computed(() => {
       </Transition>
 
       <template v-if="preferencesButtonPosition.fixed">
-        <Preferences
-          class="z-100 fixed bottom-20 right-0"
-          @clear-preferences-and-logout="clearPreferencesAndLogout"
-        />
+        <Preferences class="z-100 fixed bottom-20 right-0" @clear-preferences-and-logout="clearPreferencesAndLogout" />
       </template>
-      <VbenBackTop />
+      <OceanBackTop />
     </template>
-  </VbenAdminLayout>
+  </OceanAdminLayout>
 </template>

@@ -2,21 +2,15 @@ import type { EChartsOption } from 'echarts';
 
 import type { Ref } from 'vue';
 
-import type { Nullable } from '@vben/types';
+import type { Nullable } from '@ocean/types';
 
 import type EchartsUI from './echarts-ui.vue';
 
 import { computed, nextTick, watch } from 'vue';
 
-import { usePreferences } from '@vben/preferences';
+import { usePreferences } from '@ocean/preferences';
 
-import {
-  tryOnUnmounted,
-  useDebounceFn,
-  useResizeObserver,
-  useTimeoutFn,
-  useWindowSize,
-} from '@vueuse/core';
+import { tryOnUnmounted, useDebounceFn, useResizeObserver, useTimeoutFn, useWindowSize } from '@vueuse/core';
 
 import echarts from './echarts';
 
@@ -53,10 +47,7 @@ function useEcharts(chartRef: Ref<EchartsUIType>) {
     return chartInstance;
   };
 
-  const renderEcharts = (
-    options: EChartsOption,
-    clear = true,
-  ): Promise<Nullable<echarts.ECharts>> => {
+  const renderEcharts = (options: EChartsOption, clear = true): Promise<Nullable<echarts.ECharts>> => {
     cacheOptions = options;
     const currentOptions = {
       ...options,

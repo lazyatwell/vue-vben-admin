@@ -5,15 +5,8 @@ import type { AlertProps } from './alert';
 
 import { computed, h, nextTick, ref } from 'vue';
 
-import { useSimpleLocale } from '@vben-core/composables';
-import {
-  CircleAlert,
-  CircleCheckBig,
-  CircleHelp,
-  CircleX,
-  Info,
-  X,
-} from '@vben-core/icons';
+import { useSimpleLocale } from '@ocean-core/composables';
+import { CircleAlert, CircleCheckBig, CircleHelp, CircleX, Info, X } from '@ocean-core/icons';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,12 +14,12 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-  VbenButton,
-  VbenLoading,
-  VbenRenderContent,
-} from '@vben-core/shadcn-ui';
-import { globalShareState } from '@vben-core/shared/global-state';
-import { cn } from '@vben-core/shared/utils';
+  OceanButton,
+  OceanLoading,
+  OceanRenderContent,
+} from '@ocean-core/shadcn-ui';
+import { globalShareState } from '@ocean-core/shared/global-state';
+import { cn } from '@ocean-core/shared/utils';
 
 import { provideAlertContext } from './alert';
 
@@ -161,32 +154,23 @@ async function handleOpenChange(val: boolean) {
             <component :is="getIconRender" class="mr-2" />
             <span class="flex-auto">{{ $t(title) }}</span>
             <AlertDialogCancel v-if="showCancel" as-child>
-              <VbenButton
-                variant="ghost"
-                size="icon"
-                class="rounded-full"
-                :disabled="loading"
-                @click="handleCancel"
-              >
+              <OceanButton variant="ghost" size="icon" class="rounded-full" :disabled="loading" @click="handleCancel">
                 <X class="text-muted-foreground size-4" />
-              </VbenButton>
+              </OceanButton>
             </AlertDialogCancel>
           </div>
         </AlertDialogTitle>
         <AlertDialogDescription>
           <div class="m-4 min-h-[30px]">
-            <VbenRenderContent :content="content" render-br />
+            <OceanRenderContent :content="content" render-br />
           </div>
-          <VbenLoading v-if="loading && contentMasking" :spinning="loading" />
+          <OceanLoading v-if="loading && contentMasking" :spinning="loading" />
         </AlertDialogDescription>
-        <div
-          class="flex items-center justify-end gap-x-2"
-          :class="`justify-${buttonAlign}`"
-        >
-          <VbenRenderContent :content="footer" />
+        <div class="flex items-center justify-end gap-x-2" :class="`justify-${buttonAlign}`">
+          <OceanRenderContent :content="footer" />
           <AlertDialogCancel v-if="showCancel" as-child>
             <component
-              :is="components.DefaultButton || VbenButton"
+              :is="components.DefaultButton || OceanButton"
               :disabled="loading"
               variant="ghost"
               @click="handleCancel"
@@ -195,11 +179,7 @@ async function handleOpenChange(val: boolean) {
             </component>
           </AlertDialogCancel>
           <AlertDialogAction as-child>
-            <component
-              :is="components.PrimaryButton || VbenButton"
-              :loading="loading"
-              @click="handleConfirm"
-            >
+            <component :is="components.PrimaryButton || OceanButton" :loading="loading" @click="handleConfirm">
               {{ confirmText || $t('confirm') }}
             </component>
           </AlertDialogAction>

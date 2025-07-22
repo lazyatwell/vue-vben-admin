@@ -1,16 +1,9 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
 
-import {
-  computed,
-  onBeforeUnmount,
-  onMounted,
-  onUpdated,
-  ref,
-  watchEffect,
-} from 'vue';
+import { computed, onBeforeUnmount, onMounted, onUpdated, ref, watchEffect } from 'vue';
 
-import { VbenTooltip } from '@vben-core/shadcn-ui';
+import { OceanTooltip } from '@ocean-core/shadcn-ui';
 
 import { useElementSize } from '@vueuse/core';
 
@@ -122,10 +115,7 @@ const checkEllipsis = () => {
   const heightDiff = element.scrollHeight - element.clientHeight;
 
   // 使用足够大的差异阈值确保只有真正被截断的文本才会显示 tooltip
-  isEllipsis.value =
-    props.line === 1
-      ? widthDiff > props.ellipsisThreshold
-      : heightDiff > props.ellipsisThreshold;
+  isEllipsis.value = props.line === 1 ? widthDiff > props.ellipsisThreshold : heightDiff > props.ellipsisThreshold;
 };
 
 // 使用 ResizeObserver 监听尺寸变化
@@ -163,8 +153,7 @@ onBeforeUnmount(() => {
 watchEffect(
   () => {
     if (props.tooltip && eleWidth.value) {
-      defaultTooltipMaxWidth.value =
-        props.tooltipMaxWidth ?? eleWidth.value + 24;
+      defaultTooltipMaxWidth.value = props.tooltipMaxWidth ?? eleWidth.value + 24;
     }
   },
   { flush: 'post' },
@@ -184,7 +173,7 @@ function handleExpand() {
 </script>
 <template>
   <div>
-    <VbenTooltip
+    <OceanTooltip
       :content-style="{
         ...tooltipOverlayStyle,
         maxWidth: `${defaultTooltipMaxWidth}px`,
@@ -192,9 +181,7 @@ function handleExpand() {
         color: tooltipColor,
         backgroundColor: tooltipBackgroundColor,
       }"
-      :disabled="
-        !props.tooltip || isExpand || (props.tooltipWhenEllipsis && !isEllipsis)
-      "
+      :disabled="!props.tooltip || isExpand || (props.tooltipWhenEllipsis && !isEllipsis)"
       :side="placement"
     >
       <slot name="tooltip">
@@ -220,7 +207,7 @@ function handleExpand() {
           <slot></slot>
         </div>
       </template>
-    </VbenTooltip>
+    </OceanTooltip>
   </div>
 </template>
 

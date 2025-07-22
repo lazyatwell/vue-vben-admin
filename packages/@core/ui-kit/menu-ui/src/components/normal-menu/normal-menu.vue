@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { MenuRecordRaw } from '@vben-core/typings';
+import type { MenuRecordRaw } from '@ocean-core/typings';
 
 import type { NormalMenuProps } from './normal-menu';
 
-import { useNamespace } from '@vben-core/composables';
-import { VbenIcon } from '@vben-core/shadcn-ui';
+import { useNamespace } from '@ocean-core/composables';
+import { OceanIcon } from '@ocean-core/shadcn-ui';
 
 interface Props extends NormalMenuProps {}
 
@@ -27,30 +27,19 @@ const emit = defineEmits<{
 const { b, e, is } = useNamespace('normal-menu');
 
 function menuIcon(menu: MenuRecordRaw) {
-  return props.activePath === menu.path
-    ? menu.activeIcon || menu.icon
-    : menu.icon;
+  return props.activePath === menu.path ? menu.activeIcon || menu.icon : menu.icon;
 }
 </script>
 
 <template>
-  <ul
-    :class="[
-      theme,
-      b(),
-      is('collapse', collapse),
-      is(theme, true),
-      is('rounded', rounded),
-    ]"
-    class="relative"
-  >
+  <ul :class="[theme, b(), is('collapse', collapse), is(theme, true), is('rounded', rounded)]" class="relative">
     <template v-for="menu in menus" :key="menu.path">
       <li
         :class="[e('item'), is('active', activePath === menu.path)]"
         @click="() => emit('select', menu)"
         @mouseenter="() => emit('enter', menu)"
       >
-        <VbenIcon :class="e('icon')" :icon="menuIcon(menu)" fallback />
+        <OceanIcon :class="e('icon')" :icon="menuIcon(menu)" fallback />
 
         <span :class="e('name')" class="truncate"> {{ menu.name }}</span>
       </li>
@@ -58,7 +47,7 @@ function menuIcon(menu: MenuRecordRaw) {
   </ul>
 </template>
 <style lang="scss" scoped>
-$namespace: vben;
+$namespace: ocean;
 
 .#{$namespace}-normal-menu {
   --menu-item-margin-y: 4px;

@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { VbenButton } from '@vben-core/shadcn-ui';
+import { OceanButton } from '@ocean-core/shadcn-ui';
 
 import { useQRCode } from '@vueuse/integrations/useQRCode';
 
@@ -52,7 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const router = useRouter();
 
-const text = ref('https://vben.vvbin.cn');
+const text = ref('https://ocean.vvbin.cn');
 
 const qrcode = useQRCode(text, {
   errorCorrectionLevel: 'H',
@@ -67,9 +67,7 @@ function goToLogin() {
 <template>
   <div>
     <Title>
-      <slot name="title">
-        {{ title || $t('authentication.welcomeBack') }} 📱
-      </slot>
+      <slot name="title"> {{ title || $t('authentication.welcomeBack') }} 📱 </slot>
       <template #desc>
         <span class="text-muted-foreground">
           <slot name="subTitle">
@@ -88,8 +86,8 @@ function goToLogin() {
       </p>
     </div>
 
-    <VbenButton class="mt-4 w-full" variant="outline" @click="goToLogin()">
+    <OceanButton class="mt-4 w-full" variant="outline" @click="goToLogin()">
       {{ $t('common.back') }}
-    </VbenButton>
+    </OceanButton>
   </div>
 </template>

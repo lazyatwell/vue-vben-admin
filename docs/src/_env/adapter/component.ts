@@ -1,16 +1,16 @@
 /**
  * 通用组件共同的使用的基础组件，原先放在 adapter/form 内部，限制了使用范围，这里提取出来，方便其他地方使用
- * 可用于 vben-form、vben-modal、vben-drawer 等组件使用,
+ * 可用于 ocean-form、ocean-modal、ocean-drawer 等组件使用,
  */
 
 import type { Component, SetupContext } from 'vue';
 
-import type { BaseFormComponentType } from '@vben/common-ui';
+import type { BaseFormComponentType } from '@ocean/common-ui';
 
 import { h } from 'vue';
 
-import { globalShareState } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { globalShareState } from '@ocean/common-ui';
+import { $t } from '@ocean/locales';
 
 import {
   AutoComplete,
@@ -37,10 +37,7 @@ import {
   Upload,
 } from 'ant-design-vue';
 
-const withDefaultPlaceholder = <T extends Component>(
-  component: T,
-  type: 'input' | 'select',
-) => {
+const withDefaultPlaceholder = <T extends Component>(component: T, type: 'input' | 'select') => {
   return (props: any, { attrs, slots }: Omit<SetupContext, 'expose'>) => {
     const placeholder = props?.placeholder || $t(`ui.placeholder.${type}`);
     return h(component, { ...props, ...attrs, placeholder }, slots);

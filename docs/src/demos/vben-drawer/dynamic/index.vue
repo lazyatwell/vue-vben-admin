@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useVbenDrawer, VbenButton } from '@vben/common-ui';
+import { OceanButton, useOceanDrawer } from '@ocean/common-ui';
 
 import ExtraDrawer from './drawer.vue';
 
-const [Drawer, drawerApi] = useVbenDrawer({
+const [Drawer, drawerApi] = useOceanDrawer({
   // 连接抽离的组件
   connectedComponent: ExtraDrawer,
 });
@@ -21,9 +21,7 @@ function handleUpdateTitle() {
   <div>
     <Drawer />
 
-    <VbenButton @click="open">Open</VbenButton>
-    <VbenButton class="ml-2" type="primary" @click="handleUpdateTitle">
-      从外部修改标题并打开
-    </VbenButton>
+    <OceanButton @click="open">Open</OceanButton>
+    <OceanButton class="ml-2" type="primary" @click="handleUpdateTitle"> 从外部修改标题并打开 </OceanButton>
   </div>
 </template>

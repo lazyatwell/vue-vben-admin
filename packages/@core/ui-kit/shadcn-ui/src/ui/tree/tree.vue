@@ -2,14 +2,14 @@
 import type { Arrayable } from '@vueuse/core';
 import type { FlattenedItem } from 'radix-vue';
 
-import type { ClassType, Recordable } from '@vben-core/typings';
+import type { ClassType, Recordable } from '@ocean-core/typings';
 
 import type { TreeProps } from './types';
 
 import { onMounted, ref, watchEffect } from 'vue';
 
-import { ChevronRight, IconifyIcon } from '@vben-core/icons';
-import { cn, get } from '@vben-core/shared/utils';
+import { ChevronRight, IconifyIcon } from '@ocean-core/icons';
+import { cn, get } from '@ocean-core/shared/utils';
 
 import { TreeItem, TreeRoot } from 'radix-vue';
 
@@ -63,12 +63,7 @@ function flatten<T = Recordable<any>, P = number | string>(
     };
     result.push(val);
     if (val.hasChildren)
-      result.push(
-        ...flatten(children, childrenField, level + 1, [
-          ...parents,
-          get(item, props.valueField),
-        ]),
-      );
+      result.push(...flatten(children, childrenField, level + 1, [...parents, get(item, props.valueField)]));
   });
   return result;
 }
@@ -83,18 +78,13 @@ onMounted(() => {
   watchEffect(() => {
     flattenData.value = flatten(props.treeData, props.childrenField);
     updateTreeValue();
-    if (
-      props.defaultExpandedLevel !== undefined &&
-      props.defaultExpandedLevel > 0
-    )
+    if (props.defaultExpandedLevel !== undefined && props.defaultExpandedLevel > 0)
       expandToLevel(props.defaultExpandedLevel);
   });
 });
 
 function getItemByValue(value: number | string) {
-  return flattenData.value.find(
-    (item) => get(item.value, props.valueField) === value,
-  )?.value;
+  return flattenData.value.find((item) => get(item.value, props.valueField) === value)?.value;
 }
 
 function updateTreeValue() {
@@ -183,17 +173,10 @@ function onSelect(item: FlattenedItem<Recordable<any>>, isSelected: boolean) {
     return;
   }
 
-  if (
-    !props.checkStrictly &&
-    props.multiple &&
-    props.autoCheckParent &&
-    isSelected
-  ) {
+  if (!props.checkStrictly && props.multiple && props.autoCheckParent && isSelected) {
     flattenData.value
       .find((i) => {
-        return (
-          get(i.value, props.valueField) === get(item.value, props.valueField)
-        );
+        return get(i.value, props.valueField) === get(item.value, props.valueField);
       })
       ?.parents?.forEach((p) => {
         if (Array.isArray(modelValue.value) && !modelValue.value.includes(p)) {
@@ -242,13 +225,7 @@ defineExpose({
     <TransitionGroup :name="transition ? 'fade' : ''">
       <TreeItem
         v-for="item in flattenItems"
-        v-slot="{
-          isExpanded,
-          isSelected,
-          isIndeterminate,
-          handleSelect,
-          handleToggle,
-        }"
+        v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
         :key="item._id"
         :style="{ 'padding-left': `${item.level - 0.5}rem` }"
         :class="
@@ -287,11 +264,7 @@ defineExpose({
         class="tree-node focus:ring-grass8 my-0.5 flex items-center rounded px-2 py-1 outline-none focus:ring-2"
       >
         <ChevronRight
-          v-if="
-            item.hasChildren &&
-            Array.isArray(item.value[childrenField]) &&
-            item.value[childrenField].length > 0
-          "
+          v-if="item.hasChildren && Array.isArray(item.value[childrenField]) && item.value[childrenField].length > 0"
           class="size-4 cursor-pointer transition"
           :class="{ 'rotate-90': isExpanded }"
           @click.stop="

@@ -1,12 +1,7 @@
-export { setupVbenForm } from './config';
+export { setupOceanForm } from './config';
 
-export type {
-  BaseFormComponentType,
-  ExtendedFormApi,
-  VbenFormProps,
-  FormSchema as VbenFormSchema,
-} from './types';
+export type { BaseFormComponentType, ExtendedFormApi, OceanFormProps, FormSchema as OceanFormSchema } from './types';
 
-export * from './use-vben-form';
-// export { default as VbenForm } from './vben-form.vue';
+export * from './use-ocean-form';
+// export { default as OceanForm } from './ocean-form.vue';
 export * as z from 'zod';

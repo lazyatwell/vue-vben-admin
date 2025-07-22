@@ -1,19 +1,14 @@
-import type {
-  VxeGridListeners,
-  VxeGridPropTypes,
-  VxeGridProps as VxeTableGridProps,
-  VxeUIExport,
-} from 'vxe-table';
+import type { VxeGridListeners, VxeGridPropTypes, VxeGridProps as VxeTableGridProps, VxeUIExport } from 'vxe-table';
 
 import type { Ref } from 'vue';
 
-import type { ClassType, DeepPartial } from '@vben/types';
+import type { ClassType, DeepPartial } from '@ocean/types';
 
-import type { BaseFormComponentType, VbenFormProps } from '@vben-core/form-ui';
+import type { BaseFormComponentType, OceanFormProps } from '@ocean-core/form-ui';
 
 import type { VxeGridApi } from './api';
 
-import { useVbenForm } from '@vben-core/form-ui';
+import { useOceanForm } from '@ocean-core/form-ui';
 
 export interface VxePaginationInfo {
   currentPage: number;
@@ -67,7 +62,7 @@ export interface VxeGridProps<
   /**
    * 表单配置
    */
-  formOptions?: VbenFormProps<D>;
+  formOptions?: OceanFormProps<D>;
   /**
    * 显示搜索表单
    */
@@ -89,5 +84,5 @@ export type ExtendedVxeGridApi<
 
 export interface SetupVxeTable {
   configVxeTable: (ui: VxeUIExport) => void;
-  useVbenForm: typeof useVbenForm;
+  useOceanForm: typeof useOceanForm;
 }

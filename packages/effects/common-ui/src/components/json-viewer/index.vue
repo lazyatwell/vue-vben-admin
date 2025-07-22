@@ -1,22 +1,17 @@
 <script lang="ts" setup>
 import type { SetupContext } from 'vue';
 
-import type { Recordable } from '@vben/types';
+import type { Recordable } from '@ocean/types';
 
-import type {
-  JsonViewerAction,
-  JsonViewerProps,
-  JsonViewerToggle,
-  JsonViewerValue,
-} from './types';
+import type { JsonViewerAction, JsonViewerProps, JsonViewerToggle, JsonViewerValue } from './types';
 
 import { computed, useAttrs } from 'vue';
 // @ts-ignore
 import VueJsonViewer from 'vue-json-viewer';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { isBoolean } from '@vben-core/shared/utils';
+import { isBoolean } from '@ocean-core/shared/utils';
 
 // @ts-ignore
 import JsonBigint from 'json-bigint';
@@ -46,10 +41,7 @@ const emit = defineEmits<{
 const attrs: SetupContext['attrs'] = useAttrs();
 
 function handleClick(event: MouseEvent) {
-  if (
-    event.target instanceof HTMLElement &&
-    event.target.classList.contains('jv-item')
-  ) {
+  if (event.target instanceof HTMLElement && event.target.classList.contains('jv-item')) {
     const pathNode = event.target.closest('.jv-push');
     if (!pathNode || !pathNode.hasAttribute('path')) {
       return;

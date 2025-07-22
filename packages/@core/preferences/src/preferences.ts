@@ -1,17 +1,13 @@
-import type { DeepPartial } from '@vben-core/typings';
+import type { DeepPartial } from '@ocean-core/typings';
 
 import type { InitialOptions, Preferences } from './types';
 
 import { markRaw, reactive, readonly, watch } from 'vue';
 
-import { StorageManager } from '@vben-core/shared/cache';
-import { isMacOs, merge } from '@vben-core/shared/utils';
+import { StorageManager } from '@ocean-core/shared/cache';
+import { isMacOs, merge } from '@ocean-core/shared/utils';
 
-import {
-  breakpointsTailwind,
-  useBreakpoints,
-  useDebounceFn,
-} from '@vueuse/core';
+import { breakpointsTailwind, useBreakpoints, useDebounceFn } from '@vueuse/core';
 
 import { defaultPreferences } from './config';
 import { updateCSSVariables } from './update-css-variables';
@@ -33,10 +29,7 @@ class PreferenceManager {
     this.cache = new StorageManager();
 
     // 避免频繁的操作缓存
-    this.savePreferences = useDebounceFn(
-      (preference: Preferences) => this._savePreferences(preference),
-      150,
-    );
+    this.savePreferences = useDebounceFn((preference: Preferences) => this._savePreferences(preference), 150);
   }
 
   clearCache() {
@@ -145,10 +138,7 @@ class PreferenceManager {
       updateCSSVariables(this.state);
     }
 
-    if (
-      Reflect.has(appUpdates, 'colorGrayMode') ||
-      Reflect.has(appUpdates, 'colorWeakMode')
-    ) {
+    if (Reflect.has(appUpdates, 'colorGrayMode') || Reflect.has(appUpdates, 'colorWeakMode')) {
       this.updateColorMode(this.state);
     }
   }
@@ -195,20 +185,18 @@ class PreferenceManager {
     );
 
     // 监听系统主题偏好设置变化
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', ({ matches: isDark }) => {
-        // 如果偏好设置中主题模式为auto，则跟随系统更新
-        if (this.state.theme.mode === 'auto') {
-          this.updatePreferences({
-            theme: { mode: isDark ? 'dark' : 'light' },
-          });
-          // 恢复为auto模式
-          this.updatePreferences({
-            theme: { mode: 'auto' },
-          });
-        }
-      });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches: isDark }) => {
+      // 如果偏好设置中主题模式为auto，则跟随系统更新
+      if (this.state.theme.mode === 'auto') {
+        this.updatePreferences({
+          theme: { mode: isDark ? 'dark' : 'light' },
+        });
+        // 恢复为auto模式
+        this.updatePreferences({
+          theme: { mode: 'auto' },
+        });
+      }
+    });
   }
 
   /**
@@ -221,12 +209,8 @@ class PreferenceManager {
       const dom = document.documentElement;
       const COLOR_WEAK = 'invert-mode';
       const COLOR_GRAY = 'grayscale-mode';
-      colorWeakMode
-        ? dom.classList.add(COLOR_WEAK)
-        : dom.classList.remove(COLOR_WEAK);
-      colorGrayMode
-        ? dom.classList.add(COLOR_GRAY)
-        : dom.classList.remove(COLOR_GRAY);
+      colorWeakMode ? dom.classList.add(COLOR_WEAK) : dom.classList.remove(COLOR_WEAK);
+      colorGrayMode ? dom.classList.add(COLOR_GRAY) : dom.classList.remove(COLOR_GRAY);
     }
   }
 }

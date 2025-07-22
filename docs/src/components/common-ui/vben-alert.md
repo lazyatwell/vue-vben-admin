@@ -2,13 +2,13 @@
 outline: deep
 ---
 
-# Vben Alert 轻量提示框
+# Ocean Alert 轻量提示框
 
 框架提供的一些用于轻量提示的弹窗，仅使用js代码即可快速动态创建提示而不需要在template写任何代码。
 
 ::: info 应用场景
 
-Alert提供的功能与Modal类似，但只适用于简单应用场景。例如临时性、动态地弹出模态确认框、输入框等。如果对弹窗有更复杂的需求，请使用VbenModal
+Alert提供的功能与Modal类似，但只适用于简单应用场景。例如临时性、动态地弹出模态确认框、输入框等。如果对弹窗有更复杂的需求，请使用OceanModal
 
 :::
 
@@ -28,15 +28,15 @@ Alert提供的快捷方法alert、confirm、prompt动态创建的弹窗在已打
 
 使用 `alert` 创建只有一个确认按钮的提示框。
 
-<DemoPreview dir="demos/vben-alert/alert" />
+<DemoPreview dir="demos/ocean-alert/alert" />
 
 使用 `confirm` 创建有确认和取消按钮的提示框。
 
-<DemoPreview dir="demos/vben-alert/confirm" />
+<DemoPreview dir="demos/ocean-alert/confirm" />
 
 使用 `prompt` 创建有确认和取消按钮、接受用户输入的提示框。
 
-<DemoPreview dir="demos/vben-alert/prompt" />
+<DemoPreview dir="demos/ocean-alert/prompt" />
 
 ## useAlertContext
 
@@ -71,9 +71,7 @@ export type BeforeCloseScope = {
  */
 export type AlertProps = {
   /** 关闭前的回调，如果返回false，则终止关闭 */
-  beforeClose?: (
-    scope: BeforeCloseScope,
-  ) => boolean | Promise<boolean | undefined> | undefined;
+  beforeClose?: (scope: BeforeCloseScope) => boolean | Promise<boolean | undefined> | undefined;
   /** 边框 */
   bordered?: boolean;
   /** 按钮对齐方式 */
@@ -131,15 +129,8 @@ export type PromptProps<T = any> = {
  * confirm默认会显示取消按钮，而alert默认只有一个按钮
  *  */
 export function alert(options: AlertProps): Promise<void>;
-export function alert(
-  message: string,
-  options?: Partial<AlertProps>,
-): Promise<void>;
-export function alert(
-  message: string,
-  title?: string,
-  options?: Partial<AlertProps>,
-): Promise<void>;
+export function alert(message: string, options?: Partial<AlertProps>): Promise<void>;
+export function alert(message: string, title?: string, options?: Partial<AlertProps>): Promise<void>;
 
 /**
  * 弹出输入框的函数签名。

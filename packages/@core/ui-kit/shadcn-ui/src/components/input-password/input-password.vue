@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, useSlots } from 'vue';
 
-import { Eye, EyeOff } from '@vben-core/icons';
-import { cn } from '@vben-core/shared/utils';
+import { Eye, EyeOff } from '@ocean-core/icons';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Input } from '../../ui';
 import PasswordStrength from './password-strength.vue';
@@ -30,12 +30,7 @@ const show = ref(false);
 
 <template>
   <div class="relative w-full">
-    <Input
-      v-bind="$attrs"
-      v-model="modelValue"
-      :class="cn(props.class)"
-      :type="show ? 'text' : 'password'"
-    />
+    <Input v-bind="$attrs" v-model="modelValue" :class="cn(props.class)" :type="show ? 'text' : 'password'" />
     <template v-if="passwordStrength">
       <PasswordStrength :password="modelValue" />
       <p v-if="slots.strengthText" class="text-muted-foreground mt-1.5 text-xs">

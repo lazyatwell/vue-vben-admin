@@ -1,13 +1,13 @@
 import { h } from 'vue';
 
-import { setupVbenVxeTable, useVbenVxeGrid } from '@vben/plugins/vxe-table';
+import { setupOceanVxeTable, useOceanVxeGrid } from '@ocean/plugins/vxe-table';
 
 import { Button, Image } from 'ant-design-vue';
 
-import { useVbenForm } from './form';
+import { useOceanForm } from './form';
 
 if (!import.meta.env.SSR) {
-  setupVbenVxeTable({
+  setupOceanVxeTable({
     configVxeTable: (vxeUI) => {
       vxeUI.setConfig({
         grid: {
@@ -50,21 +50,17 @@ if (!import.meta.env.SSR) {
       vxeUI.renderer.add('CellLink', {
         renderTableDefault(renderOpts) {
           const { props } = renderOpts;
-          return h(
-            Button,
-            { size: 'small', type: 'link' },
-            { default: () => props?.text },
-          );
+          return h(Button, { size: 'small', type: 'link' }, { default: () => props?.text });
         },
       });
 
       // 这里可以自行扩展 vxe-table 的全局配置，比如自定义格式化
       // vxeUI.formats.add
     },
-    useVbenForm,
+    useOceanForm,
   });
 }
 
-export { useVbenVxeGrid };
+export { useOceanVxeGrid };
 
-export type * from '@vben/plugins/vxe-table';
+export type * from '@ocean/plugins/vxe-table';

@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { Recordable } from '@vben/types';
+import type { Recordable } from '@ocean/types';
 
-import type { VbenFormSchema } from '@vben-core/form-ui';
+import type { OceanFormSchema } from '@ocean-core/form-ui';
 
 import type { AuthenticationProps } from './types';
 
 import { computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { useVbenForm } from '@vben-core/form-ui';
-import { VbenButton, VbenCheckbox } from '@vben-core/shadcn-ui';
+import { useOceanForm } from '@ocean-core/form-ui';
+import { OceanButton, OceanCheckbox } from '@ocean-core/shadcn-ui';
 
 import Title from './auth-title.vue';
 import ThirdPartyLogin from './third-party-login.vue';
 
 interface Props extends AuthenticationProps {
-  formSchema?: VbenFormSchema[];
+  formSchema?: OceanFormSchema[];
 }
 
 defineOptions({
@@ -46,7 +46,7 @@ const emit = defineEmits<{
   submit: [Recordable<any>];
 }>();
 
-const [Form, formApi] = useVbenForm(
+const [Form, formApi] = useOceanForm(
   reactive({
     commonConfig: {
       hideLabel: true,
@@ -68,10 +68,7 @@ async function handleSubmit() {
   const { valid } = await formApi.validate();
   const values = await formApi.getValues();
   if (valid) {
-    localStorage.setItem(
-      REMEMBER_ME_KEY,
-      rememberMe.value ? values?.username : '',
-    );
+    localStorage.setItem(REMEMBER_ME_KEY, rememberMe.value ? values?.username : '');
     emit('submit', values);
   }
 }
@@ -110,29 +107,18 @@ defineExpose({
 
     <Form />
 
-    <div
-      v-if="showRememberMe || showForgetPassword"
-      class="mb-6 flex justify-between"
-    >
+    <div v-if="showRememberMe || showForgetPassword" class="mb-6 flex justify-between">
       <div class="flex-center">
-        <VbenCheckbox
-          v-if="showRememberMe"
-          v-model:checked="rememberMe"
-          name="rememberMe"
-        >
+        <OceanCheckbox v-if="showRememberMe" v-model:checked="rememberMe" name="rememberMe">
           {{ $t('authentication.rememberMe') }}
-        </VbenCheckbox>
+        </OceanCheckbox>
       </div>
 
-      <span
-        v-if="showForgetPassword"
-        class="vben-link text-sm font-normal"
-        @click="handleGo(forgetPasswordPath)"
-      >
+      <span v-if="showForgetPassword" class="ocean-link text-sm font-normal" @click="handleGo(forgetPasswordPath)">
         {{ $t('authentication.forgetPassword') }}
       </span>
     </div>
-    <VbenButton
+    <OceanButton
       :class="{
         'cursor-wait': loading,
       }"
@@ -142,28 +128,15 @@ defineExpose({
       @click="handleSubmit"
     >
       {{ submitButtonText || $t('common.login') }}
-    </VbenButton>
+    </OceanButton>
 
-    <div
-      v-if="showCodeLogin || showQrcodeLogin"
-      class="mb-2 mt-4 flex items-center justify-between"
-    >
-      <VbenButton
-        v-if="showCodeLogin"
-        class="w-1/2"
-        variant="outline"
-        @click="handleGo(codeLoginPath)"
-      >
+    <div v-if="showCodeLogin || showQrcodeLogin" class="mb-2 mt-4 flex items-center justify-between">
+      <OceanButton v-if="showCodeLogin" class="w-1/2" variant="outline" @click="handleGo(codeLoginPath)">
         {{ $t('authentication.mobileLogin') }}
-      </VbenButton>
-      <VbenButton
-        v-if="showQrcodeLogin"
-        class="ml-4 w-1/2"
-        variant="outline"
-        @click="handleGo(qrCodeLoginPath)"
-      >
+      </OceanButton>
+      <OceanButton v-if="showQrcodeLogin" class="ml-4 w-1/2" variant="outline" @click="handleGo(qrCodeLoginPath)">
         {{ $t('authentication.qrcodeLogin') }}
-      </VbenButton>
+      </OceanButton>
     </div>
 
     <!-- 第三方登录 -->
@@ -174,10 +147,7 @@ defineExpose({
     <slot name="to-register">
       <div v-if="showRegister" class="mt-3 text-center text-sm">
         {{ $t('authentication.accountTip') }}
-        <span
-          class="vben-link text-sm font-normal"
-          @click="handleGo(registerPath)"
-        >
+        <span class="ocean-link text-sm font-normal" @click="handleGo(registerPath)">
           {{ $t('authentication.createAccount') }}
         </span>
       </div>

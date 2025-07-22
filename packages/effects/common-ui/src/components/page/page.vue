@@ -5,15 +5,14 @@ import type { PageProps } from './types';
 
 import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 
-import { CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT } from '@vben-core/shared/constants';
-import { cn } from '@vben-core/shared/utils';
+import { CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT } from '@ocean-core/shared/constants';
+import { cn } from '@ocean-core/shared/utils';
 
 defineOptions({
   name: 'Page',
 });
 
-const { autoContentHeight = false, heightOffset = 0 } =
-  defineProps<PageProps>();
+const { autoContentHeight = false, heightOffset = 0 } = defineProps<PageProps>();
 
 const headerHeight = ref(0);
 const footerHeight = ref(0);
@@ -52,20 +51,9 @@ onMounted(() => {
 <template>
   <div class="relative">
     <div
-      v-if="
-        description ||
-        $slots.description ||
-        title ||
-        $slots.title ||
-        $slots.extra
-      "
+      v-if="description || $slots.description || title || $slots.title || $slots.extra"
       ref="headerRef"
-      :class="
-        cn(
-          'bg-card border-border relative flex items-end border-b px-6 py-4',
-          headerClass,
-        )
-      "
+      :class="cn('bg-card border-border relative flex items-end border-b px-6 py-4', headerClass)"
     >
       <div class="flex-auto">
         <slot name="title">
@@ -93,12 +81,7 @@ onMounted(() => {
     <div
       v-if="$slots.footer"
       ref="footerRef"
-      :class="
-        cn(
-          'bg-card align-center absolute bottom-0 left-0 right-0 flex px-6 py-4',
-          footerClass,
-        )
-      "
+      :class="cn('bg-card align-center absolute bottom-0 left-0 right-0 flex px-6 py-4', footerClass)"
     >
       <slot name="footer"></slot>
     </div>

@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 
-import { preferences, updatePreferences } from '@vben/preferences';
-import { useAccessStore, useUserStore } from '@vben/stores';
+import { preferences, updatePreferences } from '@ocean/preferences';
+import { useAccessStore, useUserStore } from '@ocean/stores';
 
 function useAccess() {
   const accessStore = useAccessStore();
@@ -36,8 +36,7 @@ function useAccess() {
   async function toggleAccessMode() {
     updatePreferences({
       app: {
-        accessMode:
-          preferences.app.accessMode === 'frontend' ? 'backend' : 'frontend',
+        accessMode: preferences.app.accessMode === 'frontend' ? 'backend' : 'frontend',
       },
     });
   }

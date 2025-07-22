@@ -52,11 +52,4 @@ interface UserInfoType {
 
 type ClassType = Array<object | string> | object | string;
 
-export type {
-  BasicOption,
-  ClassType,
-  SelectOption,
-  TabOption,
-  UserInfoType,
-  UserType,
-};
+export type { BasicOption, ClassType, SelectOption, TabOption, UserInfoType, UserType };

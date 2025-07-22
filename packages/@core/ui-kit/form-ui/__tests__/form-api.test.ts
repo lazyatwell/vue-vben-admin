@@ -67,11 +67,7 @@ describe('formApi', () => {
 
     await formApi.mount(formActions);
     await formApi.setFieldValue('name', 'new value');
-    expect(setFieldValueMock).toHaveBeenCalledWith(
-      'name',
-      'new value',
-      undefined,
-    );
+    expect(setFieldValueMock).toHaveBeenCalledWith('name', 'new value', undefined);
   });
 
   it('should reset form', async () => {
@@ -153,14 +149,9 @@ describe('updateSchema', () => {
   });
 
   it('should log an error if fieldName is missing in some items', () => {
-    const newSchema: any[] = [
-      { component: 'textarea', fieldName: 'name' },
-      { component: 'number' },
-    ];
+    const newSchema: any[] = [{ component: 'textarea', fieldName: 'name' }, { component: 'number' }];
 
-    const consoleErrorSpy = vi
-      .spyOn(console, 'error')
-      .mockImplementation(() => {});
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     instance.updateSchema(newSchema);
 

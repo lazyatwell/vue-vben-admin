@@ -83,7 +83,7 @@ pnpm vsh publint
 
 ### vsh code-workspace
 
-生成 `vben-admin.code-workspace` 文件，目前不需要手动执行，会在代码提交时自动执行。
+生成 `ocean-admin.code-workspace` 文件，目前不需要手动执行，会在代码提交时自动执行。
 
 #### 用法
 
@@ -100,7 +100,7 @@ pnpm vsh code-workspace
 
 ## turbo-run
 
-用于快速执行大仓中脚本，并提供选项式交互选择。
+用于快速执行根目录中脚本，并提供选项式交互选择。
 
 ### 用法
 

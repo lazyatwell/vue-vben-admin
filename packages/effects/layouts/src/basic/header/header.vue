@@ -1,19 +1,14 @@
 <script lang="ts" setup>
 import { computed, useSlots } from 'vue';
 
-import { useRefresh } from '@vben/hooks';
-import { RotateCw } from '@vben/icons';
-import { preferences, usePreferences } from '@vben/preferences';
-import { useAccessStore } from '@vben/stores';
+import { useRefresh } from '@ocean/hooks';
+import { RotateCw } from '@ocean/icons';
+import { preferences, usePreferences } from '@ocean/preferences';
+import { useAccessStore } from '@ocean/stores';
 
-import { VbenFullScreen, VbenIconButton } from '@vben-core/shadcn-ui';
+import { OceanFullScreen, OceanIconButton } from '@ocean-core/shadcn-ui';
 
-import {
-  GlobalSearch,
-  LanguageToggle,
-  PreferencesButton,
-  ThemeToggle,
-} from '../../widgets';
+import { GlobalSearch, LanguageToggle, PreferencesButton, ThemeToggle } from '../../widgets';
 
 interface Props {
   /**
@@ -113,31 +108,22 @@ function clearPreferencesAndLogout() {
 </script>
 
 <template>
-  <template
-    v-for="slot in leftSlots.filter((item) => item.index < REFERENCE_VALUE)"
-    :key="slot.name"
-  >
+  <template v-for="slot in leftSlots.filter((item) => item.index < REFERENCE_VALUE)" :key="slot.name">
     <slot :name="slot.name">
       <template v-if="slot.name === 'refresh'">
-        <VbenIconButton class="my-0 mr-1 rounded-md" @click="refresh">
+        <OceanIconButton class="my-0 mr-1 rounded-md" @click="refresh">
           <RotateCw class="size-4" />
-        </VbenIconButton>
+        </OceanIconButton>
       </template>
     </slot>
   </template>
   <div class="flex-center hidden lg:block">
     <slot name="breadcrumb"></slot>
   </div>
-  <template
-    v-for="slot in leftSlots.filter((item) => item.index > REFERENCE_VALUE)"
-    :key="slot.name"
-  >
+  <template v-for="slot in leftSlots.filter((item) => item.index > REFERENCE_VALUE)" :key="slot.name">
     <slot :name="slot.name"></slot>
   </template>
-  <div
-    :class="`menu-align-${preferences.header.menuAlign}`"
-    class="flex h-full min-w-0 flex-1 items-center"
-  >
+  <div :class="`menu-align-${preferences.header.menuAlign}`" class="flex h-full min-w-0 flex-1 items-center">
     <slot name="menu"></slot>
   </div>
   <div class="flex h-full min-w-0 flex-shrink-0 items-center">
@@ -152,10 +138,7 @@ function clearPreferencesAndLogout() {
         </template>
 
         <template v-else-if="slot.name === 'preferences'">
-          <PreferencesButton
-            class="mr-1"
-            @clear-preferences-and-logout="clearPreferencesAndLogout"
-          />
+          <PreferencesButton class="mr-1" @clear-preferences-and-logout="clearPreferencesAndLogout" />
         </template>
         <template v-else-if="slot.name === 'theme-toggle'">
           <ThemeToggle class="mr-1 mt-[2px]" />
@@ -164,7 +147,7 @@ function clearPreferencesAndLogout() {
           <LanguageToggle class="mr-1" />
         </template>
         <template v-else-if="slot.name === 'fullscreen'">
-          <VbenFullScreen class="mr-1" />
+          <OceanFullScreen class="mr-1" />
         </template>
       </slot>
     </template>

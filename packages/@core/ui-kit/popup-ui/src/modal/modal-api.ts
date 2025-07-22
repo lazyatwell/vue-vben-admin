@@ -1,7 +1,7 @@
 import type { ModalApiOptions, ModalState } from './modal';
 
-import { Store } from '@vben-core/shared/store';
-import { bindMethods, isFunction } from '@vben-core/shared/utils';
+import { Store } from '@ocean-core/shared/store';
+import { bindMethods, isFunction } from '@ocean-core/shared/utils';
 
 export class ModalApi {
   // 共享数据
@@ -12,12 +12,7 @@ export class ModalApi {
 
   private api: Pick<
     ModalApiOptions,
-    | 'onBeforeClose'
-    | 'onCancel'
-    | 'onClosed'
-    | 'onConfirm'
-    | 'onOpenChange'
-    | 'onOpened'
+    'onBeforeClose' | 'onCancel' | 'onClosed' | 'onConfirm' | 'onOpenChange' | 'onOpened'
   >;
 
   // private prevState!: ModalState;
@@ -169,11 +164,7 @@ export class ModalApi {
     return this;
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: ModalState) => Partial<ModalState>)
-      | Partial<ModalState>,
-  ) {
+  setState(stateOrFn: ((prev: ModalState) => Partial<ModalState>) | Partial<ModalState>) {
     if (isFunction(stateOrFn)) {
       this.store.setState(stateOrFn);
     } else {

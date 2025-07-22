@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MenuRecordRaw } from '@vben-core/typings';
+import type { MenuRecordRaw } from '@ocean-core/typings';
 
 import { computed } from 'vue';
 
@@ -25,9 +25,7 @@ const props = withDefaults(defineProps<Props>(), {});
  */
 const hasChildren = computed(() => {
   const { menu } = props;
-  return (
-    Reflect.has(menu, 'children') && !!menu.children && menu.children.length > 0
-  );
+  return Reflect.has(menu, 'children') && !!menu.children && menu.children.length > 0;
 });
 </script>
 
@@ -46,13 +44,7 @@ const hasChildren = computed(() => {
       <span>{{ menu.name }}</span>
     </template>
   </MenuItem>
-  <SubMenuComp
-    v-else
-    :key="`${menu.path}_sub`"
-    :active-icon="menu.activeIcon"
-    :icon="menu.icon"
-    :path="menu.path"
-  >
+  <SubMenuComp v-else :key="`${menu.path}_sub`" :active-icon="menu.activeIcon" :icon="menu.icon" :path="menu.path">
     <template #content>
       <MenuBadge
         :badge="menu.badge"

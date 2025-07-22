@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, unref, watch, watchEffect } from 'vue';
 
-import { isNumber } from '@vben-core/shared/utils';
+import { isNumber } from '@ocean-core/shared/utils';
 
 import { TransitionPresets, useTransition } from '@vueuse/core';
 
@@ -92,9 +92,7 @@ function run() {
       emit('started');
       emit('onStarted');
     },
-    ...(props.useEasing
-      ? { transition: TransitionPresets[props.transition] }
-      : {}),
+    ...(props.useEasing ? { transition: TransitionPresets[props.transition] } : {}),
   });
 }
 

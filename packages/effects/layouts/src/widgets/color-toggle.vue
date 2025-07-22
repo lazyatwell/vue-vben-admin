@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import type { BuiltinThemeType } from '@vben/types';
+import type { BuiltinThemeType } from '@ocean/types';
 
-import { Palette } from '@vben/icons';
-import {
-  COLOR_PRESETS,
-  preferences,
-  updatePreferences,
-} from '@vben/preferences';
+import { Palette } from '@ocean/icons';
+import { COLOR_PRESETS, preferences, updatePreferences } from '@ocean/preferences';
 
-import { VbenIconButton } from '@vben-core/shadcn-ui';
+import { OceanIconButton } from '@ocean-core/shadcn-ui';
 
 defineOptions({
   name: 'AuthenticationColorToggle',
@@ -26,14 +22,9 @@ function handleUpdate(colorPrimary: string, type: BuiltinThemeType) {
 
 <template>
   <div class="group relative flex items-center overflow-hidden">
-    <div
-      class="flex w-0 overflow-hidden transition-all duration-500 ease-out group-hover:w-60"
-    >
+    <div class="flex w-0 overflow-hidden transition-all duration-500 ease-out group-hover:w-60">
       <template v-for="preset in COLOR_PRESETS" :key="preset.color">
-        <VbenIconButton
-          class="flex-center flex-shrink-0"
-          @click="handleUpdate(preset.color, preset.type)"
-        >
+        <OceanIconButton class="flex-center flex-shrink-0" @click="handleUpdate(preset.color, preset.type)">
           <div
             :style="{ backgroundColor: preset.color }"
             class="flex-center relative size-5 rounded-full hover:scale-110"
@@ -53,12 +44,12 @@ function handleUpdate(colorPrimary: string, type: BuiltinThemeType) {
               />
             </svg>
           </div>
-        </VbenIconButton>
+        </OceanIconButton>
       </template>
     </div>
 
-    <VbenIconButton>
+    <OceanIconButton>
       <Palette class="text-primary size-4" />
-    </VbenIconButton>
+    </OceanIconButton>
   </div>
 </template>

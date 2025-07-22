@@ -1,0 +1,160 @@
+{
+  "folders": [
+    {
+      "name": "@ocean/backend-mock",
+      "path": "apps/backend-mock",
+    },
+    {
+      "name": "@ocean/web",
+      "path": "apps/web",
+    },
+    {
+      "name": "@ocean/docs",
+      "path": "docs",
+    },
+    {
+      "name": "@ocean/commitlint-config",
+      "path": "internal/lint-configs/commitlint-config",
+    },
+    {
+      "name": "@ocean/eslint-config",
+      "path": "internal/lint-configs/eslint-config",
+    },
+    {
+      "name": "@ocean/prettier-config",
+      "path": "internal/lint-configs/prettier-config",
+    },
+    {
+      "name": "@ocean/stylelint-config",
+      "path": "internal/lint-configs/stylelint-config",
+    },
+    {
+      "name": "@ocean/node-utils",
+      "path": "internal/node-utils",
+    },
+    {
+      "name": "@ocean/tailwind-config",
+      "path": "internal/tailwind-config",
+    },
+    {
+      "name": "@ocean/tsconfig",
+      "path": "internal/tsconfig",
+    },
+    {
+      "name": "@ocean/vite-config",
+      "path": "internal/vite-config",
+    },
+    {
+      "name": "@ocean-core/design",
+      "path": "packages/@core/base/design",
+    },
+    {
+      "name": "@ocean-core/icons",
+      "path": "packages/@core/base/icons",
+    },
+    {
+      "name": "@ocean-core/shared",
+      "path": "packages/@core/base/shared",
+    },
+    {
+      "name": "@ocean-core/typings",
+      "path": "packages/@core/base/typings",
+    },
+    {
+      "name": "@ocean-core/composables",
+      "path": "packages/@core/composables",
+    },
+    {
+      "name": "@ocean-core/preferences",
+      "path": "packages/@core/preferences",
+    },
+    {
+      "name": "@ocean-core/form-ui",
+      "path": "packages/@core/ui-kit/form-ui",
+    },
+    {
+      "name": "@ocean-core/layout-ui",
+      "path": "packages/@core/ui-kit/layout-ui",
+    },
+    {
+      "name": "@ocean-core/menu-ui",
+      "path": "packages/@core/ui-kit/menu-ui",
+    },
+    {
+      "name": "@ocean-core/popup-ui",
+      "path": "packages/@core/ui-kit/popup-ui",
+    },
+    {
+      "name": "@ocean-core/shadcn-ui",
+      "path": "packages/@core/ui-kit/shadcn-ui",
+    },
+    {
+      "name": "@ocean-core/tabs-ui",
+      "path": "packages/@core/ui-kit/tabs-ui",
+    },
+    {
+      "name": "@ocean/constants",
+      "path": "packages/constants",
+    },
+    {
+      "name": "@ocean/access",
+      "path": "packages/effects/access",
+    },
+    {
+      "name": "@ocean/common-ui",
+      "path": "packages/effects/common-ui",
+    },
+    {
+      "name": "@ocean/hooks",
+      "path": "packages/effects/hooks",
+    },
+    {
+      "name": "@ocean/layouts",
+      "path": "packages/effects/layouts",
+    },
+    {
+      "name": "@ocean/plugins",
+      "path": "packages/effects/plugins",
+    },
+    {
+      "name": "@ocean/request",
+      "path": "packages/effects/request",
+    },
+    {
+      "name": "@ocean/icons",
+      "path": "packages/icons",
+    },
+    {
+      "name": "@ocean/locales",
+      "path": "packages/locales",
+    },
+    {
+      "name": "@ocean/preferences",
+      "path": "packages/preferences",
+    },
+    {
+      "name": "@ocean/stores",
+      "path": "packages/stores",
+    },
+    {
+      "name": "@ocean/styles",
+      "path": "packages/styles",
+    },
+    {
+      "name": "@ocean/types",
+      "path": "packages/types",
+    },
+    {
+      "name": "@ocean/utils",
+      "path": "packages/utils",
+    },
+    {
+      "name": "@ocean/turbo-run",
+      "path": "scripts/turbo-run",
+    },
+    {
+      "name": "@ocean/vsh",
+      "path": "scripts/vsh",
+    },
+  ],
+}

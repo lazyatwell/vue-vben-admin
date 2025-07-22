@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import type {
-  ContextMenuContentProps,
-  ContextMenuRootEmits,
-  ContextMenuRootProps,
-} from 'radix-vue';
+import type { ContextMenuContentProps, ContextMenuRootEmits, ContextMenuRootProps } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '@ocean-core/typings';
 
 import type { IContextMenuItem } from './interface';
 
@@ -36,13 +32,7 @@ const props = defineProps<
 const emits = defineEmits<ContextMenuRootEmits>();
 
 const delegatedProps = computed(() => {
-  const {
-    class: _cls,
-    contentClass: _,
-    contentProps: _cProps,
-    itemClass: _iCls,
-    ...delegated
-  } = props;
+  const { class: _cls, contentClass: _, contentProps: _cProps, itemClass: _iCls, ...delegated } = props;
 
   return delegated;
 });
@@ -66,11 +56,7 @@ function handleClick(menu: IContextMenuItem) {
     <ContextMenuTrigger as-child>
       <slot></slot>
     </ContextMenuTrigger>
-    <ContextMenuContent
-      :class="contentClass"
-      v-bind="contentProps"
-      class="side-content z-popup"
-    >
+    <ContextMenuContent :class="contentClass" v-bind="contentProps" class="side-content z-popup">
       <template v-for="menu in menusView" :key="menu.key">
         <ContextMenuItem
           :class="itemClass"
@@ -79,11 +65,7 @@ function handleClick(menu: IContextMenuItem) {
           class="cursor-pointer"
           @click="handleClick(menu)"
         >
-          <component
-            :is="menu.icon"
-            v-if="menu.icon"
-            class="mr-2 size-4 text-lg"
-          />
+          <component :is="menu.icon" v-if="menu.icon" class="mr-2 size-4 text-lg" />
 
           {{ menu.text }}
           <ContextMenuShortcut v-if="menu.shortcut">

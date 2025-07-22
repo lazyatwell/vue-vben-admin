@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Vben Form 表单
+# Ocean Form 表单
 
 框架提供的表单组件，可适配 `Element Plus`、`Ant Design Vue`、`Naive UI` 等框架。
 
@@ -25,17 +25,14 @@ outline: deep
 ::: details ant design vue 表单适配器
 
 ```ts
-import type {
-  VbenFormSchema as FormSchema,
-  VbenFormProps,
-} from '@vben/common-ui';
+import type { OceanFormSchema as FormSchema, OceanFormProps } from '@ocean/common-ui';
 
 import type { ComponentType } from './component';
 
-import { setupVbenForm, useVbenForm as useForm, z } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { setupOceanForm, useOceanForm as useForm, z } from '@ocean/common-ui';
+import { $t } from '@ocean/locales';
 
-setupVbenForm<ComponentType>({
+setupOceanForm<ComponentType>({
   config: {
     // ant design vue组件库默认都是 v-model:value
     baseModelPropName: 'value',
@@ -65,11 +62,11 @@ setupVbenForm<ComponentType>({
   },
 });
 
-const useVbenForm = useForm<ComponentType>;
+const useOceanForm = useForm<ComponentType>;
 
-export { useVbenForm, z };
-export type VbenFormSchema = FormSchema<ComponentType>;
-export type { VbenFormProps };
+export { useOceanForm, z };
+export type OceanFormSchema = FormSchema<ComponentType>;
+export type { OceanFormProps };
 ```
 
 :::
@@ -79,16 +76,16 @@ export type { VbenFormProps };
 ```ts
 /**
  * 通用组件共同的使用的基础组件，原先放在 adapter/form 内部，限制了使用范围，这里提取出来，方便其他地方使用
- * 可用于 vben-form、vben-modal、vben-drawer 等组件使用,
+ * 可用于 ocean-form、ocean-modal、ocean-drawer 等组件使用,
  */
 
-import type { BaseFormComponentType } from '@vben/common-ui';
+import type { BaseFormComponentType } from '@ocean/common-ui';
 
 import type { Component, SetupContext } from 'vue';
 import { h } from 'vue';
 
-import { globalShareState, IconPicker } from '@vben/common-ui';
-import { $t } from '@vben/locales';
+import { globalShareState, IconPicker } from '@ocean/common-ui';
+import { $t } from '@ocean/locales';
 
 import {
   AutoComplete,
@@ -218,21 +215,21 @@ export { initComponentAdapter };
 
 :::
 
-使用 `useVbenForm` 创建最基础的表单。
+使用 `useOceanForm` 创建最基础的表单。
 
-<DemoPreview dir="demos/vben-form/basic" />
+<DemoPreview dir="demos/ocean-form/basic" />
 
 ## 查询表单
 
 查询表单是一种特殊的表单，用于查询数据。查询表单不会触发表单验证，只会触发查询事件。
 
-<DemoPreview dir="demos/vben-form/query" />
+<DemoPreview dir="demos/ocean-form/query" />
 
 ## 表单校验
 
 表单校验是一个非常重要的功能，可以通过 `rules` 属性进行校验。
 
-<DemoPreview dir="demos/vben-form/rules" />
+<DemoPreview dir="demos/ocean-form/rules" />
 
 ## 表单联动
 
@@ -240,31 +237,31 @@ export { initComponentAdapter };
 
 _注意_ 需要指定 `dependencies` 的 `triggerFields` 属性，设置由谁的改动来触发，以便表单组件能够正确的联动。
 
-<DemoPreview dir="demos/vben-form/dynamic" />
+<DemoPreview dir="demos/ocean-form/dynamic" />
 
 ## 自定义组件
 
 如果你的业务组件库没有提供某个组件，你可以自行封装一个组件，然后加到表单内部。
 
-<DemoPreview dir="demos/vben-form/custom" />
+<DemoPreview dir="demos/ocean-form/custom" />
 
 ## 操作
 
 一些常见的表单操作。
 
-<DemoPreview dir="demos/vben-form/api" />
+<DemoPreview dir="demos/ocean-form/api" />
 
 ## API
 
-`useVbenForm` 返回一个数组，第一个元素是表单组件，第二个元素是表单的方法。
+`useOceanForm` 返回一个数组，第一个元素是表单组件，第二个元素是表单的方法。
 
 ```vue
 <script setup lang="ts">
-import { useVbenForm } from '#/adapter/form';
+import { useOceanForm } from '#/adapter/form';
 
 // Form 为弹窗组件
 // formApi 为弹窗的方法
-const [Form, formApi] = useVbenForm({
+const [Form, formApi] = useOceanForm({
   // 属性
   // 事件
 });
@@ -277,54 +274,53 @@ const [Form, formApi] = useVbenForm({
 
 ### FormApi
 
-useVbenForm 返回的第二个参数，是一个对象，包含了一些表单的方法。
+useOceanForm 返回的第二个参数，是一个对象，包含了一些表单的方法。
 
-| 方法名 | 描述 | 类型 | 版本号 |
-| --- | --- | --- | --- |
-| submitForm | 提交表单 | `(e:Event)=>Promise<Record<string,any>>` | - |
-| validateAndSubmitForm | 提交并校验表单 | `(e:Event)=>Promise<Record<string,any>>` | - |
-| resetForm | 重置表单 | `()=>Promise<void>` | - |
-| setValues | 设置表单值, 默认会过滤不在schema中定义的field, 可通过filterFields形参关闭过滤 | `(fields: Record<string, any>, filterFields?: boolean, shouldValidate?: boolean) => Promise<void>` | - |
-| getValues | 获取表单值 | `(fields:Record<string, any>,shouldValidate: boolean = false)=>Promise<void>` | - |
-| validate | 表单校验 | `()=>Promise<void>` | - |
-| validateField | 校验指定字段 | `(fieldName: string)=>Promise<ValidationResult<unknown>>` | - |
-| isFieldValid | 检查某个字段是否已通过校验 | `(fieldName: string)=>Promise<boolean>` | - |
-| resetValidate | 重置表单校验 | `()=>Promise<void>` | - |
-| updateSchema | 更新formSchema | `(schema:FormSchema[])=>void` | - |
-| setFieldValue | 设置字段值 | `(field: string, value: any, shouldValidate?: boolean)=>Promise<void>` | - |
-| setState | 设置组件状态（props） | `(stateOrFn:\| ((prev: VbenFormProps) => Partial<VbenFormProps>)\| Partial<VbenFormProps>)=>Promise<void>` | - |
-| getState | 获取组件状态（props） | `()=>Promise<VbenFormProps>` | - |
-| form | 表单对象实例，可以操作表单，见 [useForm](https://vee-validate.logaretm.com/v4/api/use-form/) | - | - |
-| getFieldComponentRef | 获取指定字段的组件实例 | `<T=unknown>(fieldName: string)=>T` | >5.5.3 |
-| getFocusedField | 获取当前已获得焦点的字段 | `()=>string\|undefined` | >5.5.3 |
+| 方法名                | 描述                                                                                         | 类型                                                                                                          | 版本号 |
+| --------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------ |
+| submitForm            | 提交表单                                                                                     | `(e:Event)=>Promise<Record<string,any>>`                                                                      | -      |
+| validateAndSubmitForm | 提交并校验表单                                                                               | `(e:Event)=>Promise<Record<string,any>>`                                                                      | -      |
+| resetForm             | 重置表单                                                                                     | `()=>Promise<void>`                                                                                           | -      |
+| setValues             | 设置表单值, 默认会过滤不在schema中定义的field, 可通过filterFields形参关闭过滤                | `(fields: Record<string, any>, filterFields?: boolean, shouldValidate?: boolean) => Promise<void>`            | -      |
+| getValues             | 获取表单值                                                                                   | `(fields:Record<string, any>,shouldValidate: boolean = false)=>Promise<void>`                                 | -      |
+| validate              | 表单校验                                                                                     | `()=>Promise<void>`                                                                                           | -      |
+| validateField         | 校验指定字段                                                                                 | `(fieldName: string)=>Promise<ValidationResult<unknown>>`                                                     | -      |
+| isFieldValid          | 检查某个字段是否已通过校验                                                                   | `(fieldName: string)=>Promise<boolean>`                                                                       | -      |
+| resetValidate         | 重置表单校验                                                                                 | `()=>Promise<void>`                                                                                           | -      |
+| updateSchema          | 更新formSchema                                                                               | `(schema:FormSchema[])=>void`                                                                                 | -      |
+| setFieldValue         | 设置字段值                                                                                   | `(field: string, value: any, shouldValidate?: boolean)=>Promise<void>`                                        | -      |
+| setState              | 设置组件状态（props）                                                                        | `(stateOrFn:\| ((prev: OceanFormProps) => Partial<OceanFormProps>)\| Partial<OceanFormProps>)=>Promise<void>` | -      |
+| getState              | 获取组件状态（props）                                                                        | `()=>Promise<OceanFormProps>`                                                                                 | -      |
+| form                  | 表单对象实例，可以操作表单，见 [useForm](https://vee-validate.logaretm.com/v4/api/use-form/) | -                                                                                                             | -      |
+| getFieldComponentRef  | 获取指定字段的组件实例                                                                       | `<T=unknown>(fieldName: string)=>T`                                                                           | >5.5.3 |
+| getFocusedField       | 获取当前已获得焦点的字段                                                                     | `()=>string\|undefined`                                                                                       | >5.5.3 |
 
 ## Props
 
-所有属性都可以传入 `useVbenForm` 的第一个参数中。
+所有属性都可以传入 `useOceanForm` 的第一个参数中。
 
-| 属性名 | 描述 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| layout | 表单项布局 | `'horizontal' \| 'vertical'` | `horizontal` |
-| showCollapseButton | 是否显示折叠按钮 | `boolean` | `false` |
-| wrapperClass | 表单的布局，基于tailwindcss | `any` | - |
-| actionWrapperClass | 表单操作区域class | `any` | - |
-| handleReset | 表单重置回调 | `(values: Record<string, any>,) => Promise<void> \| void` | - |
-| handleSubmit | 表单提交回调 | `(values: Record<string, any>,) => Promise<void> \| void` | - |
-| handleValuesChange | 表单值变化回调 | `(values: Record<string, any>, fieldsChanged: string[]) => void` | - |
-| actionButtonsReverse | 调换操作按钮位置 | `boolean` | `false` |
-| resetButtonOptions | 重置按钮组件参数 | `ActionButtonOptions` | - |
-| submitButtonOptions | 提交按钮组件参数 | `ActionButtonOptions` | - |
-| showDefaultActions | 是否显示默认操作按钮 | `boolean` | `true` |
-| collapsed | 是否折叠，在`showCollapseButton`为`true`时生效 | `boolean` | `false` |
-| collapseTriggerResize | 折叠时，触发`resize`事件 | `boolean` | `false` |
-| collapsedRows | 折叠时保持的行数 | `number` | `1` |
-| fieldMappingTime | 用于将表单内的数组值映射成 2 个字段 | `[string, [string, string],Nullable<string>\|[string,string]\|((any,string)=>any)?][]` | - |
-| commonConfig | 表单项的通用配置，每个配置都会传递到每个表单项，表单项可覆盖 | `FormCommonConfig` | - |
-| schema | 表单项的每一项配置 | `FormSchema[]` | - |
-| submitOnEnter | 按下回车健时提交表单 | `boolean` | false |
-| submitOnChange | 字段值改变时提交表单(内部防抖，这个属性一般用于表格的搜索表单) | `boolean` | false |
-| compact | 是否紧凑模式(忽略为校验信息所预留的空间) | `boolean` | false |
-| scrollToFirstError | 表单验证失败时是否自动滚动到第一个错误字段 | `boolean` | false |
+| 属性名                | 描述                                                           | 类型                                                                                   | 默认值       |
+| --------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------ |
+| layout                | 表单项布局                                                     | `'horizontal' \| 'vertical'`                                                           | `horizontal` |
+| showCollapseButton    | 是否显示折叠按钮                                               | `boolean`                                                                              | `false`      |
+| wrapperClass          | 表单的布局，基于tailwindcss                                    | `any`                                                                                  | -            |
+| actionWrapperClass    | 表单操作区域class                                              | `any`                                                                                  | -            |
+| handleReset           | 表单重置回调                                                   | `(values: Record<string, any>,) => Promise<void> \| void`                              | -            |
+| handleSubmit          | 表单提交回调                                                   | `(values: Record<string, any>,) => Promise<void> \| void`                              | -            |
+| handleValuesChange    | 表单值变化回调                                                 | `(values: Record<string, any>, fieldsChanged: string[]) => void`                       | -            |
+| actionButtonsReverse  | 调换操作按钮位置                                               | `boolean`                                                                              | `false`      |
+| resetButtonOptions    | 重置按钮组件参数                                               | `ActionButtonOptions`                                                                  | -            |
+| submitButtonOptions   | 提交按钮组件参数                                               | `ActionButtonOptions`                                                                  | -            |
+| showDefaultActions    | 是否显示默认操作按钮                                           | `boolean`                                                                              | `true`       |
+| collapsed             | 是否折叠，在`showCollapseButton`为`true`时生效                 | `boolean`                                                                              | `false`      |
+| collapseTriggerResize | 折叠时，触发`resize`事件                                       | `boolean`                                                                              | `false`      |
+| collapsedRows         | 折叠时保持的行数                                               | `number`                                                                               | `1`          |
+| fieldMappingTime      | 用于将表单内的数组值映射成 2 个字段                            | `[string, [string, string],Nullable<string>\|[string,string]\|((any,string)=>any)?][]` | -            |
+| commonConfig          | 表单项的通用配置，每个配置都会传递到每个表单项，表单项可覆盖   | `FormCommonConfig`                                                                     | -            |
+| schema                | 表单项的每一项配置                                             | `FormSchema[]`                                                                         | -            |
+| submitOnEnter         | 按下回车健时提交表单                                           | `boolean`                                                                              | false        |
+| submitOnChange        | 字段值改变时提交表单(内部防抖，这个属性一般用于表格的搜索表单) | `boolean`                                                                              | false        |
+| compact               | 是否紧凑模式(忽略为校验信息所预留的空间)                       | `boolean`                                                                              | false        |
 
 ::: tip handleValuesChange
 
@@ -432,9 +428,7 @@ export interface FormCommonConfig {
 ::: details FormSchema
 
 ```ts
-export interface FormSchema<
-  T extends BaseFormComponentType = BaseFormComponentType,
-> extends FormCommonConfig {
+export interface FormSchema<T extends BaseFormComponentType = BaseFormComponentType> extends FormCommonConfig {
   /** 组件 */
   component: Component | T;
   /** 组件参数 */

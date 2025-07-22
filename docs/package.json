@@ -1,6 +1,6 @@
 {
-  "name": "@vben/docs",
-  "version": "5.5.7",
+  "name": "@ocean/docs",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "vitepress build",
@@ -14,11 +14,11 @@
     }
   },
   "dependencies": {
-    "@vben-core/shadcn-ui": "workspace:*",
-    "@vben/common-ui": "workspace:*",
-    "@vben/locales": "workspace:*",
-    "@vben/plugins": "workspace:*",
-    "@vben/styles": "workspace:*",
+    "@ocean-core/shadcn-ui": "workspace:*",
+    "@ocean/common-ui": "workspace:*",
+    "@ocean/locales": "workspace:*",
+    "@ocean/plugins": "workspace:*",
+    "@ocean/styles": "workspace:*",
     "ant-design-vue": "catalog:",
     "lucide-vue-next": "catalog:",
     "medium-zoom": "catalog:",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@nolebase/vitepress-plugin-git-changelog": "catalog:",
-    "@vben/vite-config": "workspace:*",
+    "@ocean/vite-config": "workspace:*",
     "@vite-pwa/vitepress": "catalog:",
     "vitepress": "catalog:",
     "vue": "catalog:"

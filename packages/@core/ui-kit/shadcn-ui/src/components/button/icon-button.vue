@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { ButtonVariants } from '../../ui';
-import type { VbenButtonProps } from './button';
+import type { OceanButtonProps } from './button';
 
 import { computed, useSlots } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
-import { VbenTooltip } from '../tooltip';
-import VbenButton from './button.vue';
+import { OceanTooltip } from '../tooltip';
+import OceanButton from './button.vue';
 
-interface Props extends VbenButtonProps {
+interface Props extends OceanButtonProps {
   class?: any;
   disabled?: boolean;
   onClick?: () => void;
@@ -33,7 +33,7 @@ const showTooltip = computed(() => !!slots.tooltip || !!props.tooltip);
 </script>
 
 <template>
-  <VbenButton
+  <OceanButton
     v-if="!showTooltip"
     :class="cn('rounded-full', props.class)"
     :disabled="disabled"
@@ -42,15 +42,11 @@ const showTooltip = computed(() => !!slots.tooltip || !!props.tooltip);
     @click="onClick"
   >
     <slot></slot>
-  </VbenButton>
+  </OceanButton>
 
-  <VbenTooltip
-    v-else
-    :delay-duration="tooltipDelayDuration"
-    :side="tooltipSide"
-  >
+  <OceanTooltip v-else :delay-duration="tooltipDelayDuration" :side="tooltipSide">
     <template #trigger>
-      <VbenButton
+      <OceanButton
         :class="cn('rounded-full', props.class)"
         :disabled="disabled"
         :variant="variant"
@@ -58,11 +54,11 @@ const showTooltip = computed(() => !!slots.tooltip || !!props.tooltip);
         @click="onClick"
       >
         <slot></slot>
-      </VbenButton>
+      </OceanButton>
     </template>
     <slot v-if="slots.tooltip" name="tooltip"> </slot>
     <template v-else>
       {{ tooltip }}
     </template>
-  </VbenTooltip>
+  </OceanTooltip>
 </template>

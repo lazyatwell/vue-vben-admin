@@ -1,7 +1,7 @@
 import type { DrawerApiOptions, DrawerState } from './drawer';
 
-import { Store } from '@vben-core/shared/store';
-import { bindMethods, isFunction } from '@vben-core/shared/utils';
+import { Store } from '@ocean-core/shared/store';
+import { bindMethods, isFunction } from '@ocean-core/shared/utils';
 
 export class DrawerApi {
   // 共享数据
@@ -12,12 +12,7 @@ export class DrawerApi {
 
   private api: Pick<
     DrawerApiOptions,
-    | 'onBeforeClose'
-    | 'onCancel'
-    | 'onClosed'
-    | 'onConfirm'
-    | 'onOpenChange'
-    | 'onOpened'
+    'onBeforeClose' | 'onCancel' | 'onClosed' | 'onConfirm' | 'onOpenChange' | 'onOpened'
   >;
 
   // private prevState!: DrawerState;
@@ -160,11 +155,7 @@ export class DrawerApi {
     return this;
   }
 
-  setState(
-    stateOrFn:
-      | ((prev: DrawerState) => Partial<DrawerState>)
-      | Partial<DrawerState>,
-  ) {
+  setState(stateOrFn: ((prev: DrawerState) => Partial<DrawerState>) | Partial<DrawerState>) {
     if (isFunction(stateOrFn)) {
       this.store.setState(stateOrFn);
     } else {

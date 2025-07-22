@@ -3,7 +3,7 @@ import type { AccordionTriggerProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { ChevronDown } from 'lucide-vue-next';
 import { AccordionHeader, AccordionTrigger } from 'radix-vue';
@@ -30,9 +30,7 @@ const delegatedProps = computed(() => {
     >
       <slot></slot>
       <slot name="icon">
-        <ChevronDown
-          class="text-muted-foreground h-4 w-4 shrink-0 transition-transform duration-200"
-        />
+        <ChevronDown class="text-muted-foreground h-4 w-4 shrink-0 transition-transform duration-200" />
       </slot>
     </AccordionTrigger>
   </AccordionHeader>

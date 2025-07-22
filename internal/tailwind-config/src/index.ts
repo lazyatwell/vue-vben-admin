@@ -16,7 +16,7 @@ const { packages } = getPackagesSync(process.cwd());
 const tailwindPackages: string[] = [];
 
 packages.forEach((pkg) => {
-  // apps目录下和 @vben-core/tailwind-ui 包需要使用到 tailwindcss ui
+  // apps目录下和 @ocean-core/tailwind-ui 包需要使用到 tailwindcss ui
   // if (fs.existsSync(path.join(pkg.dir, 'tailwind.config.mjs'))) {
   tailwindPackages.push(pkg.dir);
   // }
@@ -118,17 +118,10 @@ const customColors = {
 export default {
   content: [
     './index.html',
-    ...tailwindPackages.map((item) =>
-      path.join(item, 'src/**/*.{vue,js,ts,jsx,tsx,svelte,astro,html}'),
-    ),
+    ...tailwindPackages.map((item) => path.join(item, 'src/**/*.{vue,js,ts,jsx,tsx,svelte,astro,html}')),
   ],
   darkMode: 'selector',
-  plugins: [
-    animate,
-    typographyPlugin,
-    addDynamicIconSelectors(),
-    enterAnimationPlugin,
-  ],
+  plugins: [animate, typographyPlugin, addDynamicIconSelectors(), enterAnimationPlugin],
   prefix: '',
   theme: {
     container: {

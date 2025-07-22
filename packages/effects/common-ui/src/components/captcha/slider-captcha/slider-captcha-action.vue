@@ -3,9 +3,9 @@ import type { CSSProperties } from 'vue';
 
 import { computed, ref, useTemplateRef } from 'vue';
 
-import { Check, ChevronsRight } from '@vben/icons';
+import { Check, ChevronsRight } from '@ocean/icons';
 
-import { Slot } from '@vben-core/shadcn-ui';
+import { Slot } from '@ocean-core/shadcn-ui';
 
 const props = defineProps<{
   actionStyle: CSSProperties;

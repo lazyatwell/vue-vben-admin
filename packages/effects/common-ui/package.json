@@ -1,13 +1,6 @@
 {
-  "name": "@vben/common-ui",
-  "version": "5.5.7",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "packages/effects/common-ui"
-  },
+  "name": "@ocean/common-ui",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -28,16 +21,16 @@
     }
   },
   "dependencies": {
-    "@vben-core/form-ui": "workspace:*",
-    "@vben-core/popup-ui": "workspace:*",
-    "@vben-core/preferences": "workspace:*",
-    "@vben-core/shadcn-ui": "workspace:*",
-    "@vben-core/shared": "workspace:*",
-    "@vben/constants": "workspace:*",
-    "@vben/hooks": "workspace:*",
-    "@vben/icons": "workspace:*",
-    "@vben/locales": "workspace:*",
-    "@vben/types": "workspace:*",
+    "@ocean-core/form-ui": "workspace:*",
+    "@ocean-core/popup-ui": "workspace:*",
+    "@ocean-core/preferences": "workspace:*",
+    "@ocean-core/shadcn-ui": "workspace:*",
+    "@ocean-core/shared": "workspace:*",
+    "@ocean/constants": "workspace:*",
+    "@ocean/hooks": "workspace:*",
+    "@ocean/icons": "workspace:*",
+    "@ocean/locales": "workspace:*",
+    "@ocean/types": "workspace:*",
     "@vueuse/core": "catalog:",
     "@vueuse/integrations": "catalog:",
     "json-bigint": "catalog:",

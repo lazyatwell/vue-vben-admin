@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 import type { Arrayable } from '@vueuse/core';
 
-import type { ValueType, VbenButtonGroupProps } from './button';
+import type { OceanButtonGroupProps, ValueType } from './button';
 
 import { computed, ref, watch } from 'vue';
 
-import { Circle, CircleCheckBig, LoaderCircle } from '@vben-core/icons';
-import { cn, isFunction } from '@vben-core/shared/utils';
+import { Circle, CircleCheckBig, LoaderCircle } from '@ocean-core/icons';
+import { cn, isFunction } from '@ocean-core/shared/utils';
 
 import { objectOmit } from '@vueuse/core';
 
-import { VbenRenderContent } from '../render-content';
-import VbenButtonGroup from './button-group.vue';
+import { OceanRenderContent } from '../render-content';
+import OceanButtonGroup from './button-group.vue';
 import Button from './button.vue';
 
-const props = withDefaults(defineProps<VbenButtonGroupProps>(), {
+const props = withDefaults(defineProps<OceanButtonGroupProps>(), {
   gap: 0,
   multiple: false,
   showIcon: true,
@@ -39,8 +39,7 @@ watch(
     if (val) {
       modelValue.value = innerValue.value;
     } else {
-      modelValue.value =
-        innerValue.value.length > 0 ? innerValue.value[0] : undefined;
+      modelValue.value = innerValue.value.length > 0 ? innerValue.value[0] : undefined;
     }
   },
 );
@@ -51,9 +50,7 @@ watch(
     if (Array.isArray(val)) {
       const arrVal = val.filter((v) => v !== undefined);
       if (arrVal.length > 0) {
-        innerValue.value = props.multiple
-          ? [...arrVal]
-          : [arrVal[0] as ValueType];
+        innerValue.value = props.multiple ? [...arrVal] : [arrVal[0] as ValueType];
       } else {
         innerValue.value = [];
       }
@@ -68,10 +65,7 @@ async function onBtnClick(value: ValueType) {
   if (props.beforeChange && isFunction(props.beforeChange)) {
     try {
       loadingValues.value.push(value);
-      const canChange = await props.beforeChange(
-        value,
-        !innerValue.value.includes(value),
-      );
+      const canChange = await props.beforeChange(value, !innerValue.value.includes(value));
       if (canChange === false) {
         return;
       }
@@ -105,47 +99,32 @@ async function onBtnClick(value: ValueType) {
 }
 </script>
 <template>
-  <VbenButtonGroup
-    :size="props.size"
-    :gap="props.gap"
-    class="vben-check-button-group"
-  >
+  <OceanButtonGroup :size="props.size" :gap="props.gap" class="ocean-check-button-group">
     <Button
       v-for="(btn, index) in props.options"
       :key="index"
       :class="cn('border', props.btnClass)"
-      :disabled="
-        props.disabled ||
-        loadingValues.includes(btn.value) ||
-        (!props.multiple && loadingValues.length > 0)
-      "
+      :disabled="props.disabled || loadingValues.includes(btn.value) || (!props.multiple && loadingValues.length > 0)"
       v-bind="btnDefaultProps"
       :variant="innerValue.includes(btn.value) ? 'default' : 'outline'"
       @click="onBtnClick(btn.value)"
       type="button"
     >
       <div class="icon-wrapper" v-if="props.showIcon">
-        <slot
-          name="icon"
-          :loading="loadingValues.includes(btn.value)"
-          :checked="innerValue.includes(btn.value)"
-        >
-          <LoaderCircle
-            class="animate-spin"
-            v-if="loadingValues.includes(btn.value)"
-          />
+        <slot name="icon" :loading="loadingValues.includes(btn.value)" :checked="innerValue.includes(btn.value)">
+          <LoaderCircle class="animate-spin" v-if="loadingValues.includes(btn.value)" />
           <CircleCheckBig v-else-if="innerValue.includes(btn.value)" />
           <Circle v-else />
         </slot>
       </div>
       <slot name="option" :label="btn.label" :value="btn.value" :data="btn">
-        <VbenRenderContent :content="btn.label" />
+        <OceanRenderContent :content="btn.label" />
       </slot>
     </Button>
-  </VbenButtonGroup>
+  </OceanButtonGroup>
 </template>
 <style lang="scss" scoped>
-.vben-check-button-group {
+.ocean-check-button-group {
   display: flex;
   flex-wrap: wrap;
 

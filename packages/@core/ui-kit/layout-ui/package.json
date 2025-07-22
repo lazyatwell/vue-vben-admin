@@ -1,13 +1,6 @@
 {
-  "name": "@vben-core/layout-ui",
-  "version": "5.5.7",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "packages/@vben-core/uikit/layout-ui"
-  },
+  "name": "@ocean-core/layout-ui",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -37,11 +30,11 @@
     }
   },
   "dependencies": {
-    "@vben-core/composables": "workspace:*",
-    "@vben-core/icons": "workspace:*",
-    "@vben-core/shadcn-ui": "workspace:*",
-    "@vben-core/shared": "workspace:*",
-    "@vben-core/typings": "workspace:*",
+    "@ocean-core/composables": "workspace:*",
+    "@ocean-core/icons": "workspace:*",
+    "@ocean-core/shadcn-ui": "workspace:*",
+    "@ocean-core/shared": "workspace:*",
+    "@ocean-core/typings": "workspace:*",
     "@vueuse/core": "catalog:",
     "vue": "catalog:"
   }

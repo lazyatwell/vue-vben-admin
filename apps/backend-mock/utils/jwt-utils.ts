@@ -23,9 +23,7 @@ export function generateRefreshToken(user: UserInfo) {
   });
 }
 
-export function verifyAccessToken(
-  event: H3Event<EventHandlerRequest>,
-): null | Omit<UserInfo, 'password'> {
+export function verifyAccessToken(event: H3Event<EventHandlerRequest>): null | Omit<UserInfo, 'password'> {
   const authHeader = getHeader(event, 'Authorization');
   if (!authHeader?.startsWith('Bearer')) {
     return null;
@@ -44,9 +42,7 @@ export function verifyAccessToken(
   }
 }
 
-export function verifyRefreshToken(
-  token: string,
-): null | Omit<UserInfo, 'password'> {
+export function verifyRefreshToken(token: string): null | Omit<UserInfo, 'password'> {
   try {
     const decoded = jwt.verify(token, REFRESH_TOKEN_SECRET) as UserPayload;
     const username = decoded.username;

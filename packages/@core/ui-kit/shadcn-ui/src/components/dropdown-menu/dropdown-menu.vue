@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import type {
-  DropdownMenuProps,
-  VbenDropdownMenuItem as IDropdownMenuItem,
-} from './interface';
+import type { DropdownMenuProps, OceanDropdownMenuItem as IDropdownMenuItem } from './interface';
 
 import {
   DropdownMenu,

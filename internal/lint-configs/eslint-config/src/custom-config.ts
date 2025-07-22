@@ -1,10 +1,6 @@
 import type { Linter } from 'eslint';
 
-const restrictedImportIgnores = [
-  '**/vite.config.mts',
-  '**/tailwind.config.mjs',
-  '**/postcss.config.mjs',
-];
+const restrictedImportIgnores = ['**/vite.config.mts', '**/tailwind.config.mjs', '**/postcss.config.mjs'];
 
 const customConfig: Linter.Config[] = [
   // shadcn-ui 内部组件是自动生成的，不做太多限制
@@ -46,23 +42,19 @@ const customConfig: Linter.Config[] = [
           patterns: [
             {
               group: ['#/api/*'],
-              message:
-                'The #/api package cannot be imported, please use the @core package itself',
+              message: 'The #/api package cannot be imported, please use the @core package itself',
             },
             {
               group: ['#/layouts/*'],
-              message:
-                'The #/layouts package cannot be imported, please use the @core package itself',
+              message: 'The #/layouts package cannot be imported, please use the @core package itself',
             },
             {
               group: ['#/locales/*'],
-              message:
-                'The #/locales package cannot be imported, please use the @core package itself',
+              message: 'The #/locales package cannot be imported, please use the @core package itself',
             },
             {
               group: ['#/stores/*'],
-              message:
-                'The #/stores package cannot be imported, please use the @core package itself',
+              message: 'The #/stores package cannot be imported, please use the @core package itself',
             },
           ],
         },
@@ -71,7 +63,7 @@ const customConfig: Linter.Config[] = [
     },
   },
   {
-    // @core内部组件，不能引入@vben/* 里面的包
+    // @core内部组件，不能引入@ocean/* 里面的包
     files: ['packages/@core/**/**'],
     ignores: restrictedImportIgnores,
     rules: {
@@ -80,9 +72,8 @@ const customConfig: Linter.Config[] = [
         {
           patterns: [
             {
-              group: ['@vben/*'],
-              message:
-                'The @core package cannot import the @vben package, please use the @core package itself',
+              group: ['@ocean/*'],
+              message: 'The @core package cannot import the @ocean package, please use the @core package itself',
             },
           ],
         },
@@ -90,7 +81,7 @@ const customConfig: Linter.Config[] = [
     },
   },
   {
-    // @core/shared内部组件，不能引入@vben/* 或者 @vben-core/* 里面的包
+    // @core/shared内部组件，不能引入@ocean/* 或者 @ocean-core/* 里面的包
     files: ['packages/@core/base/**/**'],
     ignores: restrictedImportIgnores,
     rules: {
@@ -99,9 +90,9 @@ const customConfig: Linter.Config[] = [
         {
           patterns: [
             {
-              group: ['@vben/*', '@vben-core/*'],
+              group: ['@ocean/*', '@ocean-core/*'],
               message:
-                'The @vben-core/shared package cannot import the @vben package, please use the @core/shared package itself',
+                'The @ocean-core/shared package cannot import the @ocean package, please use the @core/shared package itself',
             },
           ],
         },
@@ -110,7 +101,7 @@ const customConfig: Linter.Config[] = [
   },
 
   {
-    // 不能引入@vben/*里面的包
+    // 不能引入@ocean/*里面的包
     files: [
       'packages/types/**/**',
       'packages/utils/**/**',
@@ -128,9 +119,8 @@ const customConfig: Linter.Config[] = [
         {
           patterns: [
             {
-              group: ['@vben/*'],
-              message:
-                'The @vben package cannot be imported, please use the @core package itself',
+              group: ['@ocean/*'],
+              message: 'The @ocean package cannot be imported, please use the @core package itself',
             },
           ],
         },

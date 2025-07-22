@@ -9,26 +9,26 @@ export * from './loading';
 export * from './page';
 export * from './resize';
 export * from './tippy';
-export * from '@vben-core/form-ui';
-export * from '@vben-core/popup-ui';
+export * from '@ocean-core/form-ui';
+export * from '@ocean-core/popup-ui';
 
 // 给文档用
 export {
-  VbenAvatar,
-  VbenButton,
-  VbenButtonGroup,
-  VbenCheckbox,
-  VbenCheckButtonGroup,
-  VbenCountToAnimator,
-  VbenFullScreen,
-  VbenInputPassword,
-  VbenLoading,
-  VbenLogo,
-  VbenPinInput,
-  VbenSelect,
-  VbenSpinner,
-  VbenTree,
-} from '@vben-core/shadcn-ui';
+  OceanAvatar,
+  OceanButton,
+  OceanButtonGroup,
+  OceanCheckbox,
+  OceanCheckButtonGroup,
+  OceanCountToAnimator,
+  OceanFullScreen,
+  OceanInputPassword,
+  OceanLoading,
+  OceanLogo,
+  OceanPinInput,
+  OceanSelect,
+  OceanSpinner,
+  OceanTree,
+} from '@ocean-core/shadcn-ui';
 
-export type { FlattenedItem } from '@vben-core/shadcn-ui';
-export { globalShareState } from '@vben-core/shared/global-state';
+export type { FlattenedItem } from '@ocean-core/shadcn-ui';
+export { globalShareState } from '@ocean-core/shared/global-state';

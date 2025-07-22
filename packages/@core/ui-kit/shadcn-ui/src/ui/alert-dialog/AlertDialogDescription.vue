@@ -3,7 +3,7 @@ import type { AlertDialogDescriptionProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { AlertDialogDescription, useForwardProps } from 'radix-vue';
 
@@ -19,10 +19,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-  <AlertDialogDescription
-    v-bind="forwardedProps"
-    :class="cn('text-muted-foreground text-sm', props.class)"
-  >
+  <AlertDialogDescription v-bind="forwardedProps" :class="cn('text-muted-foreground text-sm', props.class)">
     <slot></slot>
   </AlertDialogDescription>
 </template>

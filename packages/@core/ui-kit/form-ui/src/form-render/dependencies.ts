@@ -1,20 +1,14 @@
-import type {
-  FormItemDependencies,
-  FormSchemaRuleType,
-  MaybeComponentProps,
-} from '../types';
+import type { FormItemDependencies, FormSchemaRuleType, MaybeComponentProps } from '../types';
 
 import { computed, ref, watch } from 'vue';
 
-import { isBoolean, isFunction } from '@vben-core/shared/utils';
+import { isBoolean, isFunction } from '@ocean-core/shared/utils';
 
 import { useFormValues } from 'vee-validate';
 
 import { injectRenderFormProps } from './context';
 
-export default function useDependencies(
-  getDependencies: () => FormItemDependencies | undefined,
-) {
+export default function useDependencies(getDependencies: () => FormItemDependencies | undefined) {
   const values = useFormValues();
 
   const formRenderProps = injectRenderFormProps();
@@ -23,7 +17,7 @@ export default function useDependencies(
   const formApi = formRenderProps.form!;
 
   if (!values) {
-    throw new Error('useDependencies should be used within <VbenForm>');
+    throw new Error('useDependencies should be used within <OceanForm>');
   }
 
   const isIf = ref(true);
@@ -57,15 +51,7 @@ export default function useDependencies(
         return;
       }
       resetConditionState();
-      const {
-        componentProps,
-        disabled,
-        if: whenIf,
-        required,
-        rules,
-        show,
-        trigger,
-      } = dependencies;
+      const { componentProps, disabled, if: whenIf, required, rules, show, trigger } = dependencies;
 
       // 1. 优先判断if，如果if为false，则不渲染dom，后续判断也不再执行
       const formValues = values.value;

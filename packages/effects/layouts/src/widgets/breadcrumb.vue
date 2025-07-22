@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import type { BreadcrumbStyleType } from '@vben/types';
+import type { BreadcrumbStyleType } from '@ocean/types';
 
-import type { IBreadcrumb } from '@vben-core/shadcn-ui';
+import type { IBreadcrumb } from '@ocean-core/shadcn-ui';
 
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { VbenBreadcrumbView } from '@vben-core/shadcn-ui';
+import { OceanBreadcrumbView } from '@ocean-core/shadcn-ui';
 
 interface Props {
   hideWhenOnlyOne?: boolean;
@@ -33,8 +33,7 @@ const breadcrumbs = computed((): IBreadcrumb[] => {
 
   for (const match of matched) {
     const { meta, path } = match;
-    const { hideChildrenInMenu, hideInBreadcrumb, icon, name, title } =
-      meta || {};
+    const { hideChildrenInMenu, hideInBreadcrumb, icon, name, title } = meta || {};
     if (hideInBreadcrumb || hideChildrenInMenu || !path) {
       continue;
     }
@@ -64,7 +63,7 @@ function handleSelect(path: string) {
 }
 </script>
 <template>
-  <VbenBreadcrumbView
+  <OceanBreadcrumbView
     :breadcrumbs="breadcrumbs"
     :show-icon="showIcon"
     :style-type="type"

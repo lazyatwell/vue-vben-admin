@@ -1,4 +1,4 @@
-import '@vben/styles';
+import '@ocean/styles';
 
 import './variables.css';
 import './base.css';

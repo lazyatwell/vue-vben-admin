@@ -1,23 +1,15 @@
 <script lang="ts" setup>
 import type { DrawerProps, ExtendedDrawerApi } from './drawer';
 
-import {
-  computed,
-  onDeactivated,
-  provide,
-  ref,
-  unref,
-  useId,
-  watch,
-} from 'vue';
+import { computed, onDeactivated, provide, ref, unref, useId, watch } from 'vue';
 
+import { useIsMobile, usePriorityValues, useSimpleLocale } from '@ocean-core/composables';
+import { X } from '@ocean-core/icons';
 import {
-  useIsMobile,
-  usePriorityValues,
-  useSimpleLocale,
-} from '@vben-core/composables';
-import { X } from '@vben-core/icons';
-import {
+  OceanButton,
+  OceanHelpTooltip,
+  OceanIconButton,
+  OceanLoading,
   Separator,
   Sheet,
   SheetClose,
@@ -26,15 +18,11 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  VbenButton,
-  VbenHelpTooltip,
-  VbenIconButton,
-  VbenLoading,
   VisuallyHidden,
-} from '@vben-core/shadcn-ui';
-import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
-import { globalShareState } from '@vben-core/shared/global-state';
-import { cn } from '@vben-core/shared/utils';
+} from '@ocean-core/shadcn-ui';
+import { ELEMENT_ID_MAIN_CONTENT } from '@ocean-core/shared/constants';
+import { globalShareState } from '@ocean-core/shared/global-state';
+import { cn } from '@ocean-core/shared/utils';
 
 interface Props extends DrawerProps {
   drawerApi?: ExtendedDrawerApi;
@@ -126,11 +114,7 @@ function escapeKeyDown(e: KeyboardEvent) {
 function pointerDownOutside(e: Event) {
   const target = e.target as HTMLElement;
   const dismissableDrawer = target?.dataset.dismissableDrawer;
-  if (
-    submitting.value ||
-    !closeOnClickModal.value ||
-    dismissableDrawer !== id
-  ) {
+  if (submitting.value || !closeOnClickModal.value || dismissableDrawer !== id) {
     e.preventDefault();
   }
 }
@@ -147,9 +131,7 @@ function handleFocusOutside(e: Event) {
 }
 
 const getAppendTo = computed(() => {
-  return appendToMain.value
-    ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div`
-    : undefined;
+  return appendToMain.value ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div` : undefined;
 });
 
 /**
@@ -176,11 +158,7 @@ const getForceMount = computed(() => {
 });
 </script>
 <template>
-  <Sheet
-    :modal="false"
-    :open="state?.isOpen"
-    @update:open="() => drawerApi?.close()"
-  >
+  <Sheet :modal="false" :open="state?.isOpen" @update:open="() => drawerApi?.close()">
     <SheetContent
       :append-to="getAppendTo"
       :class="
@@ -208,14 +186,10 @@ const getForceMount = computed(() => {
       <SheetHeader
         v-if="showHeader"
         :class="
-          cn(
-            '!flex flex-row items-center justify-between border-b px-6 py-5',
-            headerClass,
-            {
-              'px-4 py-3': closable,
-              'pl-2': closable && closeIconPlacement === 'left',
-            },
-          )
+          cn('!flex flex-row items-center justify-between border-b px-6 py-5', headerClass, {
+            'px-4 py-3': closable,
+            'pl-2': closable && closeIconPlacement === 'left',
+          })
         "
       >
         <div class="flex items-center">
@@ -226,9 +200,9 @@ const getForceMount = computed(() => {
             class="data-[state=open]:bg-secondary ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"
           >
             <slot name="close-icon">
-              <VbenIconButton>
+              <OceanIconButton>
                 <X class="size-4" />
-              </VbenIconButton>
+              </OceanIconButton>
             </slot>
           </SheetClose>
           <Separator
@@ -241,9 +215,9 @@ const getForceMount = computed(() => {
             <slot name="title">
               {{ title }}
 
-              <VbenHelpTooltip v-if="titleTooltip" trigger-class="pb-1">
+              <OceanHelpTooltip v-if="titleTooltip" trigger-class="pb-1">
                 {{ titleTooltip }}
-              </VbenHelpTooltip>
+              </OceanHelpTooltip>
             </slot>
           </SheetTitle>
           <SheetDescription v-if="description" class="mt-1 text-xs">
@@ -267,9 +241,9 @@ const getForceMount = computed(() => {
             class="data-[state=open]:bg-secondary ml-[2px] cursor-pointer rounded-full opacity-80 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none"
           >
             <slot name="close-icon">
-              <VbenIconButton>
+              <OceanIconButton>
                 <X class="size-4" />
-              </VbenIconButton>
+              </OceanIconButton>
             </slot>
           </SheetClose>
         </div>
@@ -290,20 +264,15 @@ const getForceMount = computed(() => {
       >
         <slot></slot>
       </div>
-      <VbenLoading v-if="showLoading || submitting" spinning />
+      <OceanLoading v-if="showLoading || submitting" spinning />
       <SheetFooter
         v-if="showFooter"
-        :class="
-          cn(
-            'w-full flex-row items-center justify-end border-t p-2 px-3',
-            footerClass,
-          )
-        "
+        :class="cn('w-full flex-row items-center justify-end border-t p-2 px-3', footerClass)"
       >
         <slot name="prepend-footer"></slot>
         <slot name="footer">
           <component
-            :is="components.DefaultButton || VbenButton"
+            :is="components.DefaultButton || OceanButton"
             v-if="showCancelButton"
             variant="ghost"
             :disabled="submitting"
@@ -315,7 +284,7 @@ const getForceMount = computed(() => {
           </component>
           <slot name="center-footer"></slot>
           <component
-            :is="components.PrimaryButton || VbenButton"
+            :is="components.PrimaryButton || OceanButton"
             v-if="showConfirmButton"
             :loading="confirmLoading || submitting"
             @click="() => drawerApi?.onConfirm()"

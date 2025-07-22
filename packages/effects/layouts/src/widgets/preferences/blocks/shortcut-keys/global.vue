@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { $t } from '@vben/locales';
-import { isWindowsOs } from '@vben/utils';
+import { $t } from '@ocean/locales';
+import { isWindowsOs } from '@ocean/utils';
 
 import SwitchItem from '../switch-item.vue';
 
@@ -11,9 +11,7 @@ defineOptions({
 });
 
 const shortcutKeysEnable = defineModel<boolean>('shortcutKeysEnable');
-const shortcutKeysGlobalSearch = defineModel<boolean>(
-  'shortcutKeysGlobalSearch',
-);
+const shortcutKeysGlobalSearch = defineModel<boolean>('shortcutKeysGlobalSearch');
 const shortcutKeysLogout = defineModel<boolean>('shortcutKeysLogout');
 // const shortcutKeysPreferences = defineModel<boolean>('shortcutKeysPreferences');
 const shortcutKeysLockScreen = defineModel<boolean>('shortcutKeysLockScreen');
@@ -25,10 +23,7 @@ const altView = computed(() => (isWindowsOs() ? 'Alt' : '⌥'));
   <SwitchItem v-model="shortcutKeysEnable">
     {{ $t('preferences.shortcutKeys.title') }}
   </SwitchItem>
-  <SwitchItem
-    v-model="shortcutKeysGlobalSearch"
-    :disabled="!shortcutKeysEnable"
-  >
+  <SwitchItem v-model="shortcutKeysGlobalSearch" :disabled="!shortcutKeysEnable">
     {{ $t('preferences.shortcutKeys.search') }}
     <template #shortcut>
       {{ isWindowsOs() ? 'Ctrl' : '⌘' }}

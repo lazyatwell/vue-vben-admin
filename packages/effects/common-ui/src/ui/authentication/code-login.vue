@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { Recordable } from '@vben/types';
+import type { Recordable } from '@ocean/types';
 
-import type { VbenFormSchema } from '@vben-core/form-ui';
+import type { OceanFormSchema } from '@ocean-core/form-ui';
 
 import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { useVbenForm } from '@vben-core/form-ui';
-import { VbenButton } from '@vben-core/shadcn-ui';
+import { useOceanForm } from '@ocean-core/form-ui';
+import { OceanButton } from '@ocean-core/shadcn-ui';
 
 import Title from './auth-title.vue';
 
 interface Props {
-  formSchema: VbenFormSchema[];
+  formSchema: OceanFormSchema[];
   /**
    * @zh_CN 是否处于加载处理状态
    */
@@ -55,7 +55,7 @@ const emit = defineEmits<{
 
 const router = useRouter();
 
-const [Form, formApi] = useVbenForm(
+const [Form, formApi] = useOceanForm(
   reactive({
     commonConfig: {
       hideLabel: true,
@@ -86,9 +86,7 @@ defineExpose({
 <template>
   <div>
     <Title>
-      <slot name="title">
-        {{ title || $t('authentication.welcomeBack') }} 📲
-      </slot>
+      <slot name="title"> {{ title || $t('authentication.welcomeBack') }} 📲 </slot>
       <template #desc>
         <span class="text-muted-foreground">
           <slot name="subTitle">
@@ -98,7 +96,7 @@ defineExpose({
       </template>
     </Title>
     <Form />
-    <VbenButton
+    <OceanButton
       :class="{
         'cursor-wait': loading,
       }"
@@ -109,9 +107,9 @@ defineExpose({
       <slot name="submitButtonText">
         {{ submitButtonText || $t('common.login') }}
       </slot>
-    </VbenButton>
-    <VbenButton class="mt-4 w-full" variant="outline" @click="goToLogin()">
+    </OceanButton>
+    <OceanButton class="mt-4 w-full" variant="outline" @click="goToLogin()">
       {{ $t('common.back') }}
-    </VbenButton>
+    </OceanButton>
   </div>
 </template>

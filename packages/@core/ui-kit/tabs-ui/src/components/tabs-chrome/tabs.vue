@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { TabDefinition } from '@vben-core/typings';
+import type { TabDefinition } from '@ocean-core/typings';
 
 import type { TabConfig, TabsProps } from '../../types';
 
 import { computed, ref } from 'vue';
 
-import { Pin, X } from '@vben-core/icons';
-import { VbenContextMenu, VbenIcon } from '@vben-core/shadcn-ui';
+import { Pin, X } from '@ocean-core/icons';
+import { OceanContextMenu, OceanIcon } from '@ocean-core/shadcn-ui';
 
 interface Props extends TabsProps {}
 
 defineOptions({
-  name: 'VbenTabsChrome',
+  name: 'OceanTabsChrome',
   inheritAttrs: false,
 });
 
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'vben-tabs-content',
+  contentClass: 'ocean-tabs-content',
   contextMenus: () => [],
   gap: 7,
   tabs: () => [],
@@ -57,13 +57,7 @@ const tabsView = computed(() => {
 });
 
 function onMouseDown(e: MouseEvent, tab: TabConfig) {
-  if (
-    e.button === 1 &&
-    tab.closable &&
-    !tab.affixTab &&
-    tabsView.value.length > 1 &&
-    props.middleClickToClose
-  ) {
+  if (e.button === 1 && tab.closable && !tab.affixTab && tabsView.value.length > 1 && props.middleClickToClose) {
     e.preventDefault();
     e.stopPropagation();
     emit('close', tab.key);
@@ -97,12 +91,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
         @click="active = tab.key"
         @mousedown="onMouseDown($event, tab)"
       >
-        <VbenContextMenu
-          :handler-data="tab"
-          :menus="contextMenus"
-          :modal="false"
-          item-class="pr-6"
-        >
+        <OceanContextMenu :handler-data="tab" :menus="contextMenus" :modal="false" item-class="pr-6">
           <div class="relative size-full px-1">
             <!-- divider -->
             <div
@@ -133,9 +122,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
             </div>
 
             <!-- extra -->
-            <div
-              class="tabs-chrome__extra absolute right-[var(--gap)] top-1/2 z-[3] size-4 translate-y-[-50%]"
-            >
+            <div class="tabs-chrome__extra absolute right-[var(--gap)] top-1/2 z-[3] size-4 translate-y-[-50%]">
               <!-- close-icon -->
               <X
                 v-show="!tab.affixTab && tabsView.length > 1 && tab.closable"
@@ -153,18 +140,14 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
             <div
               class="tabs-chrome__item-main group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground text-accent-foreground z-[2] mx-[calc(var(--gap)*2)] my-0 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pl-2 pr-4 duration-150"
             >
-              <VbenIcon
-                v-if="showIcon"
-                :icon="tab.icon"
-                class="mr-1 flex size-4 items-center overflow-hidden"
-              />
+              <OceanIcon v-if="showIcon" :icon="tab.icon" class="mr-1 flex size-4 items-center overflow-hidden" />
 
               <span class="flex-1 overflow-hidden whitespace-nowrap text-sm">
                 {{ tab.title }}
               </span>
             </div>
           </div>
-        </VbenContextMenu>
+        </OceanContextMenu>
       </div>
     </TransitionGroup>
   </div>

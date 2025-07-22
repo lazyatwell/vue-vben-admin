@@ -1,13 +1,13 @@
 import type { ComputedRef } from 'vue';
 
-import type { MenuRecordRaw } from '@vben/types';
+import type { MenuRecordRaw } from '@ocean/types';
 
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { preferences } from '@vben/preferences';
-import { useAccessStore } from '@vben/stores';
-import { findRootMenuByPath } from '@vben/utils';
+import { preferences } from '@ocean/preferences';
+import { useAccessStore } from '@ocean/stores';
+import { findRootMenuByPath } from '@ocean/utils';
 
 import { useNavigation } from './use-navigation';
 
@@ -24,9 +24,7 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
   const extraMenus = ref<MenuRecordRaw[]>([]);
   const sidebarExtraVisible = ref<boolean>(false);
   const extraActiveMenu = ref('');
-  const parentLevel = computed(() =>
-    preferences.app.layout === 'header-mixed-nav' ? 1 : 0,
-  );
+  const parentLevel = computed(() => (preferences.app.layout === 'header-mixed-nav' ? 1 : 0));
 
   /**
    * 选择混合菜单事件
@@ -45,11 +43,7 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
     if (!hasChildren) {
       await navigation(menu.path);
     } else if (preferences.sidebar.autoActivateChild) {
-      await navigation(
-        defaultSubMap.has(menu.path)
-          ? (defaultSubMap.get(menu.path) as string)
-          : menu.path,
-      );
+      await navigation(defaultSubMap.has(menu.path) ? (defaultSubMap.get(menu.path) as string) : menu.path);
     }
   };
 
@@ -58,10 +52,7 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
    * @param menu
    * @param rootMenu
    */
-  const handleDefaultSelect = async (
-    menu: MenuRecordRaw,
-    rootMenu?: MenuRecordRaw,
-  ) => {
+  const handleDefaultSelect = async (menu: MenuRecordRaw, rootMenu?: MenuRecordRaw) => {
     extraMenus.value = rootMenu?.children ?? extraRootMenus.value ?? [];
     extraActiveMenu.value = menu.parents?.[parentLevel.value] ?? menu.path;
 
@@ -78,10 +69,7 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
       return;
     }
 
-    const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(
-      menus.value,
-      route.path,
-    );
+    const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(menus.value, route.path);
     extraActiveMenu.value = rootMenuPath ?? findMenu?.path ?? '';
     extraMenus.value = rootMenu?.children ?? [];
   };
@@ -97,11 +85,7 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
 
   function calcExtraMenus(path: string) {
     const currentPath = route.meta?.activePath || path;
-    const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(
-      menus.value,
-      currentPath,
-      parentLevel.value,
-    );
+    const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(menus.value, currentPath, parentLevel.value);
     extraRootMenus.value = rootMenu?.children ?? [];
     if (rootMenuPath) defaultSubMap.set(rootMenuPath, currentPath);
     extraActiveMenu.value = rootMenuPath ?? findMenu?.path ?? '';

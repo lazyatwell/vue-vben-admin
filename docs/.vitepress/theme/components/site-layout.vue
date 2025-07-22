@@ -1,15 +1,8 @@
 <script lang="ts" setup>
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
-// import { useAntdDesignTokens } from '@vben/hooks';
-// import { initPreferences } from '@vben/preferences';
+// import { useAntdDesignTokens } from '@ocean/hooks';
+// import { initPreferences } from '@ocean/preferences';
 import { ConfigProvider, theme } from 'ant-design-vue';
 import mediumZoom from 'medium-zoom';
 import { useRoute } from 'vitepress';
@@ -71,9 +64,7 @@ function watchDarkModeChange(callback: (isDark: boolean) => void) {
 }
 
 const tokenTheme = computed(() => {
-  const algorithm = isDark.value
-    ? [theme.darkAlgorithm]
-    : [theme.defaultAlgorithm];
+  const algorithm = isDark.value ? [theme.darkAlgorithm] : [theme.defaultAlgorithm];
 
   return {
     algorithm,

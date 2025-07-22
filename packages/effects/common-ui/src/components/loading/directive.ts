@@ -2,8 +2,8 @@ import type { App, Directive, DirectiveBinding } from 'vue';
 
 import { h, render } from 'vue';
 
-import { VbenLoading, VbenSpinner } from '@vben-core/shadcn-ui';
-import { isString } from '@vben-core/shared/utils';
+import { OceanLoading, OceanSpinner } from '@ocean-core/shadcn-ui';
+import { isString } from '@ocean-core/shared/utils';
 
 const LOADING_INSTANCE_KEY = Symbol('loading');
 const SPINNER_INSTANCE_KEY = Symbol('spinner');
@@ -12,7 +12,7 @@ const CLASS_NAME_RELATIVE = 'spinner-parent--relative';
 
 const loadingDirective: Directive = {
   mounted(el, binding) {
-    const instance = h(VbenLoading, getOptions(binding));
+    const instance = h(OceanLoading, getOptions(binding));
     render(instance, el);
 
     el.classList.add(CLASS_NAME_RELATIVE);
@@ -37,10 +37,7 @@ const loadingDirective: Directive = {
         });
         instance.component.update();
       } catch (error) {
-        console.error(
-          'Failed to update loading component in directive:',
-          error,
-        );
+        console.error('Failed to update loading component in directive:', error);
       }
     }
   },
@@ -58,7 +55,7 @@ function getOptions(binding: DirectiveBinding) {
 
 const spinningDirective: Directive = {
   mounted(el, binding) {
-    const instance = h(VbenSpinner, getOptions(binding));
+    const instance = h(OceanSpinner, getOptions(binding));
     render(instance, el);
 
     el.classList.add(CLASS_NAME_RELATIVE);
@@ -83,10 +80,7 @@ const spinningDirective: Directive = {
         });
         instance.component.update();
       } catch (error) {
-        console.error(
-          'Failed to update spinner component in directive:',
-          error,
-        );
+        console.error('Failed to update spinner component in directive:', error);
       }
     }
   },
@@ -104,10 +98,7 @@ type loadingDirectiveParams = {
  * @param app
  * @param params
  */
-export function registerLoadingDirective(
-  app: App,
-  params?: loadingDirectiveParams,
-) {
+export function registerLoadingDirective(app: App, params?: loadingDirectiveParams) {
   // 注入一个样式供指令使用，确保容器是相对定位
   const style = document.createElement('style');
   style.id = CLASS_NAME_RELATIVE;
@@ -118,15 +109,9 @@ export function registerLoadingDirective(
   `;
   document.head.append(style);
   if (params?.loading !== false) {
-    app.directive(
-      isString(params?.loading) ? params.loading : 'loading',
-      loadingDirective,
-    );
+    app.directive(isString(params?.loading) ? params.loading : 'loading', loadingDirective);
   }
   if (params?.spinning !== false) {
-    app.directive(
-      isString(params?.spinning) ? params.spinning : 'spinning',
-      spinningDirective,
-    );
+    app.directive(isString(params?.spinning) ? params.spinning : 'spinning', spinningDirective);
   }
 }

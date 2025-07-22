@@ -3,7 +3,7 @@ import type { LabelProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Label } from 'radix-vue';
 
@@ -20,10 +20,7 @@ const delegatedProps = computed(() => {
   <Label
     v-bind="delegatedProps"
     :class="
-      cn(
-        'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-        props.class,
-      )
+      cn('text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70', props.class)
     "
   >
     <slot></slot>

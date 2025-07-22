@@ -3,7 +3,7 @@ import type { PopoverContentEmits, PopoverContentProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'radix-vue';
 
@@ -11,13 +11,10 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(
-  defineProps<PopoverContentProps & { class?: any }>(),
-  {
-    align: 'center',
-    sideOffset: 4,
-  },
-);
+const props = withDefaults(defineProps<PopoverContentProps & { class?: any }>(), {
+  align: 'center',
+  sideOffset: 4,
+});
 const emits = defineEmits<PopoverContentEmits>();
 
 const delegatedProps = computed(() => {

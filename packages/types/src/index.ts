@@ -1,1 +1,1 @@
-export type * from '@vben-core/typings';
+export type * from '@ocean-core/typings';

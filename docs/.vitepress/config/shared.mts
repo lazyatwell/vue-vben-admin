@@ -3,21 +3,12 @@ import type { HeadConfig } from 'vitepress';
 
 import { resolve } from 'node:path';
 
-import {
-  viteArchiverPlugin,
-  viteVxeTableImportsPlugin,
-} from '@vben/vite-config';
+import { viteArchiverPlugin, viteVxeTableImportsPlugin } from '@ocean/vite-config';
 
-import {
-  GitChangelog,
-  GitChangelogMarkdownSection,
-} from '@nolebase/vitepress-plugin-git-changelog/vite';
+import { GitChangelog, GitChangelogMarkdownSection } from '@nolebase/vitepress-plugin-git-changelog/vite';
 import tailwind from 'tailwindcss';
 import { defineConfig, postcssIsolateStyles } from 'vitepress';
-import {
-  groupIconMdPlugin,
-  groupIconVitePlugin,
-} from 'vitepress-plugin-group-icons';
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
 
 import { demoPreviewPlugin } from './plugins/demo-preview';
 import { search as zhSearch } from './zh.mts';
@@ -34,8 +25,8 @@ export const shared = defineConfig({
   pwa: pwa(),
   srcDir: 'src',
   themeConfig: {
-    i18nRouting: true,
-    logo: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp',
+    i18nRouting: false,
+    logo: '/imgs/logo.jpg',
     search: {
       options: {
         locales: {
@@ -44,12 +35,10 @@ export const shared = defineConfig({
       },
       provider: 'local',
     },
-    siteTitle: 'Vben Admin',
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/vbenjs/vue-vben-admin' },
-    ],
+    siteTitle: 'Ocean Admin',
+    socialLinks: [],
   },
-  title: 'Vben Admin',
+  title: 'Ocean Admin',
   vite: {
     build: {
       chunkSizeWarningLimit: Infinity,
@@ -57,10 +46,7 @@ export const shared = defineConfig({
     },
     css: {
       postcss: {
-        plugins: [
-          tailwind(),
-          postcssIsolateStyles({ includeFiles: [/vp-doc\.css/] }),
-        ],
+        plugins: [tailwind(), postcssIsolateStyles({ includeFiles: [/vp-doc\.css/] })],
       },
       preprocessorOptions: {
         scss: {
@@ -73,22 +59,7 @@ export const shared = defineConfig({
     },
     plugins: [
       GitChangelog({
-        mapAuthors: [
-          {
-            mapByNameAliases: ['Vben'],
-            name: 'vben',
-            username: 'anncwb',
-          },
-          {
-            name: 'vince',
-            username: 'vince292007',
-          },
-          {
-            name: 'Li Kui',
-            username: 'likui628',
-          },
-        ],
-        repoURL: () => 'https://github.com/vbenjs/vue-vben-admin',
+        repoURL: () => 'http://10.3.0.218:800/vue3/ocean-frontend.git',
       }),
       GitChangelogMarkdownSection(),
       viteArchiverPlugin({ outputDir: '.vitepress' }),
@@ -123,19 +94,12 @@ function head(): HeadConfig[] {
     [
       'meta',
       {
-        content:
-          'width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no',
+        content: 'width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no',
         name: 'viewport',
       },
     ],
     ['meta', { content: 'vben admin docs', name: 'keywords' }],
     ['link', { href: '/favicon.ico', rel: 'icon' }],
-    // [
-    //   'script',
-    //   {
-    //     src: 'https://cdn.tailwindcss.com',
-    //   },
-    // ],
   ];
 }
 
@@ -143,8 +107,7 @@ function pwa(): PwaOptions {
   return {
     includeManifestIcons: false,
     manifest: {
-      description:
-        'Vben Admin is a modern admin dashboard template based on Vue 3. ',
+      description: 'Vben Admin is a modern admin dashboard template based on Vue 3. ',
       icons: [
         {
           sizes: '192x192',

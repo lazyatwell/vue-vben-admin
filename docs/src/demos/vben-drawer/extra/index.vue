@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { useVbenDrawer, VbenButton } from '@vben/common-ui';
+import { OceanButton, useOceanDrawer } from '@ocean/common-ui';
 
 import ExtraDrawer from './drawer.vue';
 
-const [Drawer, drawerApi] = useVbenDrawer({
+const [Drawer, drawerApi] = useOceanDrawer({
   // 连接抽离的组件
   connectedComponent: ExtraDrawer,
 });
@@ -16,6 +16,6 @@ function open() {
 <template>
   <div>
     <Drawer />
-    <VbenButton @click="open">Open</VbenButton>
+    <OceanButton @click="open">Open</OceanButton>
   </div>
 </template>

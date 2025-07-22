@@ -1,27 +1,17 @@
-import type {
-  NormalizedOutputOptions,
-  OutputBundle,
-  OutputChunk,
-} from 'rollup';
+import type { NormalizedOutputOptions, OutputBundle, OutputChunk } from 'rollup';
 import type { PluginOption } from 'vite';
 
 import { EOL } from 'node:os';
 
-import { dateUtil, readPackageJSON } from '@vben/node-utils';
+import { dateUtil, readPackageJSON } from '@ocean/node-utils';
 
 /**
  * 用于注入版权信息
  * @returns
  */
 
-async function viteLicensePlugin(
-  root = process.cwd(),
-): Promise<PluginOption | undefined> {
-  const {
-    description = '',
-    homepage = '',
-    version = '',
-  } = await readPackageJSON(root);
+async function viteLicensePlugin(root = process.cwd()): Promise<PluginOption | undefined> {
+  const { description = '', homepage = '', version = '' } = await readPackageJSON(root);
 
   return {
     apply: 'build',
@@ -30,15 +20,15 @@ async function viteLicensePlugin(
       handler: (_options: NormalizedOutputOptions, bundle: OutputBundle) => {
         const date = dateUtil().format('YYYY-MM-DD ');
         const copyrightText = `/*!
-  * Vben Admin
+  * Ocean Admin
   * Version: ${version}
-  * Author: vben
-  * Copyright (C) 2024 Vben
+  * Author: ocean
+  * Copyright (C) 2024 Ocean
   * License: MIT License
   * Description: ${description}
   * Date Created: ${date}
   * Homepage: ${homepage}
-  * Contact: ann.vben@gmail.com
+  * Contact: ann.ocean@gmail.com
 */
               `.trim();
 

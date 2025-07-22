@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { Settings } from '@vben/icons';
+import { Settings } from '@ocean/icons';
 
-import { VbenIconButton } from '@vben-core/shadcn-ui';
+import { OceanIconButton } from '@ocean-core/shadcn-ui';
 
 import Preferences from './preferences.vue';
 
@@ -13,8 +13,8 @@ function clearPreferencesAndLogout() {
 </script>
 <template>
   <Preferences @clear-preferences-and-logout="clearPreferencesAndLogout">
-    <VbenIconButton>
+    <OceanIconButton>
       <Settings class="text-foreground size-4" />
-    </VbenIconButton>
+    </OceanIconButton>
   </Preferences>
 </template>

@@ -3,7 +3,7 @@ import type { NumberFieldIncrementProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Plus } from 'lucide-vue-next';
 import { NumberFieldIncrement, useForwardProps } from 'radix-vue';
@@ -24,10 +24,7 @@ const forwarded = useForwardProps(delegatedProps);
     data-slot="increment"
     v-bind="forwarded"
     :class="
-      cn(
-        'absolute right-0 top-1/2 -translate-y-1/2 p-3 disabled:cursor-not-allowed disabled:opacity-20',
-        props.class,
-      )
+      cn('absolute right-0 top-1/2 -translate-y-1/2 p-3 disabled:cursor-not-allowed disabled:opacity-20', props.class)
     "
   >
     <slot>

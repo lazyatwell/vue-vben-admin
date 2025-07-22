@@ -1,20 +1,14 @@
 <script lang="ts" setup>
-import type { HoverCardContentProps } from '@vben-core/shadcn-ui';
+import type { HoverCardContentProps } from '@ocean-core/shadcn-ui';
 
 import type { MenuItemRegistered, MenuProvider, SubMenuProps } from '../types';
 
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
-import { useNamespace } from '@vben-core/composables';
-import { VbenHoverCard } from '@vben-core/shadcn-ui';
+import { useNamespace } from '@ocean-core/composables';
+import { OceanHoverCard } from '@ocean-core/shadcn-ui';
 
-import {
-  createSubMenuContext,
-  useMenu,
-  useMenuContext,
-  useMenuStyle,
-  useSubMenuContext,
-} from '../hooks';
+import { createSubMenuContext, useMenu, useMenuContext, useMenuStyle, useSubMenuContext } from '../hooks';
 import CollapseTransition from './collapse-transition.vue';
 import SubMenuContent from './sub-menu-content.vue';
 
@@ -53,9 +47,7 @@ createSubMenuContext({
 const opened = computed(() => {
   return rootMenu?.openedMenus.includes(props.path);
 });
-const isTopLevelMenuSubmenu = computed(
-  () => parentMenu.value?.type.name === 'Menu',
-);
+const isTopLevelMenuSubmenu = computed(() => parentMenu.value?.type.name === 'Menu');
 const mode = computed(() => rootMenu?.props.mode ?? 'vertical');
 const rounded = computed(() => rootMenu?.props.rounded);
 const currentLevel = computed(() => subMenu?.level ?? 0);
@@ -125,10 +117,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
     return;
   }
 
-  if (
-    (!rootMenu?.props.collapse && rootMenu?.props.mode === 'vertical') ||
-    props.disabled
-  ) {
+  if ((!rootMenu?.props.collapse && rootMenu?.props.mode === 'vertical') || props.disabled) {
     if (subMenu) {
       subMenu.mouseInChild.value = true;
     }
@@ -146,11 +135,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
 }
 
 function handleMouseleave(deepDispatch = false) {
-  if (
-    !rootMenu?.props.collapse &&
-    rootMenu?.props.mode === 'vertical' &&
-    subMenu
-  ) {
+  if (!rootMenu?.props.collapse && rootMenu?.props.mode === 'vertical' && subMenu) {
     subMenu.mouseInChild.value = false;
     return;
   }
@@ -169,9 +154,7 @@ function handleMouseleave(deepDispatch = false) {
   }
 }
 
-const menuIcon = computed(() =>
-  active.value ? props.activeIcon || props.icon : props.icon,
-);
+const menuIcon = computed(() => (active.value ? props.activeIcon || props.icon : props.icon));
 
 const item = reactive({
   active,
@@ -191,18 +174,13 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <li
-    :class="[
-      b(),
-      is('opened', opened),
-      is('active', active),
-      is('disabled', disabled),
-    ]"
+    :class="[b(), is('opened', opened), is('active', active), is('disabled', disabled)]"
     @focus="handleMouseenter"
     @mouseenter="handleMouseenter"
     @mouseleave="() => handleMouseleave()"
   >
     <template v-if="rootMenu.isMenuPopup">
-      <VbenHoverCard
+      <OceanHoverCard
         :content-class="[
           rootMenu.theme,
           nsMenu.e('popup-container'),
@@ -236,14 +214,11 @@ onBeforeUnmount(() => {
           @mouseenter="(e) => handleMouseenter(e, 100)"
           @mouseleave="() => handleMouseleave(true)"
         >
-          <ul
-            :class="[nsMenu.b(), is('rounded', rounded)]"
-            :style="subMenuStyle"
-          >
+          <ul :class="[nsMenu.b(), is('rounded', rounded)]" :style="subMenuStyle">
             <slot></slot>
           </ul>
         </div>
-      </VbenHoverCard>
+      </OceanHoverCard>
     </template>
 
     <template v-else>
@@ -262,11 +237,7 @@ onBeforeUnmount(() => {
         </template>
       </SubMenuContent>
       <CollapseTransition>
-        <ul
-          v-show="opened"
-          :class="[nsMenu.b(), is('rounded', rounded)]"
-          :style="subMenuStyle"
-        >
+        <ul v-show="opened" :class="[nsMenu.b(), is('rounded', rounded)]" :style="subMenuStyle">
           <slot></slot>
         </ul>
       </CollapseTransition>

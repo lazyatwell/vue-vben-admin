@@ -2,24 +2,22 @@ import type { VxeGridSlots, VxeGridSlotTypes } from 'vxe-table';
 
 import type { SlotsType } from 'vue';
 
-import type { BaseFormComponentType } from '@vben-core/form-ui';
+import type { BaseFormComponentType } from '@ocean-core/form-ui';
 
 import type { ExtendedVxeGridApi, VxeGridProps } from './types';
 
 import { defineComponent, h, onBeforeUnmount } from 'vue';
 
-import { useStore } from '@vben-core/shared/store';
+import { useStore } from '@ocean-core/shared/store';
 
 import { VxeGridApi } from './api';
 import VxeGrid from './use-vxe-grid.vue';
 
 type FilteredSlots<T> = {
-  [K in keyof VxeGridSlots<T> as K extends 'form'
-    ? never
-    : K]: VxeGridSlots<T>[K];
+  [K in keyof VxeGridSlots<T> as K extends 'form' ? never : K]: VxeGridSlots<T>[K];
 };
 
-export function useVbenVxeGrid<
+export function useOceanVxeGrid<
   T extends Record<string, any> = any,
   D extends BaseFormComponentType = BaseFormComponentType,
 >(options: VxeGridProps<T, D>) {
@@ -39,7 +37,7 @@ export function useVbenVxeGrid<
       return () => h(VxeGrid, { ...props, ...attrs, api: extendedApi }, slots);
     },
     {
-      name: 'VbenVxeGrid',
+      name: 'OceanVxeGrid',
       inheritAttrs: false,
       slots: Object as SlotsType<
         {
@@ -67,4 +65,4 @@ export function useVbenVxeGrid<
   return [Grid, extendedApi] as const;
 }
 
-export type UseVbenVxeGrid = typeof useVbenVxeGrid;
+export type UseOceanVxeGrid = typeof useOceanVxeGrid;

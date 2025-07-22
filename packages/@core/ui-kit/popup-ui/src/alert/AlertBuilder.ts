@@ -1,14 +1,14 @@
 import type { Component, VNode } from 'vue';
 
-import type { Recordable } from '@vben-core/typings';
+import type { Recordable } from '@ocean-core/typings';
 
 import type { AlertProps, BeforeCloseScope, PromptProps } from './alert';
 
 import { h, nextTick, ref, render } from 'vue';
 
-import { useSimpleLocale } from '@vben-core/composables';
-import { Input, VbenRenderContent } from '@vben-core/shadcn-ui';
-import { isFunction, isString } from '@vben-core/shared/utils';
+import { useSimpleLocale } from '@ocean-core/composables';
+import { Input, OceanRenderContent } from '@ocean-core/shadcn-ui';
+import { isFunction, isString } from '@ocean-core/shared/utils';
 
 import Alert from './alert.vue';
 
@@ -16,18 +16,11 @@ const alerts = ref<Array<{ container: HTMLElement; instance: Component }>>([]);
 
 const { $t } = useSimpleLocale();
 
-export function vbenAlert(options: AlertProps): Promise<void>;
-export function vbenAlert(
-  message: string,
-  options?: Partial<AlertProps>,
-): Promise<void>;
-export function vbenAlert(
-  message: string,
-  title?: string,
-  options?: Partial<AlertProps>,
-): Promise<void>;
+export function oceanAlert(options: AlertProps): Promise<void>;
+export function oceanAlert(message: string, options?: Partial<AlertProps>): Promise<void>;
+export function oceanAlert(message: string, title?: string, options?: Partial<AlertProps>): Promise<void>;
 
-export function vbenAlert(
+export function oceanAlert(
   arg0: AlertProps | string,
   arg1?: Partial<AlertProps> | string,
   arg2?: Partial<AlertProps>,
@@ -95,18 +88,11 @@ export function vbenAlert(
   });
 }
 
-export function vbenConfirm(options: AlertProps): Promise<void>;
-export function vbenConfirm(
-  message: string,
-  options?: Partial<AlertProps>,
-): Promise<void>;
-export function vbenConfirm(
-  message: string,
-  title?: string,
-  options?: Partial<AlertProps>,
-): Promise<void>;
+export function oceanConfirm(options: AlertProps): Promise<void>;
+export function oceanConfirm(message: string, options?: Partial<AlertProps>): Promise<void>;
+export function oceanConfirm(message: string, title?: string, options?: Partial<AlertProps>): Promise<void>;
 
-export function vbenConfirm(
+export function oceanConfirm(
   arg0: AlertProps | string,
   arg1?: Partial<AlertProps> | string,
   arg2?: Partial<AlertProps>,
@@ -115,23 +101,19 @@ export function vbenConfirm(
     showCancel: true,
   };
   if (!arg1) {
-    return isString(arg0)
-      ? vbenAlert(arg0, defaultProps)
-      : vbenAlert({ ...defaultProps, ...arg0 });
+    return isString(arg0) ? oceanAlert(arg0, defaultProps) : oceanAlert({ ...defaultProps, ...arg0 });
   } else if (!arg2) {
     return isString(arg1)
-      ? vbenAlert(arg0 as string, arg1, defaultProps)
-      : vbenAlert(arg0 as string, { ...defaultProps, ...arg1 });
+      ? oceanAlert(arg0 as string, arg1, defaultProps)
+      : oceanAlert(arg0 as string, { ...defaultProps, ...arg1 });
   }
-  return vbenAlert(arg0 as string, arg1 as string, {
+  return oceanAlert(arg0 as string, arg1 as string, {
     ...defaultProps,
     ...arg2,
   });
 }
 
-export async function vbenPrompt<T = any>(
-  options: PromptProps<T>,
-): Promise<T | undefined> {
+export async function oceanPrompt<T = any>(options: PromptProps<T>): Promise<T | undefined> {
   const {
     component: _component,
     componentProps: _componentProps,
@@ -146,7 +128,7 @@ export async function vbenPrompt<T = any>(
   const inputComponentRef = ref<null | VNode>(null);
   const staticContents: Component[] = [];
 
-  staticContents.push(h(VbenRenderContent, { content, renderBr: true }));
+  staticContents.push(h(OceanRenderContent, { content, renderBr: true }));
 
   const modelPropName = _modelPropName || 'modelValue';
   const componentProps = { ..._componentProps };
@@ -164,18 +146,10 @@ export async function vbenPrompt<T = any>(
     };
 
     // 创建输入组件
-    inputComponentRef.value = h(
-      _component || Input,
-      currentProps,
-      componentSlots,
-    );
+    inputComponentRef.value = h(_component || Input, currentProps, componentSlots);
 
     // 返回包含静态内容和输入组件的数组
-    return h(
-      'div',
-      { class: 'flex flex-col gap-2' },
-      { default: () => [...staticContents, inputComponentRef.value] },
-    );
+    return h('div', { class: 'flex flex-col gap-2' }, { default: () => [...staticContents, inputComponentRef.value] });
   };
 
   const props: AlertProps & Recordable<any> = {
@@ -195,31 +169,21 @@ export async function vbenPrompt<T = any>(
       await nextTick();
       const componentRef: null | VNode = inputComponentRef.value;
       if (componentRef) {
-        if (
-          componentRef.component?.exposed &&
-          isFunction(componentRef.component.exposed.focus)
-        ) {
+        if (componentRef.component?.exposed && isFunction(componentRef.component.exposed.focus)) {
           componentRef.component.exposed.focus();
         } else {
           if (componentRef.el) {
             if (
               isFunction(componentRef.el.focus) &&
-              ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'].includes(
-                componentRef.el.tagName,
-              )
+              ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'].includes(componentRef.el.tagName)
             ) {
               componentRef.el.focus();
             } else if (isFunction(componentRef.el.querySelector)) {
-              const focusableElement = componentRef.el.querySelector(
-                'input, select, textarea, button',
-              );
+              const focusableElement = componentRef.el.querySelector('input, select, textarea, button');
               if (focusableElement && isFunction(focusableElement.focus)) {
                 focusableElement.focus();
               }
-            } else if (
-              componentRef.el.nextElementSibling &&
-              isFunction(componentRef.el.nextElementSibling.focus)
-            ) {
+            } else if (componentRef.el.nextElementSibling && isFunction(componentRef.el.nextElementSibling.focus)) {
               componentRef.el.nextElementSibling.focus();
             }
           }
@@ -228,7 +192,7 @@ export async function vbenPrompt<T = any>(
     },
   };
 
-  await vbenConfirm(props);
+  await oceanConfirm(props);
   return modelValue.value;
 }
 

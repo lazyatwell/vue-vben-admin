@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { VbenButtonProps } from './button';
+import type { OceanButtonProps } from './button';
 
 import { computed } from 'vue';
 
-import { LoaderCircle } from '@vben-core/icons';
-import { cn } from '@vben-core/shared/utils';
+import { LoaderCircle } from '@ocean-core/icons';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Primitive } from 'radix-vue';
 
 import { buttonVariants } from '../../ui';
 
-interface Props extends VbenButtonProps {}
+interface Props extends OceanButtonProps {}
 
 const props = withDefaults(defineProps<Props>(), {
   as: 'button',
@@ -33,10 +33,7 @@ const isDisabled = computed(() => {
     :class="cn(buttonVariants({ variant, size }), props.class)"
     :disabled="isDisabled"
   >
-    <LoaderCircle
-      v-if="loading"
-      class="text-md mr-2 size-4 flex-shrink-0 animate-spin"
-    />
+    <LoaderCircle v-if="loading" class="text-md mr-2 size-4 flex-shrink-0 animate-spin" />
     <slot></slot>
   </Primitive>
 </template>

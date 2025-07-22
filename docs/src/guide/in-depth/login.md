@@ -32,10 +32,7 @@ outline: deep
 如果你想调整登录表单的相关内容，你可以在应用下的 `src/views/_core/authentication/login.vue` 内，配置`AuthenticationLogin` 组件参数即可：
 
 ```vue
-<AuthenticationLogin
-  :loading="authStore.loginLoading"
-  @submit="authStore.authLogin"
-/>
+<AuthenticationLogin :loading="authStore.loginLoading" @submit="authStore.authLogin" />
 ```
 
 ::: details AuthenticationLogin 组件参数
@@ -141,7 +138,7 @@ interface HttpResponse<T = any> {
 - 其次你需要在先将本地代理地址改为你的真实后端地址，你可以在应用下的 `vite.config.mts` 内配置：
 
 ```ts
-import { defineConfig } from '@vben/vite-config';
+import { defineConfig } from '@ocean/vite-config';
 
 export default defineConfig(async () => {
   return {

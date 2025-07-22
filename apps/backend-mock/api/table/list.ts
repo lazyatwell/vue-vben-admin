@@ -49,19 +49,13 @@ export default eventHandler(async (event) => {
     listData.sort((a, b) => {
       if (sortOrder === 'asc') {
         if (sortBy === 'price') {
-          return (
-            Number.parseFloat(a[sortBy as string]) -
-            Number.parseFloat(b[sortBy as string])
-          );
+          return Number.parseFloat(a[sortBy as string]) - Number.parseFloat(b[sortBy as string]);
         } else {
           return a[sortBy as string] > b[sortBy as string] ? 1 : -1;
         }
       } else {
         if (sortBy === 'price') {
-          return (
-            Number.parseFloat(b[sortBy as string]) -
-            Number.parseFloat(a[sortBy as string])
-          );
+          return Number.parseFloat(b[sortBy as string]) - Number.parseFloat(a[sortBy as string]);
         } else {
           return a[sortBy as string] < b[sortBy as string] ? 1 : -1;
         }

@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import type {
-  ContextMenuRadioItemEmits,
-  ContextMenuRadioItemProps,
-} from 'radix-vue';
+import type { ContextMenuRadioItemEmits, ContextMenuRadioItemProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Circle } from 'lucide-vue-next';
-import {
-  ContextMenuItemIndicator,
-  ContextMenuRadioItem,
-  useForwardPropsEmits,
-} from 'radix-vue';
+import { ContextMenuItemIndicator, ContextMenuRadioItem, useForwardPropsEmits } from 'radix-vue';
 
 const props = defineProps<ContextMenuRadioItemProps & { class?: any }>();
 const emits = defineEmits<ContextMenuRadioItemEmits>();

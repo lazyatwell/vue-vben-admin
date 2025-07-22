@@ -3,16 +3,13 @@ import type { HoverCardContentProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { HoverCardContent, HoverCardPortal, useForwardProps } from 'radix-vue';
 
-const props = withDefaults(
-  defineProps<HoverCardContentProps & { class?: any }>(),
-  {
-    sideOffset: 4,
-  },
-);
+const props = withDefaults(defineProps<HoverCardContentProps & { class?: any }>(), {
+  sideOffset: 4,
+});
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props;

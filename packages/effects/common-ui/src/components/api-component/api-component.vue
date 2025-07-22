@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
 
-import type { AnyPromiseFunction } from '@vben/types';
+import type { AnyPromiseFunction } from '@ocean/types';
 
 import { computed, nextTick, ref, unref, useAttrs, watch } from 'vue';
 
-import { LoaderCircle } from '@vben/icons';
+import { LoaderCircle } from '@ocean/icons';
 
-import { cloneDeep, get, isEqual, isFunction } from '@vben-core/shared/utils';
+import { cloneDeep, get, isEqual, isFunction } from '@ocean-core/shared/utils';
 
 import { objectOmit } from '@vueuse/core';
 
@@ -62,12 +62,7 @@ interface Props {
    * - 函数：自定义选择逻辑，函数的参数为请求的结果数组，返回值为选择的选项
    * - false：不自动选择(默认)
    */
-  autoSelect?:
-    | 'first'
-    | 'last'
-    | 'one'
-    | ((item: OptionsItem[]) => OptionsItem)
-    | false;
+  autoSelect?: 'first' | 'last' | 'one' | ((item: OptionsItem[]) => OptionsItem) | false;
 }
 
 defineOptions({ name: 'ApiComponent', inheritAttrs: false });
@@ -119,9 +114,7 @@ const getOptions = computed(() => {
         ...objectOmit(item, [labelField, valueField, childrenField]),
         label: get(item, labelField),
         value: numberToString ? `${value}` : value,
-        ...(childrenField && item[childrenField]
-          ? { children: transformData(item[childrenField]) }
-          : {}),
+        ...(childrenField && item[childrenField] ? { children: transformData(item[childrenField]) } : {}),
       };
     });
   }
@@ -226,11 +219,7 @@ watch(
 );
 
 function emitChange() {
-  if (
-    modelValue.value === undefined &&
-    props.autoSelect &&
-    unref(getOptions).length > 0
-  ) {
+  if (modelValue.value === undefined && props.autoSelect && unref(getOptions).length > 0) {
     let firstOption;
     if (isFunction(props.autoSelect)) {
       firstOption = props.autoSelect(unref(getOptions));
@@ -272,12 +261,7 @@ defineExpose({
 });
 </script>
 <template>
-  <component
-    :is="component"
-    v-bind="bindProps"
-    :placeholder="$attrs.placeholder"
-    ref="componentRef"
-  >
+  <component :is="component" v-bind="bindProps" :placeholder="$attrs.placeholder" ref="componentRef">
     <template v-for="item in Object.keys($slots)" #[item]="data">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>

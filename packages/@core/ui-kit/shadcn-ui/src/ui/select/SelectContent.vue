@@ -3,14 +3,9 @@ import type { SelectContentEmits, SelectContentProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
-import {
-  SelectContent,
-  SelectPortal,
-  SelectViewport,
-  useForwardPropsEmits,
-} from 'radix-vue';
+import { SelectContent, SelectPortal, SelectViewport, useForwardPropsEmits } from 'radix-vue';
 
 import SelectScrollDownButton from './SelectScrollDownButton.vue';
 import SelectScrollUpButton from './SelectScrollUpButton.vue';
@@ -19,12 +14,9 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(
-  defineProps<SelectContentProps & { class?: any }>(),
-  {
-    position: 'popper',
-  },
-);
+const props = withDefaults(defineProps<SelectContentProps & { class?: any }>(), {
+  position: 'popper',
+});
 const emits = defineEmits<SelectContentEmits>();
 
 const delegatedProps = computed(() => {
@@ -54,8 +46,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         :class="
           cn(
             'p-1',
-            position === 'popper' &&
-              'h-[--radix-select-trigger-height] w-full min-w-[--radix-select-trigger-width]',
+            position === 'popper' && 'h-[--radix-select-trigger-height] w-full min-w-[--radix-select-trigger-width]',
           )
         "
       >

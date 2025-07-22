@@ -12,7 +12,7 @@ defineOptions({
 });
 
 withDefaults(defineProps<Props>(), {
-  companyName: 'Vben Admin',
+  companyName: 'Ocean Admin',
   companySiteLink: '',
   date: '2024',
   icp: '',
@@ -23,12 +23,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <div class="text-md flex-center">
     <!-- ICP Link -->
-    <a
-      v-if="icp"
-      :href="icpLink || 'javascript:void(0)'"
-      class="hover:text-primary-hover mx-1"
-      target="_blank"
-    >
+    <a v-if="icp" :href="icpLink || 'javascript:void(0)'" class="hover:text-primary-hover mx-1" target="_blank">
       {{ icp }}
     </a>
 

@@ -183,9 +183,7 @@
     "json5"
   ],
 
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ],
+  "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
 
   "github.copilot.enable": {
     "*": true,
@@ -196,11 +194,7 @@
 
   "cssVariables.lookupFiles": ["packages/core/base/design/src/**/*.css"],
 
-  "i18n-ally.localesPaths": [
-    "packages/locales/src/langs",
-    "playground/src/locales/langs",
-    "apps/*/src/locales/langs"
-  ],
+  "i18n-ally.localesPaths": ["packages/locales/src/langs", "playground/src/locales/langs", "apps/*/src/locales/langs"],
   "i18n-ally.pathMatcher": "{locale}/{namespace}.{ext}",
   "i18n-ally.enabledParsers": ["json"],
   "i18n-ally.sourceLanguage": "en",
@@ -227,17 +221,7 @@
   "vue.server.hybridMode": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "oxc.enable": false,
-  "cSpell.words": [
-    "archiver",
-    "axios",
-    "dotenv",
-    "isequal",
-    "jspm",
-    "napi",
-    "nolebase",
-    "rollup",
-    "vitest"
-  ],
+  "cSpell.words": ["archiver", "axios", "dotenv", "isequal", "jspm", "napi", "nolebase", "rollup", "vitest"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#3399ff",
     "activityBar.background": "#3399ff",

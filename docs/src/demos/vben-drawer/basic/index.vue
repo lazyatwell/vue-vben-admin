@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { useVbenDrawer, VbenButton } from '@vben/common-ui';
+import { OceanButton, useOceanDrawer } from '@ocean/common-ui';
 
-const [Drawer, drawerApi] = useVbenDrawer();
+const [Drawer, drawerApi] = useOceanDrawer();
 </script>
 <template>
   <div>
-    <VbenButton @click="() => drawerApi.open()">Open</VbenButton>
+    <OceanButton @click="() => drawerApi.open()">Open</OceanButton>
     <Drawer class="w-[600px]" title="基础示例"> drawer content </Drawer>
   </div>
 </template>

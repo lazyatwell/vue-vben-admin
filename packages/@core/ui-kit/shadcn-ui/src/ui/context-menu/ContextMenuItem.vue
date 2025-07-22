@@ -3,13 +3,11 @@ import type { ContextMenuItemEmits, ContextMenuItemProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { ContextMenuItem, useForwardPropsEmits } from 'radix-vue';
 
-const props = defineProps<
-  ContextMenuItemProps & { class?: any; inset?: boolean }
->();
+const props = defineProps<ContextMenuItemProps & { class?: any; inset?: boolean }>();
 const emits = defineEmits<ContextMenuItemEmits>();
 
 const delegatedProps = computed(() => {

@@ -1,0 +1,40 @@
+{
+  "name": "@ocean/web",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "dependencies": {
+    "@ocean/access": "workspace:*",
+    "@ocean/common-ui": "workspace:*",
+    "@ocean/constants": "workspace:*",
+    "@ocean/hooks": "workspace:*",
+    "@ocean/icons": "workspace:*",
+    "@ocean/layouts": "workspace:*",
+    "@ocean/locales": "workspace:*",
+    "@ocean/plugins": "workspace:*",
+    "@ocean/preferences": "workspace:*",
+    "@ocean/request": "workspace:*",
+    "@ocean/stores": "workspace:*",
+    "@ocean/styles": "workspace:*",
+    "@ocean/types": "workspace:*",
+    "@ocean/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "dayjs": "catalog:",
+    "element-plus": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "unplugin-element-plus": "catalog:"
+  }
+}

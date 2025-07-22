@@ -1,15 +1,10 @@
 <script lang="ts" setup>
 import type { NotificationItem } from './types';
 
-import { Bell, MailCheck } from '@vben/icons';
-import { $t } from '@vben/locales';
+import { Bell, MailCheck } from '@ocean/icons';
+import { $t } from '@ocean/locales';
 
-import {
-  VbenButton,
-  VbenIconButton,
-  VbenPopover,
-  VbenScrollbar,
-} from '@vben-core/shadcn-ui';
+import { OceanButton, OceanIconButton, OceanPopover, OceanScrollbar } from '@ocean-core/shadcn-ui';
 
 import { useToggle } from '@vueuse/core';
 
@@ -62,53 +57,38 @@ function handleClick(item: NotificationItem) {
 }
 </script>
 <template>
-  <VbenPopover
-    v-model:open="open"
-    content-class="relative right-2 w-[360px] p-0"
-  >
+  <OceanPopover v-model:open="open" content-class="relative right-2 w-[360px] p-0">
     <template #trigger>
       <div class="flex-center mr-2 h-full" @click.stop="toggle()">
-        <VbenIconButton class="bell-button text-foreground relative">
-          <span
-            v-if="dot"
-            class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"
-          ></span>
+        <OceanIconButton class="bell-button text-foreground relative">
+          <span v-if="dot" class="bg-primary absolute right-0.5 top-0.5 h-2 w-2 rounded"></span>
           <Bell class="size-4" />
-        </VbenIconButton>
+        </OceanIconButton>
       </div>
     </template>
 
     <div class="relative">
       <div class="flex items-center justify-between p-4 py-3">
         <div class="text-foreground">{{ $t('ui.widgets.notifications') }}</div>
-        <VbenIconButton
+        <OceanIconButton
           :disabled="notifications.length <= 0"
           :tooltip="$t('ui.widgets.markAllAsRead')"
           @click="handleMakeAll"
         >
           <MailCheck class="size-4" />
-        </VbenIconButton>
+        </OceanIconButton>
       </div>
-      <VbenScrollbar v-if="notifications.length > 0">
+      <OceanScrollbar v-if="notifications.length > 0">
         <ul class="!flex max-h-[360px] w-full flex-col">
           <template v-for="item in notifications" :key="item.title">
             <li
               class="hover:bg-accent border-border relative flex w-full cursor-pointer items-start gap-5 border-t px-3 py-3"
               @click="handleClick(item)"
             >
-              <span
-                v-if="!item.isRead"
-                class="bg-primary absolute right-2 top-2 h-2 w-2 rounded"
-              ></span>
+              <span v-if="!item.isRead" class="bg-primary absolute right-2 top-2 h-2 w-2 rounded"></span>
 
-              <span
-                class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"
-              >
-                <img
-                  :src="item.avatar"
-                  class="aspect-square h-full w-full object-cover"
-                  role="img"
-                />
+              <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                <img :src="item.avatar" class="aspect-square h-full w-full object-cover" role="img" />
               </span>
               <div class="flex flex-col gap-1 leading-none">
                 <p class="font-semibold">{{ item.title }}</p>
@@ -122,7 +102,7 @@ function handleClick(item: NotificationItem) {
             </li>
           </template>
         </ul>
-      </VbenScrollbar>
+      </OceanScrollbar>
 
       <template v-else>
         <div class="flex-center text-muted-foreground min-h-[150px] w-full">
@@ -130,23 +110,16 @@ function handleClick(item: NotificationItem) {
         </div>
       </template>
 
-      <div
-        class="border-border flex items-center justify-between border-t px-4 py-3"
-      >
-        <VbenButton
-          :disabled="notifications.length <= 0"
-          size="sm"
-          variant="ghost"
-          @click="handleClear"
-        >
+      <div class="border-border flex items-center justify-between border-t px-4 py-3">
+        <OceanButton :disabled="notifications.length <= 0" size="sm" variant="ghost" @click="handleClear">
           {{ $t('ui.widgets.clearNotifications') }}
-        </VbenButton>
-        <VbenButton size="sm" @click="handleViewAll">
+        </OceanButton>
+        <OceanButton size="sm" @click="handleViewAll">
           {{ $t('ui.widgets.viewAll') }}
-        </VbenButton>
+        </OceanButton>
       </div>
     </div>
-  </VbenPopover>
+  </OceanPopover>
 </template>
 
 <style scoped>

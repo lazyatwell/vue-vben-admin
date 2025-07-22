@@ -2,30 +2,25 @@ import type { ZodRawShape } from 'zod';
 
 import type { ComputedRef } from 'vue';
 
-import type { ExtendedFormApi, FormActions, VbenFormProps } from './types';
+import type { ExtendedFormApi, FormActions, OceanFormProps } from './types';
 
 import { computed, unref, useSlots } from 'vue';
 
-import { createContext } from '@vben-core/shadcn-ui';
-import { isString, mergeWithArrayOverride, set } from '@vben-core/shared/utils';
+import { createContext } from '@ocean-core/shadcn-ui';
+import { isString, mergeWithArrayOverride, set } from '@ocean-core/shared/utils';
 
 import { useForm } from 'vee-validate';
 import { object, ZodIntersection, ZodNumber, ZodObject, ZodString } from 'zod';
 import { getDefaultsForSchema } from 'zod-defaults';
 
-type ExtendFormProps = VbenFormProps & { formApi: ExtendedFormApi };
+type ExtendFormProps = OceanFormProps & { formApi: ExtendedFormApi };
 
 export const [injectFormProps, provideFormProps] =
-  createContext<[ComputedRef<ExtendFormProps> | ExtendFormProps, FormActions]>(
-    'VbenFormProps',
-  );
+  createContext<[ComputedRef<ExtendFormProps> | ExtendFormProps, FormActions]>('OceanFormProps');
 
-export const [injectComponentRefMap, provideComponentRefMap] =
-  createContext<Map<string, unknown>>('ComponentRefMap');
+export const [injectComponentRefMap, provideComponentRefMap] = createContext<Map<string, unknown>>('ComponentRefMap');
 
-export function useFormInitial(
-  props: ComputedRef<VbenFormProps> | VbenFormProps,
-) {
+export function useFormInitial(props: ComputedRef<OceanFormProps> | OceanFormProps) {
   const slots = useSlots();
   const initialValues = generateInitialValues();
 
@@ -88,10 +83,7 @@ export function useFormInitial(
       const rightDefaultValue = getCustomDefaultValue(rule._def.right);
 
       // 如果左右两边都能提取默认值，合并它们
-      if (
-        typeof leftDefaultValue === 'object' &&
-        typeof rightDefaultValue === 'object'
-      ) {
+      if (typeof leftDefaultValue === 'object' && typeof rightDefaultValue === 'object') {
         return { ...leftDefaultValue, ...rightDefaultValue };
       }
 

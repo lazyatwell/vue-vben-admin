@@ -1,23 +1,10 @@
 <script lang="ts" setup>
 import type { ExtendedModalApi, ModalProps } from './modal';
 
-import {
-  computed,
-  nextTick,
-  onDeactivated,
-  provide,
-  ref,
-  unref,
-  useId,
-  watch,
-} from 'vue';
+import { computed, nextTick, onDeactivated, provide, ref, unref, useId, watch } from 'vue';
 
-import {
-  useIsMobile,
-  usePriorityValues,
-  useSimpleLocale,
-} from '@vben-core/composables';
-import { Expand, Shrink } from '@vben-core/icons';
+import { useIsMobile, usePriorityValues, useSimpleLocale } from '@ocean-core/composables';
+import { Expand, Shrink } from '@ocean-core/icons';
 import {
   Dialog,
   DialogContent,
@@ -25,15 +12,15 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  VbenButton,
-  VbenHelpTooltip,
-  VbenIconButton,
-  VbenLoading,
+  OceanButton,
+  OceanHelpTooltip,
+  OceanIconButton,
+  OceanLoading,
   VisuallyHidden,
-} from '@vben-core/shadcn-ui';
-import { ELEMENT_ID_MAIN_CONTENT } from '@vben-core/shared/constants';
-import { globalShareState } from '@vben-core/shared/global-state';
-import { cn } from '@vben-core/shared/utils';
+} from '@ocean-core/shadcn-ui';
+import { ELEMENT_ID_MAIN_CONTENT } from '@ocean-core/shared/constants';
+import { globalShareState } from '@ocean-core/shared/global-state';
+import { cn } from '@ocean-core/shared/utils';
 
 import { useModalDraggable } from './use-modal-draggable';
 
@@ -97,26 +84,15 @@ const {
   zIndex,
 } = usePriorityValues(props, state);
 
-const shouldFullscreen = computed(
-  () => (fullscreen.value && header.value) || isMobile.value,
-);
+const shouldFullscreen = computed(() => (fullscreen.value && header.value) || isMobile.value);
 
-const shouldDraggable = computed(
-  () => draggable.value && !shouldFullscreen.value && header.value,
-);
+const shouldDraggable = computed(() => draggable.value && !shouldFullscreen.value && header.value);
 
 const getAppendTo = computed(() => {
-  return appendToMain.value
-    ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div`
-    : undefined;
+  return appendToMain.value ? `#${ELEMENT_ID_MAIN_CONTENT}>div:not(.absolute)>div` : undefined;
 });
 
-const { dragging, transform } = useModalDraggable(
-  dialogRef,
-  headerRef,
-  shouldDraggable,
-  getAppendTo,
-);
+const { dragging, transform } = useModalDraggable(dialogRef, headerRef, shouldDraggable, getAppendTo);
 
 const firstOpened = ref(false);
 const isClosed = ref(true);
@@ -191,11 +167,7 @@ function handerOpenAutoFocus(e: Event) {
 function pointerDownOutside(e: Event) {
   const target = e.target as HTMLElement;
   const isDismissableModal = target?.dataset.dismissableModal;
-  if (
-    !closeOnClickModal.value ||
-    isDismissableModal !== id ||
-    submitting.value
-  ) {
+  if (!closeOnClickModal.value || isDismissableModal !== id || submitting.value) {
     e.preventDefault();
     e.stopPropagation();
   }
@@ -216,11 +188,7 @@ function handleClosed() {
 }
 </script>
 <template>
-  <Dialog
-    :modal="false"
-    :open="state?.isOpen"
-    @update:open="() => (!submitting ? modalApi?.close() : undefined)"
-  >
+  <Dialog :modal="false" :open="state?.isOpen" @update:open="() => (!submitting ? modalApi?.close() : undefined)">
     <DialogContent
       ref="contentRef"
       :append-to="getAppendTo"
@@ -232,8 +200,7 @@ function handleClosed() {
           {
             'border-border border': bordered,
             'shadow-3xl': !bordered,
-            'left-0 top-0 size-full max-h-full !translate-x-0 !translate-y-0':
-              shouldFullscreen,
+            'left-0 top-0 size-full max-h-full !translate-x-0 !translate-y-0': shouldFullscreen,
             'top-1/2 !-translate-y-1/2': centered && !shouldFullscreen,
             'duration-300': !dragging,
             hidden: isClosed,
@@ -276,9 +243,9 @@ function handleClosed() {
             {{ title }}
 
             <slot v-if="titleTooltip" name="titleTooltip">
-              <VbenHelpTooltip trigger-class="pb-1">
+              <OceanHelpTooltip trigger-class="pb-1">
                 {{ titleTooltip }}
-              </VbenHelpTooltip>
+              </OceanHelpTooltip>
             </slot>
           </slot>
         </DialogTitle>
@@ -302,15 +269,15 @@ function handleClosed() {
       >
         <slot></slot>
       </div>
-      <VbenLoading v-if="showLoading || submitting" spinning />
-      <VbenIconButton
+      <OceanLoading v-if="showLoading || submitting" spinning />
+      <OceanIconButton
         v-if="fullscreenButton"
         class="hover:bg-accent hover:text-accent-foreground text-foreground/80 flex-center absolute right-10 top-3 hidden size-6 rounded-full px-1 text-lg opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none sm:block"
         @click="handleFullscreen"
       >
         <Shrink v-if="fullscreen" class="size-3.5" />
         <Expand v-else class="size-3.5" />
-      </VbenIconButton>
+      </OceanIconButton>
 
       <DialogFooter
         v-if="showFooter"
@@ -328,7 +295,7 @@ function handleClosed() {
         <slot name="prepend-footer"></slot>
         <slot name="footer">
           <component
-            :is="components.DefaultButton || VbenButton"
+            :is="components.DefaultButton || OceanButton"
             v-if="showCancelButton"
             variant="ghost"
             :disabled="submitting"
@@ -340,7 +307,7 @@ function handleClosed() {
           </component>
           <slot name="center-footer"></slot>
           <component
-            :is="components.PrimaryButton || VbenButton"
+            :is="components.PrimaryButton || OceanButton"
             v-if="showConfirmButton"
             :disabled="confirmDisabled"
             :loading="confirmLoading || submitting"

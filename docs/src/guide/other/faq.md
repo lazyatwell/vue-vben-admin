@@ -1,24 +1,9 @@
 # 常见问题 #{faq}
 
-::: tip 列举了一些常见的问题
-
-有问题可以先来这里寻找，如果没有可以在 [GitHub Issue](https://github.com/vbenjs/vue-vben-admin/issues) 搜索或者提交你的问题, 如果是讨论性的问题可以在 [GitHub Discussions](https://github.com/vbenjs/vue-vben-admin/discussions)
-
-:::
-
-## 说明
-
-遇到问题,可以先从以下几个方面查找
-
-1. 对应模块的 GitHub 仓库 [issue](https://github.com/vbenjs/vue-vben-admin/issues) 搜索
-2. 从[google](https://www.google.com)搜索问题
-3. 从[百度](https://www.baidu.com)搜索问题
-4. 在下面列表找不到问题可以到 issue 提问 [issues](https://github.com/vbenjs/vue-vben-admin/issues)
-5. 如果不是问题类型的，需要讨论的，请到 [discussions](https://github.com/vbenjs/vue-vben-admin/discussions) 讨论
-
 ## 依赖问题
 
-在 `Monorepo` 项目下，需要养成每次 `git pull`代码都要执行`pnpm install`的习惯，因为经常会有新的依赖包加入，项目在`lefthook.yml`已经配置了自动执行`pnpm install`，但是有时候会出现问题，如果没有自动执行，建议手动执行一次。
+- 执行`pnpm install`解决，因为可能会有新的依赖包加入，
+- 项目在`lefthook.yml`已经配置了每次 `git pull`代码自动执行`pnpm install`，但是有时候会出现问题，如果没有自动执行，建议手动执行一次。
 
 ## 关于缓存更新问题
 
@@ -107,10 +92,10 @@ registry = https://registry.npmmirror.com/
 
 ## 运行错误
 
-如果出现类似以下错误，请检查项目全路径（包含所有父级路径）不能出现中文、日文、韩文。否则将会出现路径访问 404 导致以下问题
+如果出现类似以下错误，请检查项目全路径（包含所有父级路径）**不能出现中文**。否则将会出现路径访问 404 导致以下问题
 
 ```ts
-[vite] Failed to resolve module import "ant-design-vue/dist/antd.css-vben-adminode_modulesant-design-vuedistantd.css". (imported by /@/setup/ant-design-vue/index.ts)
+[vite] Failed to resolve module import "ant-design-vue/dist/antd.css-ocean-adminode_modulesant-design-vuedistantd.css". (imported by /@/setup/ant-design-vue/index.ts)
 ```
 
 ## 控制台路由警告问题
@@ -129,8 +114,8 @@ registry = https://registry.npmmirror.com/
 
 ```bash
 TypeError: str.matchAll is not a function
-at Object.extractor (vue-vben-admin-main\node_modules@purge-icons\core\dist\index.js:146:27)
-at Extract (vue-vben-admin-main\node_modules@purge-icons\core\dist\index.js:173:54)
+at Object.extractor (vue-ocean-admin-main\node_modules@purge-icons\core\dist\index.js:146:27)
+at Extract (vue-ocean-admin-main\node_modules@purge-icons\core\dist\index.js:173:54)
 ```
 
 ## nginx 部署

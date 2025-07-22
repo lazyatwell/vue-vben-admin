@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import { useVbenModal, VbenButton } from '@vben/common-ui';
+import { OceanButton, useOceanModal } from '@ocean/common-ui';
 
 const list = ref<number[]>([]);
 
-const [Modal, modalApi] = useVbenModal({
+const [Modal, modalApi] = useOceanModal({
   onCancel() {
     modalApi.close();
   },
@@ -29,17 +29,11 @@ function handleUpdate(len: number) {
 </script>
 <template>
   <Modal title="自动计算高度">
-    <div
-      v-for="item in list"
-      :key="item"
-      class="even:bg-heavy bg-muted flex-center h-[220px] w-full"
-    >
+    <div v-for="item in list" :key="item" class="even:bg-heavy bg-muted flex-center h-[220px] w-full">
       {{ item }}
     </div>
     <template #prepend-footer>
-      <VbenButton type="link" @click="handleUpdate(6)">
-        点击更新数据
-      </VbenButton>
+      <OceanButton type="link" @click="handleUpdate(6)"> 点击更新数据 </OceanButton>
     </template>
   </Modal>
 </template>

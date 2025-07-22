@@ -1,4 +1,4 @@
-import { DEFAULT_NAMESPACE } from '@vben-core/shared/constants';
+import { DEFAULT_NAMESPACE } from '@ocean-core/shared/constants';
 
 /**
  * @see copy https://github.com/element-plus/element-plus/blob/dev/packages/hooks/use-namespace/index.ts
@@ -6,13 +6,7 @@ import { DEFAULT_NAMESPACE } from '@vben-core/shared/constants';
 
 const statePrefix = 'is-';
 
-const _bem = (
-  namespace: string,
-  block: string,
-  blockSuffix: string,
-  element: string,
-  modifier: string,
-) => {
+const _bem = (namespace: string, block: string, blockSuffix: string, element: string, modifier: string) => {
   let cls = `${namespace}-${block}`;
   if (blockSuffix) {
     cls += `-${blockSuffix}`;
@@ -38,24 +32,16 @@ const is: {
 const useNamespace = (block: string) => {
   const namespace = DEFAULT_NAMESPACE;
   const b = (blockSuffix = '') => _bem(namespace, block, blockSuffix, '', '');
-  const e = (element?: string) =>
-    element ? _bem(namespace, block, '', element, '') : '';
-  const m = (modifier?: string) =>
-    modifier ? _bem(namespace, block, '', '', modifier) : '';
+  const e = (element?: string) => (element ? _bem(namespace, block, '', element, '') : '');
+  const m = (modifier?: string) => (modifier ? _bem(namespace, block, '', '', modifier) : '');
   const be = (blockSuffix?: string, element?: string) =>
-    blockSuffix && element
-      ? _bem(namespace, block, blockSuffix, element, '')
-      : '';
+    blockSuffix && element ? _bem(namespace, block, blockSuffix, element, '') : '';
   const em = (element?: string, modifier?: string) =>
     element && modifier ? _bem(namespace, block, '', element, modifier) : '';
   const bm = (blockSuffix?: string, modifier?: string) =>
-    blockSuffix && modifier
-      ? _bem(namespace, block, blockSuffix, '', modifier)
-      : '';
+    blockSuffix && modifier ? _bem(namespace, block, blockSuffix, '', modifier) : '';
   const bem = (blockSuffix?: string, element?: string, modifier?: string) =>
-    blockSuffix && element && modifier
-      ? _bem(namespace, block, blockSuffix, element, modifier)
-      : '';
+    blockSuffix && element && modifier ? _bem(namespace, block, blockSuffix, element, modifier) : '';
 
   // for css var
   // --el-xxx: value;

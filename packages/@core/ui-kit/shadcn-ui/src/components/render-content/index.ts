@@ -1,1 +1,1 @@
-export { default as VbenRenderContent } from './render-content.vue';
+export { default as OceanRenderContent } from './render-content.vue';

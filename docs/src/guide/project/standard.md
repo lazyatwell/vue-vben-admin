@@ -112,11 +112,6 @@ CommitLint 配置文件为 `.commitlintrc.mjs`，其核心配置放在`internal/
 git commit -m 'feat: add home page' --no-verify
 ```
 
-```bash [永久关闭]
-# 在 .husky/commit-msg 内注释以下代码即可
-pnpm exec commitlint --edit "$1" # [!code --]
-```
-
 :::
 
 ## Publint
@@ -178,11 +173,6 @@ git hook 一般结合各种 lint，在 git 提交代码的时候进行代码风�
 
 ```bash [临时关闭]
 git commit -m 'feat: add home page' --no-verify
-```
-
-```bash [永久关闭]
-# 删除 lefthook.yml 文件即可
-rm lefthook.yml
 ```
 
 :::

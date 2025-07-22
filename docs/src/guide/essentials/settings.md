@@ -31,10 +31,10 @@
 
 ```bash [.env]
 # 应用标题
-VITE_APP_TITLE=Vben Admin
+VITE_APP_TITLE=Ocean Admin
 
 # 应用命名空间，用于缓存、store等功能的前缀，确保隔离
-VITE_APP_NAMESPACE=vben-web-antd
+VITE_APP_NAMESPACE=ocean-web-antd
 ```
 
 ```bash [.env.development]
@@ -63,7 +63,7 @@ VITE_INJECT_APP_LOADING=true
 VITE_BASE=/
 
 # 接口地址
-VITE_GLOB_API_URL=https://mock-napi.vben.pro/api
+VITE_GLOB_API_URL=https://mock-napi.ocean.pro/api
 
 # 是否开启压缩，可以设置为 none, brotli, gzip
 VITE_COMPRESS=gzip
@@ -86,16 +86,16 @@ VITE_ARCHIVER=true
 
 ## 生产环境动态配置
 
-当在大仓根目录下，执行 `pnpm build`构建项目之后，会自动在对应的应用下生成 `dist/_app.config.js`文件并插入 `index.html`。
+当在根目录下，执行 `pnpm build`构建项目之后，会自动在对应的应用下生成 `dist/_app.config.js`文件并插入 `index.html`。
 
 `_app.config.js` 是一个动态配置文件，可以在项目构建之后，根据不同的环境动态修改配置。内容如下：
 
 ```ts
-window._VBEN_ADMIN_PRO_APP_CONF_ = {
-  VITE_GLOB_API_URL: 'https://mock-napi.vben.pro/api',
+window._OCEAN_ADMIN_PRO_APP_CONF_ = {
+  VITE_GLOB_API_URL: 'https://mock-napi.ocean.pro/api',
 };
-Object.freeze(window._VBEN_ADMIN_PRO_APP_CONF_);
-Object.defineProperty(window, '_VBEN_ADMIN_PRO_APP_CONF_', {
+Object.freeze(window._OCEAN_ADMIN_PRO_APP_CONF_);
+Object.defineProperty(window, '_OCEAN_ADMIN_PRO_APP_CONF_', {
   configurable: false,
   writable: false,
 });
@@ -107,7 +107,7 @@ Object.defineProperty(window, '_VBEN_ADMIN_PRO_APP_CONF_', {
 
 ### 使用
 
-想要获取 `_app.config.js` 内的变量，需要使用`@vben/hooks`提供的 `useAppConfig`方法。
+想要获取 `_app.config.js` 内的变量，需要使用`@ocean/hooks`提供的 `useAppConfig`方法。
 
 ```ts
 const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
@@ -120,13 +120,13 @@ const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 - 首先在 `.env` 或者对应的开发环境配置文件内，新增需要可动态配置的变量，需要以 `VITE_GLOB_*` 开头的变量，如：
 
   ```bash
-  VITE_GLOB_OTHER_API_URL=https://mock-napi.vben.pro/other-api
+  VITE_GLOB_OTHER_API_URL=https://mock-napi.ocean.pro/other-api
   ```
 
 - 在 `packages/types/global.d.ts`,新增对应的类型定义，如：
 
   ```ts
-  export interface VbenAdminProAppConfigRaw {
+  export interface OceanAdminProAppConfigRaw {
     VITE_GLOB_API_URL: string;
     VITE_GLOB_OTHER_API_URL: string; // [!code ++]
   }
@@ -140,14 +140,9 @@ const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 - 在 `packages/effects/hooks/src/use-app-config.ts` 中，新增对应的配置项，如：
 
   ```ts
-  export function useAppConfig(
-    env: Record<string, any>,
-    isProduction: boolean,
-  ): ApplicationConfig {
-    // 生产环境下，直接使用 window._VBEN_ADMIN_PRO_APP_CONF_ 全局变量
-    const config = isProduction
-      ? window._VBEN_ADMIN_PRO_APP_CONF_
-      : (env as VbenAdminProAppConfigRaw);
+  export function useAppConfig(env: Record<string, any>, isProduction: boolean): ApplicationConfig {
+    // 生产环境下，直接使用 window._OCEAN_ADMIN_PRO_APP_CONF_ 全局变量
+    const config = isProduction ? window._OCEAN_ADMIN_PRO_APP_CONF_ : (env as OceanAdminProAppConfigRaw);
 
     const { VITE_GLOB_API_URL, VITE_GLOB_OTHER_API_URL } = config; // [!code ++]
 
@@ -179,8 +174,8 @@ const { otherApiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 如果你找不到文档说明，可以尝试自己配置好以后，点击`复制偏好设置`，覆盖项目默认即可。配置文件位于应用目录下的`preferences.ts`，在这里，你可以覆盖框架默认的配置，实现自定义配置。
 
 ```ts
-import { useAppConfig } from '@vben/hooks';
-import { defineOverridesPreferences } from '@vben/preferences';
+import { useAppConfig } from '@ocean/hooks';
+import { defineOverridesPreferences } from '@ocean/preferences';
 
 /**
  * @description 项目配置文件
@@ -212,8 +207,7 @@ const defaultPreferences: Preferences = {
     contentPaddingLeft: 0,
     contentPaddingRight: 0,
     contentPaddingTop: 0,
-    defaultAvatar:
-      'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
+    defaultAvatar: 'https://unpkg.com/@oceanjs/static-source@0.1.7/source/avatar-v1.webp',
     defaultHomePath: '/analytics',
     dynamicTitle: true,
     enableCheckUpdates: true,
@@ -223,7 +217,7 @@ const defaultPreferences: Preferences = {
     layout: 'sidebar-nav',
     locale: 'zh-CN',
     loginExpiredMode: 'page',
-    name: 'Vben Admin',
+    name: 'Ocean Admin',
     preferencesButtonPosition: 'auto',
     watermark: false,
     zIndex: 200,
@@ -236,8 +230,8 @@ const defaultPreferences: Preferences = {
     styleType: 'normal',
   },
   copyright: {
-    companyName: 'Vben',
-    companySiteLink: 'https://www.vben.pro',
+    companyName: 'Ocean',
+    companySiteLink: 'https://www.ocean.pro',
     date: '2024',
     enable: true,
     icp: '',
@@ -259,7 +253,7 @@ const defaultPreferences: Preferences = {
   logo: {
     enable: true,
     fit: 'contain',
-    source: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp',
+    source: 'https://unpkg.com/@oceanjs/static-source@0.1.7/source/logo-v1.webp',
   },
   navigation: {
     accordion: true,

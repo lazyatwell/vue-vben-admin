@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@vben/icons';
-import { $t } from '@vben/locales';
+import { MdiGithub, MdiGoogle, MdiQqchat, MdiWechat } from '@ocean/icons';
+import { $t } from '@ocean/locales';
 
-import { VbenIconButton } from '@vben-core/shadcn-ui';
+import { OceanIconButton } from '@ocean-core/shadcn-ui';
 
 defineOptions({
   name: 'ThirdPartyLogin',
@@ -20,18 +20,18 @@ defineOptions({
     </div>
 
     <div class="mt-4 flex flex-wrap justify-center">
-      <VbenIconButton class="mb-3">
+      <OceanIconButton class="mb-3">
         <MdiWechat />
-      </VbenIconButton>
-      <VbenIconButton class="mb-3">
+      </OceanIconButton>
+      <OceanIconButton class="mb-3">
         <MdiQqchat />
-      </VbenIconButton>
-      <VbenIconButton class="mb-3">
+      </OceanIconButton>
+      <OceanIconButton class="mb-3">
         <MdiGithub />
-      </VbenIconButton>
-      <VbenIconButton class="mb-3">
+      </OceanIconButton>
+      <OceanIconButton class="mb-3">
         <MdiGoogle />
-      </VbenIconButton>
+      </OceanIconButton>
     </div>
   </div>
 </template>

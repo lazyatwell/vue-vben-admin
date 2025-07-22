@@ -3,7 +3,7 @@ import type { SelectScrollDownButtonProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { ChevronDown } from 'lucide-vue-next';
 import { SelectScrollDownButton, useForwardProps } from 'radix-vue';
@@ -22,9 +22,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 <template>
   <SelectScrollDownButton
     v-bind="forwardedProps"
-    :class="
-      cn('flex cursor-default items-center justify-center py-1', props.class)
-    "
+    :class="cn('flex cursor-default items-center justify-center py-1', props.class)"
   >
     <slot>
       <ChevronDown class="h-4 w-4" />

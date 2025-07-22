@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useVbenModal } from '@vben/common-ui';
+import { useOceanModal } from '@ocean/common-ui';
 
-const [Modal] = useVbenModal();
+const [Modal] = useOceanModal();
 </script>
 <template>
   <Modal title="组件抽离示例"> extra modal content </Modal>

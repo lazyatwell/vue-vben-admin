@@ -3,7 +3,7 @@ import type { VxeGridListeners, VxeGridProps } from '#/adapter/vxe-table';
 
 import { Button, message } from 'ant-design-vue';
 
-import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import { useOceanVxeGrid } from '#/adapter/vxe-table';
 
 import { MOCK_TABLE_DATA } from '../table-data';
 
@@ -40,7 +40,7 @@ const gridEvents: VxeGridListeners<RowType> = {
   },
 };
 
-const [Grid, gridApi] = useVbenVxeGrid({ gridEvents, gridOptions });
+const [Grid, gridApi] = useOceanVxeGrid({ gridEvents, gridOptions });
 
 const showBorder = gridApi.useStore((state) => state.gridOptions?.border);
 const showStripe = gridApi.useStore((state) => state.gridOptions?.stripe);
@@ -70,15 +70,9 @@ function changeLoading() {
   <div class="vp-raw w-full">
     <Grid>
       <template #toolbar-tools>
-        <Button class="mr-2" type="primary" @click="changeBorder">
-          {{ showBorder ? '隐藏' : '显示' }}边框
-        </Button>
-        <Button class="mr-2" type="primary" @click="changeLoading">
-          显示loading
-        </Button>
-        <Button class="mr-2" type="primary" @click="changeStripe">
-          {{ showStripe ? '隐藏' : '显示' }}斑马纹
-        </Button>
+        <Button class="mr-2" type="primary" @click="changeBorder"> {{ showBorder ? '隐藏' : '显示' }}边框 </Button>
+        <Button class="mr-2" type="primary" @click="changeLoading"> 显示loading </Button>
+        <Button class="mr-2" type="primary" @click="changeStripe"> {{ showStripe ? '隐藏' : '显示' }}斑马纹 </Button>
       </template>
     </Grid>
   </div>

@@ -1,6 +1,6 @@
 import type { Component } from 'vue';
 
-interface VbenDropdownMenuItem {
+interface OceanDropdownMenuItem {
   disabled?: boolean;
   /**
    * @zh_CN 点击事件处理
@@ -26,7 +26,7 @@ interface VbenDropdownMenuItem {
 }
 
 interface DropdownMenuProps {
-  menus: VbenDropdownMenuItem[];
+  menus: OceanDropdownMenuItem[];
 }
 
-export type { DropdownMenuProps, VbenDropdownMenuItem };
+export type { DropdownMenuProps, OceanDropdownMenuItem };

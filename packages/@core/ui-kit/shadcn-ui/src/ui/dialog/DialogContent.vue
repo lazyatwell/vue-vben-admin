@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import type { DialogContentEmits, DialogContentProps } from 'radix-vue';
 
-import type { ClassType } from '@vben-core/typings';
+import type { ClassType } from '@ocean-core/typings';
 
 import { computed, ref } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { X } from 'lucide-vue-next';
-import {
-  DialogClose,
-  DialogContent,
-  DialogPortal,
-  useForwardPropsEmits,
-} from 'radix-vue';
+import { DialogClose, DialogContent, DialogPortal, useForwardPropsEmits } from 'radix-vue';
 
 import DialogOverlay from './DialogOverlay.vue';
 
@@ -33,28 +28,16 @@ const props = withDefaults(
   >(),
   { appendTo: 'body', closeDisabled: false, showClose: true },
 );
-const emits = defineEmits<
-  DialogContentEmits & { close: []; closed: []; opened: [] }
->();
+const emits = defineEmits<DialogContentEmits & { close: []; closed: []; opened: [] }>();
 
 const delegatedProps = computed(() => {
-  const {
-    class: _,
-    modal: _modal,
-    open: _open,
-    showClose: __,
-    ...delegated
-  } = props;
+  const { class: _, modal: _modal, open: _open, showClose: __, ...delegated } = props;
 
   return delegated;
 });
 
 function isAppendToBody() {
-  return (
-    props.appendTo === 'body' ||
-    props.appendTo === document.body ||
-    !props.appendTo
-  );
+  return props.appendTo === 'body' || props.appendTo === document.body || !props.appendTo;
 }
 
 const position = computed(() => {
@@ -87,8 +70,7 @@ defineExpose({
         :style="{
           ...(zIndex ? { zIndex } : {}),
           position,
-          backdropFilter:
-            overlayBlur && overlayBlur > 0 ? `blur(${overlayBlur}px)` : 'none',
+          backdropFilter: overlayBlur && overlayBlur > 0 ? `blur(${overlayBlur}px)` : 'none',
         }"
         @click="() => emits('close')"
       />

@@ -1,4 +1,4 @@
-export const useVbenForm = () => {};
+export const useOceanForm = () => {};
 export const z = {};
-export type VbenFormSchema = any;
-export type VbenFormProps = any;
+export type OceanFormSchema = any;
+export type OceanFormProps = any;

@@ -1,1 +1,1 @@
-export { default as VbenCountToAnimator } from './count-to-animator.vue';
+export { default as OceanCountToAnimator } from './count-to-animator.vue';

@@ -3,7 +3,7 @@ import type { DialogDescriptionProps } from 'radix-vue';
 
 import { computed } from 'vue';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { DialogDescription } from 'radix-vue';
 
@@ -17,10 +17,7 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <DialogDescription
-    :class="cn('text-muted-foreground text-sm', props.class)"
-    v-bind="delegatedProps"
-  >
+  <DialogDescription :class="cn('text-muted-foreground text-sm', props.class)" v-bind="delegatedProps">
     <slot></slot>
   </DialogDescription>
 </template>

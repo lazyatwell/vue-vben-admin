@@ -4,16 +4,14 @@ import type {
   ComponentRecordType,
   GenerateMenuAndRoutesOptions,
   RouteRecordStringComponent,
-} from '@vben-core/typings';
+} from '@ocean-core/typings';
 
-import { mapTree } from '@vben-core/shared/utils';
+import { mapTree } from '@ocean-core/shared/utils';
 
 /**
  * 动态生成路由 - 后端方式
  */
-async function generateRoutesByBackend(
-  options: GenerateMenuAndRoutesOptions,
-): Promise<RouteRecordRaw[]> {
+async function generateRoutesByBackend(options: GenerateMenuAndRoutesOptions): Promise<RouteRecordRaw[]> {
   const { fetchMenuListAsync, layoutMap = {}, pageMap = {} } = options;
 
   try {
@@ -56,9 +54,7 @@ function convertRoutes(
       // 页面组件转换
     } else if (component) {
       const normalizePath = normalizeViewPath(component);
-      const pageKey = normalizePath.endsWith('.vue')
-        ? normalizePath
-        : `${normalizePath}.vue`;
+      const pageKey = normalizePath.endsWith('.vue') ? normalizePath : `${normalizePath}.vue`;
       if (pageMap[pageKey]) {
         route.component = pageMap[pageKey];
       } else {
@@ -76,9 +72,7 @@ function normalizeViewPath(path: string): string {
   const normalizedPath = path.replace(/^(\.\/|\.\.\/)+/, '');
 
   // 确保路径以 '/' 开头
-  const viewPath = normalizedPath.startsWith('/')
-    ? normalizedPath
-    : `/${normalizedPath}`;
+  const viewPath = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
 
   // 这里耦合了admin的目录结构
   return viewPath.replace(/^\/views.*\/$/, '/');

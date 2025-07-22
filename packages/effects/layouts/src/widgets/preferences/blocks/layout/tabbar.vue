@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SelectOption } from '@vben/types';
+import type { SelectOption } from '@ocean/types';
 
 import { computed } from 'vue';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
 import NumberFieldItem from '../number-field-item.vue';
 import SelectItem from '../select-item.vue';
@@ -24,9 +24,7 @@ const tabbarStyleType = defineModel<string>('tabbarStyleType');
 const tabbarShowMore = defineModel<boolean>('tabbarShowMore');
 const tabbarShowMaximize = defineModel<boolean>('tabbarShowMaximize');
 const tabbarMaxCount = defineModel<number>('tabbarMaxCount');
-const tabbarMiddleClickToClose = defineModel<boolean>(
-  'tabbarMiddleClickToClose',
-);
+const tabbarMiddleClickToClose = defineModel<boolean>('tabbarMiddleClickToClose');
 
 const styleItems = computed((): SelectOption[] => [
   {
@@ -69,11 +67,7 @@ const styleItems = computed((): SelectOption[] => [
   <SwitchItem v-model="tabbarDraggable" :disabled="!tabbarEnable">
     {{ $t('preferences.tabbar.draggable') }}
   </SwitchItem>
-  <SwitchItem
-    v-model="tabbarWheelable"
-    :disabled="!tabbarEnable"
-    :tip="$t('preferences.tabbar.wheelableTip')"
-  >
+  <SwitchItem v-model="tabbarWheelable" :disabled="!tabbarEnable" :tip="$t('preferences.tabbar.wheelableTip')">
     {{ $t('preferences.tabbar.wheelable') }}
   </SwitchItem>
   <SwitchItem v-model="tabbarMiddleClickToClose" :disabled="!tabbarEnable">

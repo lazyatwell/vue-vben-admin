@@ -3,10 +3,10 @@ import type { AuthenticationProps } from './types';
 
 import { computed, watch } from 'vue';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { useVbenModal } from '@vben-core/popup-ui';
-import { Slot, VbenAvatar } from '@vben-core/shadcn-ui';
+import { useOceanModal } from '@ocean-core/popup-ui';
+import { OceanAvatar, Slot } from '@ocean-core/shadcn-ui';
 
 interface Props extends AuthenticationProps {
   avatar?: string;
@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const open = defineModel<boolean>('open');
 
-const [Modal, modalApi] = useVbenModal();
+const [Modal, modalApi] = useOceanModal();
 
 watch(
   () => open.value,
@@ -42,9 +42,7 @@ const getZIndex = computed(() => {
  */
 const zIndexExcludeClass = ['ant-message', 'loading'];
 function isZIndexExcludeClass(element: Element) {
-  return zIndexExcludeClass.some((className) =>
-    element.classList.contains(className),
-  );
+  return zIndexExcludeClass.some((className) => element.classList.contains(className));
 }
 
 /**
@@ -56,11 +54,7 @@ function calcZIndex() {
   [...elements].forEach((element) => {
     const style = window.getComputedStyle(element);
     const zIndex = style.getPropertyValue('z-index');
-    if (
-      zIndex &&
-      !Number.isNaN(Number.parseInt(zIndex)) &&
-      !isZIndexExcludeClass(element)
-    ) {
+    if (zIndex && !Number.isNaN(Number.parseInt(zIndex)) && !isZIndexExcludeClass(element)) {
       maxZ = Math.max(maxZ, Number.parseInt(zIndex));
     }
   });
@@ -80,7 +74,7 @@ function calcZIndex() {
       :z-index="getZIndex"
       class="border-none px-10 py-6 text-center shadow-xl sm:w-[600px] sm:rounded-2xl md:h-[unset]"
     >
-      <VbenAvatar :src="avatar" class="mx-auto mb-6 size-20" />
+      <OceanAvatar :src="avatar" class="mx-auto mb-6 size-20" />
       <Slot
         :show-forget-password="false"
         :show-register="false"

@@ -1,6 +1,6 @@
 import type { Component, Ref } from 'vue';
 
-import type { ClassType, MaybePromise } from '@vben-core/typings';
+import type { ClassType, MaybePromise } from '@ocean-core/typings';
 
 import type { DrawerApi } from './drawer-api';
 
@@ -137,9 +137,7 @@ export interface DrawerState extends DrawerProps {
 }
 
 export type ExtendedDrawerApi = DrawerApi & {
-  useStore: <T = NoInfer<DrawerState>>(
-    selector?: (state: NoInfer<DrawerState>) => T,
-  ) => Readonly<Ref<T>>;
+  useStore: <T = NoInfer<DrawerState>>(selector?: (state: NoInfer<DrawerState>) => T) => Readonly<Ref<T>>;
 };
 
 export interface DrawerApiOptions extends DrawerState {

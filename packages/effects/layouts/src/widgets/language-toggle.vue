@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { SupportedLanguagesType } from '@vben/locales';
+import type { SupportedLanguagesType } from '@ocean/locales';
 
-import { SUPPORT_LANGUAGES } from '@vben/constants';
-import { Languages } from '@vben/icons';
-import { loadLocaleMessages } from '@vben/locales';
-import { preferences, updatePreferences } from '@vben/preferences';
+import { SUPPORT_LANGUAGES } from '@ocean/constants';
+import { Languages } from '@ocean/icons';
+import { loadLocaleMessages } from '@ocean/locales';
+import { preferences, updatePreferences } from '@ocean/preferences';
 
-import { VbenDropdownRadioMenu, VbenIconButton } from '@vben-core/shadcn-ui';
+import { OceanDropdownRadioMenu, OceanIconButton } from '@ocean-core/shadcn-ui';
 
 defineOptions({
   name: 'LanguageToggle',
@@ -26,14 +26,14 @@ async function handleUpdate(value: string | undefined) {
 
 <template>
   <div>
-    <VbenDropdownRadioMenu
+    <OceanDropdownRadioMenu
       :menus="SUPPORT_LANGUAGES"
       :model-value="preferences.app.locale"
       @update:model-value="handleUpdate"
     >
-      <VbenIconButton>
+      <OceanIconButton>
         <Languages class="text-foreground size-4" />
-      </VbenIconButton>
-    </VbenDropdownRadioMenu>
+      </OceanIconButton>
+    </OceanDropdownRadioMenu>
   </div>
 </template>

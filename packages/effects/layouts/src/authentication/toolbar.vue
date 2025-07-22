@@ -3,14 +3,9 @@ import type { ToolbarType } from './types';
 
 import { computed } from 'vue';
 
-import { preferences } from '@vben/preferences';
+import { preferences } from '@ocean/preferences';
 
-import {
-  AuthenticationColorToggle,
-  AuthenticationLayoutToggle,
-  LanguageToggle,
-  ThemeToggle,
-} from '../widgets';
+import { AuthenticationColorToggle, AuthenticationLayoutToggle, LanguageToggle, ThemeToggle } from '../widgets';
 
 interface Props {
   toolbarList?: ToolbarType[];

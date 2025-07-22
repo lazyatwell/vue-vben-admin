@@ -3,7 +3,7 @@ import type { PrimitiveProps } from 'radix-vue';
 
 import type { ButtonVariants, ButtonVariantSize } from './types';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { Primitive } from 'radix-vue';
 
@@ -22,11 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
-    :class="cn(buttonVariants({ variant, size }), props.class)"
-  >
+  <Primitive :as="as" :as-child="asChild" :class="cn(buttonVariants({ variant, size }), props.class)">
     <slot></slot>
   </Primitive>
 </template>

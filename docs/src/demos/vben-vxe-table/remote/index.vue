@@ -5,7 +5,7 @@ import type { VxeGridProps } from '#/adapter/vxe-table';
 
 import { Button } from 'ant-design-vue';
 
-import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import { useOceanVxeGrid } from '#/adapter/vxe-table';
 
 import { MOCK_API_DATA } from '../table-data';
 
@@ -91,7 +91,7 @@ const gridOptions: VxeGridProps<RowType> = {
   },
 };
 
-const [Grid, gridApi] = useVbenVxeGrid({
+const [Grid, gridApi] = useOceanVxeGrid({
   gridOptions,
 });
 </script>
@@ -100,12 +100,8 @@ const [Grid, gridApi] = useVbenVxeGrid({
   <div class="vp-raw w-full">
     <Grid>
       <template #toolbar-tools>
-        <Button class="mr-2" type="primary" @click="() => gridApi.query()">
-          刷新当前页面
-        </Button>
-        <Button type="primary" @click="() => gridApi.reload()">
-          刷新并返回第一页
-        </Button>
+        <Button class="mr-2" type="primary" @click="() => gridApi.query()"> 刷新当前页面 </Button>
+        <Button type="primary" @click="() => gridApi.reload()"> 刷新并返回第一页 </Button>
       </template>
     </Grid>
   </div>

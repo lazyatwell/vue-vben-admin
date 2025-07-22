@@ -37,7 +37,7 @@ export const MOCK_CODES = [
   // super
   {
     codes: ['AC_100100', 'AC_100110', 'AC_100120', 'AC_100010'],
-    username: 'vben',
+    username: 'super',
   },
   {
     // admin
@@ -174,7 +174,7 @@ const createDemosMenus = (role: 'admin' | 'super' | 'user') => {
 export const MOCK_MENUS = [
   {
     menus: [...dashboardMenus, ...createDemosMenus('super')],
-    username: 'vben',
+    username: 'super',
   },
   {
     menus: [...dashboardMenus, ...createDemosMenus('admin')],
@@ -306,64 +306,6 @@ export const MOCK_MENU_LIST = [
     ],
   },
   {
-    id: 9,
-    meta: {
-      badgeType: 'dot',
-      order: 9998,
-      title: 'demos.vben.title',
-      icon: 'carbon:data-center',
-    },
-    name: 'Project',
-    path: '/vben-admin',
-    type: 'catalog',
-    status: 1,
-    children: [
-      {
-        id: 901,
-        pid: 9,
-        name: 'VbenDocument',
-        path: '/vben-admin/document',
-        component: 'IFrameView',
-        type: 'embedded',
-        status: 1,
-        meta: {
-          icon: 'carbon:book',
-          iframeSrc: 'https://doc.vben.pro',
-          title: 'demos.vben.document',
-        },
-      },
-      {
-        id: 902,
-        pid: 9,
-        name: 'VbenGithub',
-        path: '/vben-admin/github',
-        component: 'IFrameView',
-        type: 'link',
-        status: 1,
-        meta: {
-          icon: 'carbon:logo-github',
-          link: 'https://github.com/vbenjs/vue-vben-admin',
-          title: 'Github',
-        },
-      },
-      {
-        id: 903,
-        pid: 9,
-        name: 'VbenAntdv',
-        path: '/vben-admin/antdv',
-        component: 'IFrameView',
-        type: 'link',
-        status: 0,
-        meta: {
-          icon: 'carbon:hexagon-vertical-solid',
-          badgeType: 'dot',
-          link: 'https://ant.vben.pro',
-          title: 'demos.vben.antdv',
-        },
-      },
-    ],
-  },
-  {
     id: 10,
     component: '_core/about/index',
     type: 'menu',
@@ -371,7 +313,7 @@ export const MOCK_MENU_LIST = [
     meta: {
       icon: 'lucide:copyright',
       order: 9999,
-      title: 'demos.vben.about',
+      title: 'demos.ocean.about',
     },
     name: 'About',
     path: '/about',

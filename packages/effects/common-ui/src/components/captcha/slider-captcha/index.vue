@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import type {
-  CaptchaVerifyPassingData,
-  SliderCaptchaProps,
-  SliderRotateVerifyPassingData,
-} from '../types';
+import type { CaptchaVerifyPassingData, SliderCaptchaProps, SliderRotateVerifyPassingData } from '../types';
 
 import { reactive, unref, useTemplateRef, watch, watchEffect } from 'vue';
 
-import { $t } from '@vben/locales';
+import { $t } from '@ocean/locales';
 
-import { cn } from '@vben-core/shared/utils';
+import { cn } from '@ocean-core/shared/utils';
 
 import { useTimeoutFn } from '@vueuse/core';
 
@@ -86,12 +82,7 @@ function handleDragStart(e: MouseEvent | TouchEvent) {
   if (!actionRef.value) return;
   emit('start', e);
 
-  state.moveDistance =
-    getEventPageX(e) -
-    Number.parseInt(
-      actionRef.value.getStyle().left.replace('px', '') || '0',
-      10,
-    );
+  state.moveDistance = getEventPageX(e) - Number.parseInt(actionRef.value.getStyle().left.replace('px', '') || '0', 10);
   state.startTime = Date.now();
   state.isMoving = true;
 }
@@ -211,11 +202,7 @@ function resume() {
     @touchend="handleDragOver"
     @touchmove="handleDragMoving"
   >
-    <SliderCaptchaBar
-      ref="barRef"
-      :bar-style="barStyle"
-      :to-left="state.toLeft"
-    />
+    <SliderCaptchaBar ref="barRef" :bar-style="barStyle" :to-left="state.toLeft" />
     <SliderCaptchaContent
       ref="contentRef"
       :content-style="contentStyle"

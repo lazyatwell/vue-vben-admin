@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import type { TabDefinition } from '@vben-core/typings';
+import type { TabDefinition } from '@ocean-core/typings';
 
 import type { TabConfig, TabsProps } from '../../types';
 
 import { computed } from 'vue';
 
-import { Pin, X } from '@vben-core/icons';
-import { VbenContextMenu, VbenIcon } from '@vben-core/shadcn-ui';
+import { Pin, X } from '@ocean-core/icons';
+import { OceanContextMenu, OceanIcon } from '@ocean-core/shadcn-ui';
 
 interface Props extends TabsProps {}
 
 defineOptions({
-  name: 'VbenTabs',
+  name: 'OceanTabs',
 
   inheritAttrs: false,
 });
 const props = withDefaults(defineProps<Props>(), {
-  contentClass: 'vben-tabs-content',
+  contentClass: 'ocean-tabs-content',
   contextMenus: () => [],
   tabs: () => [],
 });
@@ -33,12 +33,10 @@ const typeWithClass = computed(() => {
       content: `h-full after:content-['']  after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-primary after:scale-x-0 after:transition-[transform] after:ease-out after:duration-300 hover:after:scale-x-100 after:origin-left [&.is-active]:after:scale-x-100 [&:not(:first-child)]:border-l last:border-r last:border-r border-border`,
     },
     card: {
-      content:
-        'h-[calc(100%-6px)] rounded-md ml-2 border border-border  transition-all',
+      content: 'h-[calc(100%-6px)] rounded-md ml-2 border border-border  transition-all',
     },
     plain: {
-      content:
-        'h-full [&:not(:first-child)]:border-l last:border-r border-border',
+      content: 'h-full [&:not(:first-child)]:border-l last:border-r border-border',
     },
   };
 
@@ -64,13 +62,7 @@ const tabsView = computed(() => {
 });
 
 function onMouseDown(e: MouseEvent, tab: TabConfig) {
-  if (
-    e.button === 1 &&
-    tab.closable &&
-    !tab.affixTab &&
-    tabsView.value.length > 1 &&
-    props.middleClickToClose
-  ) {
+  if (e.button === 1 && tab.closable && !tab.affixTab && tabsView.value.length > 1 && props.middleClickToClose) {
     e.preventDefault();
     e.stopPropagation();
     emit('close', tab.key);
@@ -79,10 +71,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
 </script>
 
 <template>
-  <div
-    :class="contentClass"
-    class="relative !flex h-full w-max items-center overflow-hidden pr-6"
-  >
+  <div :class="contentClass" class="relative !flex h-full w-max items-center overflow-hidden pr-6">
     <TransitionGroup name="slide-left">
       <div
         v-for="(tab, i) in tabsView"
@@ -101,17 +90,10 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
         @click="active = tab.key"
         @mousedown="onMouseDown($event, tab)"
       >
-        <VbenContextMenu
-          :handler-data="tab"
-          :menus="contextMenus"
-          :modal="false"
-          item-class="pr-6"
-        >
+        <OceanContextMenu :handler-data="tab" :menus="contextMenus" :modal="false" item-class="pr-6">
           <div class="relative flex size-full items-center">
             <!-- extra -->
-            <div
-              class="absolute right-1.5 top-1/2 z-[3] translate-y-[-50%] overflow-hidden"
-            >
+            <div class="absolute right-1.5 top-1/2 z-[3] translate-y-[-50%] overflow-hidden">
               <!-- close-icon -->
               <X
                 v-show="!tab.affixTab && tabsView.length > 1 && tab.closable"
@@ -129,7 +111,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
             <div
               class="text-accent-foreground group-[.is-active]:text-primary dark:group-[.is-active]:text-accent-foreground mx-3 mr-4 flex h-full items-center overflow-hidden rounded-tl-[5px] rounded-tr-[5px] pr-3 transition-all duration-300"
             >
-              <VbenIcon
+              <OceanIcon
                 v-if="showIcon"
                 :icon="tab.icon"
                 class="mr-2 flex size-4 items-center overflow-hidden"
@@ -141,7 +123,7 @@ function onMouseDown(e: MouseEvent, tab: TabConfig) {
               </span>
             </div>
           </div>
-        </VbenContextMenu>
+        </OceanContextMenu>
       </div>
     </TransitionGroup>
   </div>

@@ -2,11 +2,11 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useContentMaximize, useTabs } from '@vben/hooks';
-import { preferences } from '@vben/preferences';
-import { useTabbarStore } from '@vben/stores';
+import { useContentMaximize, useTabs } from '@ocean/hooks';
+import { preferences } from '@ocean/preferences';
+import { useTabbarStore } from '@ocean/stores';
 
-import { TabsToolMore, TabsToolScreen, TabsView } from '@vben-core/tabs-ui';
+import { TabsToolMore, TabsToolScreen, TabsView } from '@ocean-core/tabs-ui';
 
 import { useTabbar } from './use-tabbar';
 
@@ -21,13 +21,7 @@ const tabbarStore = useTabbarStore();
 const { contentIsMaximize, toggleMaximize } = useContentMaximize();
 const { unpinTab } = useTabs();
 
-const {
-  createContextMenus,
-  currentActive,
-  currentTabs,
-  handleClick,
-  handleClose,
-} = useTabbar();
+const { createContextMenus, currentActive, currentTabs, handleClick, handleClose } = useTabbar();
 
 const menus = computed(() => {
   const tab = tabbarStore.getTabByKey(currentActive.value);

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { BreadcrumbProps } from './types';
 
-import { ChevronDown } from '@vben-core/icons';
+import { ChevronDown } from '@ocean-core/icons';
 
 import {
   Breadcrumb,
@@ -15,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../../ui';
-import { VbenIcon } from '../icon';
+import { OceanIcon } from '../icon';
 
 interface Props extends BreadcrumbProps {}
 
@@ -37,23 +37,17 @@ function handleClick(path?: string) {
   <Breadcrumb>
     <BreadcrumbList>
       <TransitionGroup name="breadcrumb-transition">
-        <template
-          v-for="(item, index) in breadcrumbs"
-          :key="`${item.path}-${item.title}-${index}`"
-        >
+        <template v-for="(item, index) in breadcrumbs" :key="`${item.path}-${item.title}-${index}`">
           <BreadcrumbItem>
             <div v-if="item.items?.length ?? 0 > 0">
               <DropdownMenu>
                 <DropdownMenuTrigger class="flex items-center gap-1">
-                  <VbenIcon v-if="showIcon" :icon="item.icon" class="size-5" />
+                  <OceanIcon v-if="showIcon" :icon="item.icon" class="size-5" />
                   {{ item.title }}
                   <ChevronDown class="size-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
-                  <template
-                    v-for="menuItem in item.items"
-                    :key="`sub-${menuItem.path}`"
-                  >
+                  <template v-for="menuItem in item.items" :key="`sub-${menuItem.path}`">
                     <DropdownMenuItem @click.stop="handleClick(menuItem.path)">
                       {{ menuItem.title }}
                     </DropdownMenuItem>
@@ -67,29 +61,17 @@ function handleClick(path?: string) {
               @click.stop="handleClick(item.path)"
             >
               <div class="flex-center">
-                <VbenIcon
-                  v-if="showIcon"
-                  :class="{ 'size-5': item.isHome }"
-                  :icon="item.icon"
-                  class="mr-1 size-4"
-                />
+                <OceanIcon v-if="showIcon" :class="{ 'size-5': item.isHome }" :icon="item.icon" class="mr-1 size-4" />
                 {{ item.title }}
               </div>
             </BreadcrumbLink>
             <BreadcrumbPage v-else>
               <div class="flex-center">
-                <VbenIcon
-                  v-if="showIcon"
-                  :class="{ 'size-5': item.isHome }"
-                  :icon="item.icon"
-                  class="mr-1 size-4"
-                />
+                <OceanIcon v-if="showIcon" :class="{ 'size-5': item.isHome }" :icon="item.icon" class="mr-1 size-4" />
                 {{ item.title }}
               </div>
             </BreadcrumbPage>
-            <BreadcrumbSeparator
-              v-if="index < breadcrumbs.length - 1 && !item.isHome"
-            />
+            <BreadcrumbSeparator v-if="index < breadcrumbs.length - 1 && !item.isHome" />
           </BreadcrumbItem>
         </template>
       </TransitionGroup>

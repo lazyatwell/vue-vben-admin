@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { message } from 'ant-design-vue';
 
-import { useVbenForm } from '#/adapter/form';
+import { useOceanForm } from '#/adapter/form';
 
-const [Form] = useVbenForm({
+const [Form] = useOceanForm({
   // 提交函数
   handleSubmit: onSubmit,
   schema: [

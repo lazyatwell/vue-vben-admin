@@ -23,7 +23,7 @@ outline: deep
 调整对应应用目录下的`preferences.ts`，确保`accessMode='frontend'`。
 
 ```ts
-import { defineOverridesPreferences } from '@vben/preferences';
+import { defineOverridesPreferences } from '@ocean/preferences';
 
 export const overridesPreferences = defineOverridesPreferences({
   // overrides
@@ -83,7 +83,7 @@ authStore.setUserInfo(userInfo);
 调整对应应用目录下的`preferences.ts`，确保`accessMode='backend'`。
 
 ```ts
-import { defineOverridesPreferences } from '@vben/preferences';
+import { defineOverridesPreferences } from '@ocean/preferences';
 
 export const overridesPreferences = defineOverridesPreferences({
   // overrides
@@ -173,7 +173,7 @@ const dashboardMenus = [
 调整对应应用目录下的`preferences.ts`，确保`accessMode='mixed'`。
 
 ```ts
-import { defineOverridesPreferences } from '@vben/preferences';
+import { defineOverridesPreferences } from '@ocean/preferences';
 
 export const overridesPreferences = defineOverridesPreferences({
   // overrides
@@ -206,10 +206,7 @@ export const overridesPreferences = defineOverridesPreferences({
 权限码为接口返回的权限码，通过权限码来判断按钮是否显示，逻辑在`src/store/auth`下：
 
 ```ts
-const [fetchUserInfoResult, accessCodes] = await Promise.all([
-  fetchUserInfo(),
-  getAccessCodes(),
-]);
+const [fetchUserInfoResult, accessCodes] = await Promise.all([fetchUserInfo(), getAccessCodes()]);
 
 userInfo = fetchUserInfoResult;
 authStore.setUserInfo(userInfo);
@@ -220,13 +217,13 @@ accessStore.setAccessCodes(accessCodes);
 
 权限码返回的数据结构为字符串数组，例如：`['AC_100100', 'AC_100110', 'AC_100120', 'AC_100010']`
 
-有了权限码，就可以使用 `@vben/access` 提供的`AccessControl`组件及API来进行按钮的显示与隐藏。
+有了权限码，就可以使用 `@ocean/access` 提供的`AccessControl`组件及API来进行按钮的显示与隐藏。
 
 #### 组件方式
 
 ```vue
 <script lang="ts" setup>
-import { AccessControl, useAccess } from '@vben/access';
+import { AccessControl, useAccess } from '@ocean/access';
 
 const { accessMode, hasAccessByCodes } = useAccess();
 </script>
@@ -252,21 +249,15 @@ const { accessMode, hasAccessByCodes } = useAccess();
 
 ```vue
 <script lang="ts" setup>
-import { AccessControl, useAccess } from '@vben/access';
+import { AccessControl, useAccess } from '@ocean/access';
 
 const { hasAccessByCodes } = useAccess();
 </script>
 
 <template>
-  <Button v-if="hasAccessByCodes(['AC_100100'])">
-    Super 账号可见 ["AC_1000001"]
-  </Button>
-  <Button v-if="hasAccessByCodes(['AC_100030'])">
-    Admin 账号可见 ["AC_100010"]
-  </Button>
-  <Button v-if="hasAccessByCodes(['AC_1000001'])">
-    User 账号可见 ["AC_1000001"]
-  </Button>
+  <Button v-if="hasAccessByCodes(['AC_100100'])"> Super 账号可见 ["AC_1000001"] </Button>
+  <Button v-if="hasAccessByCodes(['AC_100030'])"> Admin 账号可见 ["AC_100010"] </Button>
+  <Button v-if="hasAccessByCodes(['AC_1000001'])"> User 账号可见 ["AC_1000001"] </Button>
   <Button v-if="hasAccessByCodes(['AC_100100', 'AC_1000001'])">
     Super & Admin 账号可见 ["AC_100100","AC_1000001"]
   </Button>
@@ -279,15 +270,9 @@ const { hasAccessByCodes } = useAccess();
 
 ```vue
 <template>
-  <Button class="mr-4" v-access:code="'AC_100100'">
-    Super 账号可见 'AC_100100'
-  </Button>
-  <Button class="mr-4" v-access:code="['AC_100030']">
-    Admin 账号可见 ["AC_100010"]
-  </Button>
-  <Button class="mr-4" v-access:code="['AC_1000001']">
-    User 账号可见 ["AC_1000001"]
-  </Button>
+  <Button class="mr-4" v-access:code="'AC_100100'"> Super 账号可见 'AC_100100' </Button>
+  <Button class="mr-4" v-access:code="['AC_100030']"> Admin 账号可见 ["AC_100010"] </Button>
+  <Button class="mr-4" v-access:code="['AC_1000001']"> User 账号可见 ["AC_1000001"] </Button>
   <Button class="mr-4" v-access:code="['AC_100100', 'AC_1000001']">
     Super & Admin 账号可见 ["AC_100100","AC_1000001"]
   </Button>
@@ -302,7 +287,7 @@ const { hasAccessByCodes } = useAccess();
 
 ```vue
 <script lang="ts" setup>
-import { AccessControl } from '@vben/access';
+import { AccessControl } from '@ocean/access';
 </script>
 
 <template>
@@ -325,7 +310,7 @@ import { AccessControl } from '@vben/access';
 
 ```vue
 <script lang="ts" setup>
-import { useAccess } from '@vben/access';
+import { useAccess } from '@ocean/access';
 
 const { hasAccessByRoles } = useAccess();
 </script>
@@ -334,9 +319,7 @@ const { hasAccessByRoles } = useAccess();
   <Button v-if="hasAccessByRoles(['super'])"> Super 账号可见 </Button>
   <Button v-if="hasAccessByRoles(['admin'])"> Admin 账号可见 </Button>
   <Button v-if="hasAccessByRoles(['user'])"> User 账号可见 </Button>
-  <Button v-if="hasAccessByRoles(['super', 'admin'])">
-    Super & Admin 账号可见
-  </Button>
+  <Button v-if="hasAccessByRoles(['super', 'admin'])"> Super & Admin 账号可见 </Button>
 </template>
 ```
 
@@ -350,8 +333,6 @@ const { hasAccessByRoles } = useAccess();
   <Button class="mr-4" v-access:role="['super']"> Super 角色可见 </Button>
   <Button class="mr-4" v-access:role="['admin']"> Admin 角色可见 </Button>
   <Button class="mr-4" v-access:role="['user']"> User 角色可见 </Button>
-  <Button class="mr-4" v-access:role="['super', 'admin']">
-    Super & Admin 角色可见
-  </Button>
+  <Button class="mr-4" v-access:role="['super', 'admin']"> Super & Admin 角色可见 </Button>
 </template>
 ```

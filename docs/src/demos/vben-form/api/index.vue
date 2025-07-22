@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { Button, message, Space } from 'ant-design-vue';
 
-import { useVbenForm } from '#/adapter/form';
+import { useOceanForm } from '#/adapter/form';
 
-const [BaseForm, formApi] = useVbenForm({
+const [BaseForm, formApi] = useOceanForm({
   // 所有表单项共用，可单独在表单内覆盖
   commonConfig: {
     // 所有表单项
@@ -223,13 +223,9 @@ function handleClick(
       <Button @click="handleClick('showSubmitButton')">显示提交按钮</Button>
       <Button @click="handleClick('updateResetButton')">修改重置按钮</Button>
       <Button @click="handleClick('updateSubmitButton')">修改提交按钮</Button>
-      <Button @click="handleClick('updateActionAlign')">
-        调整操作按钮位置
-      </Button>
+      <Button @click="handleClick('updateActionAlign')"> 调整操作按钮位置 </Button>
       <Button @click="handleClick('batchAddSchema')"> 批量添加表单项 </Button>
-      <Button @click="handleClick('batchDeleteSchema')">
-        批量删除表单项
-      </Button>
+      <Button @click="handleClick('batchDeleteSchema')"> 批量删除表单项 </Button>
     </Space>
     <BaseForm />
   </div>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, nextTick } from 'vue';
 
-import { VbenButton } from '@vben-core/shadcn-ui';
+import { OceanButton } from '@ocean-core/shadcn-ui';
 
 interface Props {
   /**
@@ -42,28 +42,21 @@ const bindProps = computed(() => {
 function toggleTheme(event: MouseEvent) {
   const isAppearanceTransition =
     // @ts-expect-error
-    document.startViewTransition &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!isAppearanceTransition || !event) {
     isDark.value = !isDark.value;
     return;
   }
   const x = event.clientX;
   const y = event.clientY;
-  const endRadius = Math.hypot(
-    Math.max(x, innerWidth - x),
-    Math.max(y, innerHeight - y),
-  );
+  const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
   // @ts-ignore startViewTransition
   const transition = document.startViewTransition(async () => {
     isDark.value = !isDark.value;
     await nextTick();
   });
   transition.ready.then(() => {
-    const clipPath = [
-      `circle(0px at ${x}px ${y}px)`,
-      `circle(${endRadius}px at ${x}px ${y}px)`,
-    ];
+    const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
     document.documentElement.animate(
       {
         clipPath: isDark.value ? [...clipPath].reverse() : clipPath,
@@ -71,9 +64,7 @@ function toggleTheme(event: MouseEvent) {
       {
         duration: 450,
         easing: 'ease-in',
-        pseudoElement: isDark.value
-          ? '::view-transition-old(root)'
-          : '::view-transition-new(root)',
+        pseudoElement: isDark.value ? '::view-transition-old(root)' : '::view-transition-new(root)',
       },
     );
   });
@@ -81,7 +72,7 @@ function toggleTheme(event: MouseEvent) {
 </script>
 
 <template>
-  <VbenButton
+  <OceanButton
     :aria-label="theme"
     :class="[`is-${theme}`]"
     aria-live="polite"
@@ -90,23 +81,11 @@ function toggleTheme(event: MouseEvent) {
     @click.stop="toggleTheme"
   >
     <svg aria-hidden="true" height="24" viewBox="0 0 24 24" width="24">
-      <mask
-        id="theme-toggle-moon"
-        class="theme-toggle__moon"
-        fill="hsl(var(--foreground)/80%)"
-        stroke="none"
-      >
+      <mask id="theme-toggle-moon" class="theme-toggle__moon" fill="hsl(var(--foreground)/80%)" stroke="none">
         <rect fill="white" height="100%" width="100%" x="0" y="0" />
         <circle cx="40" cy="8" fill="black" r="11" />
       </mask>
-      <circle
-        id="sun"
-        class="theme-toggle__sun"
-        cx="12"
-        cy="12"
-        mask="url(#theme-toggle-moon)"
-        r="11"
-      />
+      <circle id="sun" class="theme-toggle__sun" cx="12" cy="12" mask="url(#theme-toggle-moon)" r="11" />
       <g class="theme-toggle__sun-beams">
         <line x1="12" x2="12" y1="1" y2="3" />
         <line x1="12" x2="12" y1="21" y2="23" />
@@ -118,7 +97,7 @@ function toggleTheme(event: MouseEvent) {
         <line x1="18.36" x2="19.78" y1="5.64" y2="4.22" />
       </g>
     </svg>
-  </VbenButton>
+  </OceanButton>
 </template>
 
 <style scoped>

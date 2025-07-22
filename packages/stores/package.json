@@ -1,13 +1,6 @@
 {
-  "name": "@vben/stores",
-  "version": "5.5.7",
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
-  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
-    "directory": "packages/stores"
-  },
+  "name": "@ocean/stores",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -20,9 +13,9 @@
     }
   },
   "dependencies": {
-    "@vben-core/preferences": "workspace:*",
-    "@vben-core/shared": "workspace:*",
-    "@vben-core/typings": "workspace:*",
+    "@ocean-core/preferences": "workspace:*",
+    "@ocean-core/shared": "workspace:*",
+    "@ocean-core/typings": "workspace:*",
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "secure-ls": "catalog:",
