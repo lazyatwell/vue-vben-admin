@@ -1,12 +1,46 @@
-import type { FieldOptions, FormContext, GenericObject } from 'vee-validate';
+import type {
+  FieldOptions,
+  FormContext,
+  FormState,
+  GenericObject,
+  ResetFormOpts,
+  ValidationOptions,
+} from 'vee-validate';
 import type { ZodTypeAny } from 'zod';
 
-import type { Component, HtmlHTMLAttributes, Ref } from 'vue';
+import type { Component, ComponentPublicInstance, HtmlHTMLAttributes, Ref } from 'vue';
 
 import type { OceanButtonProps } from '@ocean-core/shadcn-ui';
-import type { ClassType, MaybeComputedRef } from '@ocean-core/typings';
+import type { ClassType, MaybeComputedRef, Recordable } from '@ocean-core/typings';
 
-import type { FormApi } from './form-api';
+export interface IFormApi {
+  form: FormActions;
+  getFieldComponentRef<T = ComponentPublicInstance>(fieldName: string): T | undefined;
+  getFocusedField(): string | undefined;
+
+  getLatestSubmissionValues(): Recordable<any>;
+  getState(): null | OceanFormProps;
+  getValues<T = Recordable<any>>(): Promise<T>;
+  isFieldValid(fieldName: string): Promise<boolean>;
+  isMounted: boolean;
+  merge(formApi: IFormApi): any;
+  mount(formActions: FormActions, componentRefMap: Map<string, unknown>): void;
+  removeSchemaByFields(fields: string[]): Promise<void>;
+  resetForm(state?: Partial<FormState<GenericObject>>, opts?: Partial<ResetFormOpts>): Promise<any>;
+  resetValidate(): Promise<void>;
+  scrollToFirstError(errors: Record<string, any> | string): void;
+  setFieldValue(field: string, value: any, shouldValidate?: boolean): Promise<void>;
+  setLatestSubmissionValues(values: null | Recordable<any>): void;
+  setState(stateOrFn: ((prev: OceanFormProps) => Partial<OceanFormProps>) | Partial<OceanFormProps>): void;
+  setValues(fields: Record<string, any>, filterFields?: boolean, shouldValidate?: boolean): Promise<void>;
+  state: null | OceanFormProps;
+  submitForm(e?: Event): Promise<any>;
+  unmount(): void;
+  updateSchema(schema: Partial<FormSchema>[]): void;
+  validate(opts?: Partial<ValidationOptions>): Promise<any>;
+  validateAndSubmitForm(): Promise<any>;
+  validateField(fieldName: string, opts?: Partial<ValidationOptions>): Promise<any>;
+}
 
 export type FormLayout = 'horizontal' | 'vertical';
 
@@ -384,7 +418,7 @@ export interface OceanFormProps<T extends BaseFormComponentType = BaseFormCompon
   submitOnEnter?: boolean;
 }
 
-export type ExtendedFormApi = FormApi & {
+export type ExtendedFormApi = IFormApi & {
   useStore: <T = NoInfer<OceanFormProps>>(selector?: (state: NoInfer<OceanFormProps>) => T) => Readonly<Ref<T>>;
 };
 

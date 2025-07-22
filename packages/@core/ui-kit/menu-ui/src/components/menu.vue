@@ -702,6 +702,7 @@ $namespace: ocean;
 
     span {
       @include menu-title;
+      user-select: none;
     }
   }
 
@@ -791,6 +792,7 @@ $namespace: ocean;
 
   &__title {
     @include menu-title;
+    user-select: none;
   }
 
   &.is-collapse-show-title {

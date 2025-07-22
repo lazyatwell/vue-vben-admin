@@ -6,7 +6,7 @@ import type { ClassType, DeepPartial } from '@ocean/types';
 
 import type { BaseFormComponentType, OceanFormProps } from '@ocean-core/form-ui';
 
-import type { VxeGridApi } from './api';
+import type { IVxeGridApi } from './api.interface';
 
 import { useOceanForm } from '@ocean-core/form-ui';
 
@@ -76,7 +76,7 @@ export interface VxeGridProps<
 export type ExtendedVxeGridApi<
   D extends Record<string, any> = any,
   F extends BaseFormComponentType = BaseFormComponentType,
-> = VxeGridApi<D> & {
+> = IVxeGridApi<D> & {
   useStore: <T = NoInfer<VxeGridProps<D, F>>>(
     selector?: (state: NoInfer<VxeGridProps<any, any>>) => T,
   ) => Readonly<Ref<T>>;

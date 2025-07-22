@@ -2,6 +2,7 @@ import type { VxeGridInstance } from 'vxe-table';
 
 import type { ExtendedFormApi } from '@ocean-core/form-ui';
 
+import type { IVxeGridApi } from './api.interface';
 import type { VxeGridProps } from './types';
 
 import { toRaw } from 'vue';
@@ -20,7 +21,7 @@ function getDefaultState(): VxeGridProps {
   };
 }
 
-export class VxeGridApi<T extends Record<string, any> = any> {
+export class VxeGridApi<T extends Record<string, any> = any> implements IVxeGridApi<T> {
   public formApi = {} as ExtendedFormApi;
 
   // private prevState: null | VxeGridProps = null;

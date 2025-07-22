@@ -4,6 +4,6 @@
   "compilerOptions": {
     "types": ["@ocean-core/typings/vue-router"]
   },
-  "include": ["src"],
+  "include": ["src", "types"],
   "exclude": ["node_modules"]
 }

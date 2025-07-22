@@ -1,6 +1,6 @@
 ## Ocean-Frontend
 
-基于vue3、typescript的企业级管理后台
+基于 [Vue3](https://cn.vuejs.org/guide/introduction)、[TypeScript](https://www.typescriptlang.org/docs/) 的企业级管理后台
 
 ## 本地开发
 

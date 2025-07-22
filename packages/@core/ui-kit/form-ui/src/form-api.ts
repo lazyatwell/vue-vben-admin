@@ -4,7 +4,7 @@ import type { ComponentPublicInstance } from 'vue';
 
 import type { Recordable } from '@ocean-core/typings';
 
-import type { FormActions, FormSchema, OceanFormProps } from './types';
+import type { FormActions, FormSchema, IFormApi, OceanFormProps } from './types';
 
 import { isRef, toRaw } from 'vue';
 
@@ -44,7 +44,7 @@ function getDefaultState(): OceanFormProps {
   };
 }
 
-export class FormApi {
+export class FormApi implements IFormApi {
   // private api: Pick<OceanFormProps, 'handleReset' | 'handleSubmit'>;
   public form = {} as FormActions;
   isMounted = false;
