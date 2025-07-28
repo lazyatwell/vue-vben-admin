@@ -35,11 +35,11 @@ async function resolveMonorepoDependencies() {
   }
 
   for (const { packageJson } of packages) {
-    const { dependencies = {}, devDependencies = {} } = packageJson;
-    for (const [key, value] of Object.entries(dependencies)) {
+    const { dependencies = {} as Record<string, string>, devDependencies = {} as Record<string, string> } = packageJson;
+    for (const [key, value] of Object.entries(dependencies) as [string, string][]) {
       resultDependencies[key] = resolvePackageVersion(pkgsMeta, key, value, catalog);
     }
-    for (const [key, value] of Object.entries(devDependencies)) {
+    for (const [key, value] of Object.entries(devDependencies) as [string, string][]) {
       resultDevDependencies[key] = resolvePackageVersion(pkgsMeta, key, value, catalog);
     }
   }

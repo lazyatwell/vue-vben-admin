@@ -2,11 +2,11 @@
 
 ::: info 你正在阅读的是 Ocean Admin`1.0.0`版本的文档！
 
-- Ocean Admin 基于 [vue-ocean-admin](https://github.com/oceanjs/vue-ocean-admin) `5.5.7`版本开发
+- Ocean Admin 基于 [vue-ocean-admin](https://github.com/oceanjs/vue-ocean-admin) `V5.5.7`及 `ruoyi-vue3`兼容已有后台接口的版本开发
 
 :::
 
-Ocean Admin是一个基于 [Vue3.0](https://github.com/vuejs/core)、[Vite](https://github.com/vitejs/vite)、 [TypeScript](https://www.typescriptlang.org/) 的中后台解决方案，目标是为开发中大型项目提供开箱即用的解决方案。
+Ocean Admin是一个基于 [Vue3.0](https://github.com/vuejs/core)、[TypeScript](https://www.typescriptlang.org/) 的中后台解决方案，目标是为开发中大型项目提供开箱即用的解决方案。
 包括二次封装组件、utils、hooks、动态菜单、权限校验、多主题配置、按钮级别权限控制等功能。
 
 ## 特点

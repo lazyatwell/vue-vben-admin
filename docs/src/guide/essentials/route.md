@@ -8,9 +8,12 @@ outline: deep
 
 ## 路由类型
 
-路由分为核心路由、静态路由和动态路由，核心路由是框架内置的路由，包含了根路由、登录路由、404路由等；静态路由是在项目启动时就已经确定的路由；动态路由一般是在用户登录后，根据用户的权限动态生成的路由。
+路由分为核心路由、静态路由和动态路由。  
+- 核心路由：是框架内置的路由，包含了根路由、登录路由、404路由等；
+- 静态路由：定义在前端，在项目启动时就已经确定的路由；
+- 动态路由：一般是在用户登录后，根据用户的权限动态生成的路由；
 
-静态路由和动态路由都会走权限控制，可以通过配置路由的 `meta` 属性中的 `authority` 字段来控制权限。
+`静态路由`和`动态路由`都会走权限控制，可以通过配置路由的 `meta` 属性中的 `authority` 字段来控制权限。
 
 ### 核心路由
 
@@ -47,7 +50,8 @@ const externalRoutes: RouteRecordRaw[] = mergeRouteModules(externalRouteFiles); 
 
 ### 动态路由
 
-动态路由的配置在对应应用 `src/router/routes/modules` 目录下，这个目录下存放了所有的路由文件。每个文件的内容格式如下，与 Vue Router 的路由配置格式一致，以下为二级路由和多级路由的配置。
+动态路由的配置在对应应用 `src/router/routes/modules` 目录下，这个目录下存放了所有的路由文件。  
+每个文件的内容格式如下，与 Vue Router 的路由配置格式一致，以下为二级路由和多级路由的配置。
 
 ## 路由定义
 
@@ -333,6 +337,11 @@ interface RouteMeta {
    */
   badgeVariants?: 'default' | 'destructive' | 'primary' | 'success' | 'warning' | string;
   /**
+   * 是否仅在开发环境中可见
+   * @default false
+   */
+  devOnly?: boolean;
+  /**
    * 路由的完整路径作为key（默认true）
    */
   fullPathKey?: boolean;
@@ -435,6 +444,12 @@ interface RouteMeta {
 - 默认值：`''`
 
 用于配置页面的激活图标，会在菜单中显示。一般会配合图标库使用，如果是`http`链接，会自动加载图片。
+
+### devOnly
+- 类型：`boolean`
+- 默认值：`false`
+
+用于配置页面是否仅在开发环境中可见，设置为 `true` 时，页面只会在开发环境中显示。
 
 ### keepAlive
 

@@ -1,4 +1,5 @@
 import type { VxeTableGridOptions } from '@ocean/plugins/vxe-table';
+import type { Recordable } from '@ocean/types';
 
 import { h } from 'vue';
 
@@ -64,3 +65,8 @@ setupOceanVxeTable({
 export { useOceanVxeGrid };
 
 export type * from '@ocean/plugins/vxe-table';
+export type OnActionClickParams<T = Recordable<any>> = {
+  code: string;
+  row: T;
+};
+export type OnActionClickFn<T = Recordable<any>> = (params: OnActionClickParams<T>) => void;

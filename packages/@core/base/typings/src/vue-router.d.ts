@@ -38,6 +38,11 @@ interface RouteMeta {
    */
   badgeVariants?: 'default' | 'destructive' | 'primary' | 'success' | 'warning' | string;
   /**
+   * 是否仅在开发环境中可见
+   * @default false
+   */
+  devOnly?: boolean;
+  /**
    * 路由的完整路径作为key（默认true）
    */
   fullPathKey?: boolean;

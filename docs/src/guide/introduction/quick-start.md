@@ -11,7 +11,7 @@ outline: deep
 在启动项目前，你需要确保你的环境满足以下要求：
 
 - [Node.js](https://nodejs.org/en) 22.14.0 及以上版本
-- [Git](https://git-scm.com/) 任意版本
+- [Git](https://git-scm.com/) 最新版本
 
 验证你的环境是否满足以上要求，你可以通过以下命令查看版本：
 
@@ -29,7 +29,7 @@ git -v
 ### 获取源码
 
 ```bash
-# clone 代码
+# 拉取代码
 git clone http://10.3.0.218:800/vue3/ocean-frontend.git
 ```
 

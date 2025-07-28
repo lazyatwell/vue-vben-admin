@@ -58,12 +58,16 @@ export const shared = defineConfig({
       stringify: true,
     },
     plugins: [
+      // @ts-ignore nocheck
       GitChangelog({
         repoURL: () => 'http://10.3.0.218:800/vue3/ocean-frontend.git',
       }),
+      // @ts-ignore nocheck
       GitChangelogMarkdownSection(),
+      // @ts-ignore nocheck
       viteArchiverPlugin({ outputDir: '.vitepress' }),
       groupIconVitePlugin(),
+      // @ts-ignore nocheck
       await viteVxeTableImportsPlugin(),
     ],
     server: {
@@ -82,11 +86,11 @@ export const shared = defineConfig({
 
 function head(): HeadConfig[] {
   return [
-    ['meta', { content: 'Vbenjs Team', name: 'author' }],
+    ['meta', { content: 'Ocean Team', name: 'author' }],
     [
       'meta',
       {
-        content: 'vben, vitejs, vite, shacdn-ui, vue',
+        content: 'ocean, vitejs, vite, shacdn-ui, vue',
         name: 'keywords',
       },
     ],
@@ -98,7 +102,7 @@ function head(): HeadConfig[] {
         name: 'viewport',
       },
     ],
-    ['meta', { content: 'vben admin docs', name: 'keywords' }],
+    ['meta', { content: 'ocean admin docs', name: 'keywords' }],
     ['link', { href: '/favicon.ico', rel: 'icon' }],
   ];
 }
@@ -107,22 +111,22 @@ function pwa(): PwaOptions {
   return {
     includeManifestIcons: false,
     manifest: {
-      description: 'Vben Admin is a modern admin dashboard template based on Vue 3. ',
+      description: 'Ocean Admin is a modern admin dashboard template based on Vue 3. ',
       icons: [
         {
           sizes: '192x192',
-          src: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/pwa-icon-192.png',
+          src: 'https://unpkg.com/@oceanjs/static-source@0.1.7/source/pwa-icon-192.png',
           type: 'image/png',
         },
         {
           sizes: '512x512',
-          src: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/pwa-icon-512.png',
+          src: 'https://unpkg.com/@oceanjs/static-source@0.1.7/source/pwa-icon-512.png',
           type: 'image/png',
         },
       ],
       id: '/',
-      name: 'Vben Admin Doc',
-      short_name: 'vben_admin_doc',
+      name: 'Ocean Admin Doc',
+      short_name: 'Ocean_admin_doc',
       theme_color: '#ffffff',
     },
     outDir: resolve(process.cwd(), '.vitepress/dist'),

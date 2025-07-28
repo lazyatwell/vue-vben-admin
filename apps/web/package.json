@@ -13,6 +13,7 @@
     "#/*": "./src/*"
   },
   "dependencies": {
+    "@ocean-core/menu-ui": "workspace:*",
     "@ocean/access": "workspace:*",
     "@ocean/common-ui": "workspace:*",
     "@ocean/constants": "workspace:*",
@@ -35,6 +36,7 @@
     "vue-router": "catalog:"
   },
   "devDependencies": {
-    "unplugin-element-plus": "catalog:"
+    "unplugin-auto-import": "catalog:",
+    "unplugin-vue-components": "catalog:"
   }
 }

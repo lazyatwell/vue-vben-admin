@@ -22,8 +22,6 @@ export const overridesPreferences = defineOverridesPreferences({
 
 检测到更新时，会弹出提示框，询问用户是否刷新页面：
 
-![check-updates](/guide/update-notice.png)
-
 ## 替换为其他检查更新方式
 
 如果需要通过其他方式检查更新，例如通过接口来更灵活地控制更新逻辑（如强制刷新、显示更新内容等），你可以通过修改 `@ocean/layouts` 下面的 `src/widgets/check-updates/check-updates.vue`文件来实现。

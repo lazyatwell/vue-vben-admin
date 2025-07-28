@@ -11,7 +11,7 @@ import { useAuthStore } from '#/store';
 import { generateAccess } from './access';
 
 /**
- * 通用守卫配置
+ * 通用守卫配置, 加载进度条
  * @param router
  */
 function setupCommonGuard(router: Router) {

@@ -3,19 +3,6 @@ import { ref } from 'vue';
 
 import { Page } from '@ocean/common-ui';
 
-import {
-  ElButton,
-  ElCard,
-  ElForm,
-  ElFormItem,
-  ElInput,
-  ElMessage,
-  ElNotification,
-  ElSegmented,
-  ElSpace,
-  ElTable,
-} from 'element-plus';
-
 type NotificationType = 'error' | 'info' | 'success' | 'warning';
 
 function info() {
@@ -104,10 +91,10 @@ const form = ref({
         <div class="flex size-72 items-center justify-center" v-loading="true">一些演示的内容</div>
       </ElCard>
       <ElCard class="mb-5 w-80">
-        <ElTable :data="tableData" stripe>
-          <ElTable.TableColumn label="测试列1" prop="prop1" />
-          <ElTable.TableColumn label="测试列2" prop="prop2" />
-        </ElTable>
+        <el-table :data="tableData" stripe>
+          <el-table-column label="测试列1" prop="prop1" />
+          <el-table-column label="测试列2" prop="prop2" />
+        </el-table>
       </ElCard>
       <ElCard class="mb-5 w-80">
         <ElForm :model="form" label-width="80px">

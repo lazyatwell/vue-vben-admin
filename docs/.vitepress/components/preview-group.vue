@@ -3,7 +3,7 @@ import type { SetupContext } from 'vue';
 
 import { computed, ref, useSlots } from 'vue';
 
-import { VbenTooltip } from '@ocean-core/shadcn-ui';
+import { OceanTooltip } from '@ocean-core/shadcn-ui';
 
 import { Code } from 'lucide-vue-next';
 import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from 'radix-vue';
@@ -72,12 +72,12 @@ const toggleOpen = () => {
           }"
           class="flex items-center"
         >
-          <VbenTooltip side="top">
+          <OceanTooltip side="top">
             <template #trigger>
               <Code class="hover:bg-accent size-7 cursor-pointer rounded-full p-1.5" @click="toggleOpen" />
             </template>
             {{ open ? 'Collapse code' : 'Expand code' }}
-          </VbenTooltip>
+          </OceanTooltip>
         </div>
       </div>
     </div>

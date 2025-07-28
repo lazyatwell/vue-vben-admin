@@ -3,7 +3,7 @@ import type { DefaultTheme } from 'vitepress';
 import { defineConfig } from 'vitepress';
 
 export const zh = defineConfig({
-  description: 'Vben Admin & 企业级管理系统框架',
+  description: 'Ocean Admin & 企业级管理系统框架',
   lang: 'zh-Hans',
   themeConfig: {
     darkModeSwitchLabel: '主题',
@@ -14,10 +14,10 @@ export const zh = defineConfig({
     },
     editLink: {
       pattern: 'http://10.3.0.218:800/vue3/ocean-frontend/-/blob/dev/:path',
-      text: '在 GitLub 上编辑此页面',
+      text: '在 GitLab 上编辑此页面',
     },
     footer: {
-      copyright: `Copyright © 2025-${new Date().getFullYear()} Ocean`,
+      copyright: `Copyright © 2025-${new Date().getFullYear() + 1} Ocean`,
       message: '基于 MIT 许可发布.',
     },
     langMenuLabel: '多语言',
@@ -81,15 +81,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: false,
       text: '深入',
       items: [
-        { link: 'in-depth/login', text: '登录' },
         // { link: 'in-depth/layout', text: '布局' },
         { link: 'in-depth/theme', text: '主题' },
         { link: 'in-depth/access', text: '权限' },
         { link: 'in-depth/locale', text: '国际化' },
+        { link: 'in-depth/loading', text: '全局loading' },
         { link: 'in-depth/features', text: '常用功能' },
         { link: 'in-depth/check-updates', text: '检查更新' },
-        { link: 'in-depth/loading', text: '全局loading' },
-        { link: 'in-depth/ui-framework', text: '组件库切换' },
       ],
     },
     {
@@ -139,35 +137,35 @@ function sidebarComponents(): DefaultTheme.SidebarItem[] {
       text: '通用组件',
       items: [
         {
-          link: 'common-ui/vben-api-component',
+          link: 'common-ui/ocean-api-component',
           text: 'ApiComponent Api组件包装器',
         },
         {
-          link: 'common-ui/vben-alert',
+          link: 'common-ui/ocean-alert',
           text: 'Alert 轻量提示框',
         },
         {
-          link: 'common-ui/vben-modal',
+          link: 'common-ui/ocean-modal',
           text: 'Modal 模态框',
         },
         {
-          link: 'common-ui/vben-drawer',
+          link: 'common-ui/ocean-drawer',
           text: 'Drawer 抽屉',
         },
         {
-          link: 'common-ui/vben-form',
+          link: 'common-ui/ocean-form',
           text: 'Form 表单',
         },
         {
-          link: 'common-ui/vben-vxe-table',
+          link: 'common-ui/ocean-vxe-table',
           text: 'Vxe Table 表格',
         },
         {
-          link: 'common-ui/vben-count-to-animator',
+          link: 'common-ui/ocean-count-to-animator',
           text: 'CountToAnimator 数字动画',
         },
         {
-          link: 'common-ui/vben-ellipsis-text',
+          link: 'common-ui/ocean-ellipsis-text',
           text: 'EllipsisText 省略文本',
         },
       ],

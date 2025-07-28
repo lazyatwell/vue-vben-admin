@@ -11,6 +11,7 @@ const routes: RouteRecordRaw[] = [
       icon: 'lucide:copyright',
       title: $t('demos.ocean.about'),
       order: 9999,
+      devOnly: true,
     },
   },
 ];
